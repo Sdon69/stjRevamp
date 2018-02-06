@@ -53,7 +53,7 @@ router.get('/', function(req, res, next) {
 
 
 
-    res.render('index');
+  res.send(`<br> No data found for filter :` );
 
 
 });
