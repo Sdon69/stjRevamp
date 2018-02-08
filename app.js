@@ -476,7 +476,6 @@ module.exports = app;
 //    * Parses the text as JSON and exposes the resulting object on req.body.
 //    */
 //   app.use(bodyParser.json());
-//
 //   app.post("/genres", function (req, res) {
 //
 //
@@ -550,6 +549,7 @@ module.exports = app;
 //
 //         });
 //     res.redirect('back');
+//
 //
 //
 //

@@ -27,10 +27,14 @@ dept_filter = 'All Events';
 var itemDetails_Gl;
 
   var globalRange;
-  var uniqueIdNumber;
+  var uniqueIdNumber = 0;
+
+  var announcementRowNumber;
+  var eventRowNumber;
+  var noteRowNumber;
 
 var itemDetails = [{
-  name: 's89',
+  title: 's89',
   age:   'str2'
 }];
 
@@ -59,44 +63,48 @@ module.exports = SheetsHelper;
  * @param  {string}   title    The name of the spreadsheet.
  * @param  {Function} callback The callback function.
  */
-SheetsHelper.prototype.createSpreadsheet = function(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, callback) {
-console.log('mode',mode);
+SheetsHelper.prototype.createSpreadsheet = function(title,mode,cataegory11,cataegory12,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, callback) {
+console.log('outsheet',mode);
   var self = this;
-  var sheetId = '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs'
-  var range = 'Stj Teacher Notes!A2:I';
 
 var tMode = tMode;
-console.log('Sheets',title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish)
-console.log('Sheets',cataegory2)
-
 
 var inputRes;
 
       var rowNumber = 2;
 
+
+
 var itemDetails = [{
-  name: 's89',
+  title: 's89',
   age:   'str2'
 }];
 
-
-
+var cataegory1;
+var cataegory2;
 
   if(mode === 'announcementViewer')
   {
     sheetId = '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs';
     range = 'Stj Teacher Notes!A2:I';
+    cataegory1 = 'All Departments';
+    cataegory2 = 'All Semesters';
   }
   else if(mode === 'eventViewer')
   {
     sheetId = '1_lodhrWpyuJSvJRi4MNyw8k7W7hSBKrXS7ukBVE4cI0';
     range = 'Class Data!A2:K';
+
+        cataegory1 = 'All Events';
   }
   else if(mode === 'notesViewer')
   {
     sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
-    range = 'Stj Teacher Notes!A2:F';
+    range = 'Stj Teacher Notes!A2:G';
+   cataegory1 = 'All Departments';
+   cataegory2 = 'All Semesters';
   }
+
 
   if(mode === 'announcementWriter')
   {
@@ -104,32 +112,26 @@ var itemDetails = [{
 
     sheetId = '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs';
     range = 'Stj Teacher Notes!A2:F';
-    inputRes = {
-                  values: [ [gTitle,gDescription,gCataegories,gUserId,gFullName,uniqueIdNumber,gDateOfPublish]]
-      }
+
   }
   if(mode === 'notesWriter')
   {
 
 
       sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
-      range = 'Stj Teacher Notes!A2:F';
-      inputRes = {
-                    values: [ [gTitle,gDescription,gCataegories,gUserId,gFullName,uniqueIdNumber,gDateOfPublish]]
-        }
+      range = 'Stj Teacher Notes!A2:G';
+
   }
   if(mode === 'eventWriter')
   {
 
     sheetId = '1_lodhrWpyuJSvJRi4MNyw8k7W7hSBKrXS7ukBVE4cI0';
     range = 'Class Data!A2:K';
-    inputRes = {
-                  values: [ [gTitle,gDescription,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gCataegories,gUserId,gFullName,"A",uniqueIdNumber]]
 
-      }
   }
 
 
+console.log('sheetId',sheetId);
 
     self.service.spreadsheets.values.get({
         spreadsheetId: sheetId,
@@ -139,13 +141,14 @@ var itemDetails = [{
           console.log('The API returned an error: ' + err);
           return;
         }
+        console.log('spreadsheetId',sheetId);
         var rows = response.values;
         if (rows.length === 0) {
           console.log('No data found.');
         } else {
           var used = false;
           var itemDetails = [{
-            name: 's89',
+            title: 's89',
             age:   'str2'
           }];
             module.exports.itemDetails = itemDetails;
@@ -155,6 +158,38 @@ var itemDetails = [{
             {
 
 
+
+                if(mode === 'announcementWriter')
+                {
+
+
+                  sheetId = '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs';
+                  range = 'Stj Teacher Notes!A2:F';
+                  inputRes = {
+                                values: [ [gTitle,gDescription,gCataegories,gUserId,gFullName,uniqueIdNumber,gDateOfPublish]]
+                    }
+                }
+                if(mode === 'notesWriter')
+                {
+
+
+                    sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
+                    range = 'Stj Teacher Notes!A2:G';
+                    inputRes = {
+                                  values: [ [gTitle,gDescription,gCataegories,gUserId,gFullName,uniqueIdNumber,gDateOfPublish]]
+                      }
+
+                }
+                if(mode === 'eventWriter')
+                {
+
+                  sheetId = '1_lodhrWpyuJSvJRi4MNyw8k7W7hSBKrXS7ukBVE4cI0';
+                  range = 'Class Data!A2:K';
+                  inputRes = {
+                                values: [ [gTitle,gDescription,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gCataegories,gUserId,gFullName,"A",uniqueIdNumber]]
+
+                    }
+                }
 
               if(tMode === 'writer')
               {
@@ -195,6 +230,8 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
   {
 
     for (var i = 0; i < rows.length; i++) {
+
+
 
                 var row = rows[i];
                 // Print columns A and E, which correspond to indices 0 and 4.
@@ -250,7 +287,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
                                      var datePublished =  row[6];
 
-                                     var trimmedString = description.substring(0, 64);
+                                     var trimmedString = description.substring(0, 68);
                                      var dottedString = trimmedString.concat('....')
 
 
@@ -259,7 +296,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
                                     itemDetails.pop({
-                                    name: 'str1',
+                                    title: 'str1',
                                     age:   'str2'
                                       })
                                       ;
@@ -291,19 +328,8 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
                                     }
 
 
-                                    module.exports.itemDetails = itemDetails;
-                                    // app.totalData = itemDetails;
+                                    module.exports.itemAnnouncementDetails = itemDetails;
 
-
-                                    // if(i = rows.length-1)
-                                    // {
-                                    //   return;
-                                    // }
-                                    // console.log('please' , app.totalData);
-
-
-                                  //  module.exports.length = Object.keys(itemDetails.shareInfo[i]).length;
-                                    // words.add(new Word(description, title, publishDate, eventDate, lastDateofRegistration, fees, fullName));
                                 }
                             }
 
@@ -342,7 +368,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
                                         title = row[0];
                                         description = row[1];
-                                        console.log();("descr", description);
+
                                         var fullName = row[8];;
                                         var publishDate = row[2];;
                                         var eventDate = row[3];;
@@ -350,7 +376,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
                                         var fees = row[5];;
                                         var fees = " ₹".concat(fees);
                                         var uniqueId = row[10];
-                                        var trimmedString = description.substring(0, 64);
+                                        var trimmedString = description.substring(0, 68);
                                         var dottedString = trimmedString.concat('....')
 
 
@@ -359,7 +385,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
                                         itemDetails.pop({
-                                        name: 'str1',
+                                        title: 'str1',
                                         age:   'str2'
                                           })
                                           ;
@@ -425,7 +451,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
 
-                                  console.log("dept_filter",cataegory1);
+
 
 
 
@@ -433,7 +459,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
                                        cataegories = row[2];
-  console.log("cataegories",cataegories);
+
 
                                       if (cataegories.includes(cataegory1)) {
                  if(cataegories.includes(cataegory2)) {
@@ -446,7 +472,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
                                           var uniqueId  = row[5];;
 
-                                          var trimmedString = description.substring(0, 64);
+                                          var trimmedString = description.substring(0, 68);
                                           var dottedString = trimmedString.concat('....')
 
                                           if(!used)
@@ -454,7 +480,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
                                           itemDetails.pop({
-                                          name: 'str1',
+                                          title: 'str1',
                                           age:   'str2'
                                             })
                                             ;
@@ -484,11 +510,9 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
                                           module.exports.itemNotesDetails = itemDetails;
 
-                                          // console.log('please' , app.totalData);
 
 
-                                        //  module.exports.length = Object.keys(itemDetails.shareInfo[i]).length;
-                                          // words.add(new Word(description, title, publishDate, eventDate, lastDateofRegistration, fees, fullName));
+
                                       }
                                     }
 
@@ -501,16 +525,18 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
               var Str1 = row[0];
-              console.log("check", Str1);
+
               if (Str1.includes("BonBlank88"))
               {
-                  console.log('range',rowNumber);
+
 
 
 
                   break;
               }
+              announcementRowNumber++;
               rowNumber++;
+
 
 
             }
@@ -520,16 +546,18 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
               var Str1 = row[0];
-              console.log("check", Str1);
+
               if (Str1.includes("BonBlank88"))
               {
-                  console.log('range',rowNumber);
+
 
 
 
                   break;
               }
-              rowNumber++;
+              noteRowNumber++;
+  rowNumber++;
+
 
 
             }  else if (mode === 'eventWriter') {
@@ -538,38 +566,50 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
                 var Str1 = row[0];
-                console.log("check", Str1);
+
                 if (Str1.includes("BonBlank88"))
                 {
-                    console.log('range',rowNumber);
+
 
 
 
                     break;
                 }
-                rowNumber++;
-
+                eventRowNumber++;
+  rowNumber++;
 
               }
 
 
 
 
-
-
           }
+
+
           globalRange = `Stj Teacher Notes!A${rowNumber}:G`;
           uniqueIdNumber = rowNumber;
+          console.log(uniqueIdNumber);
           if (mode === 'eventWriter') {
 
-  globalRange = `Class Data!A${rowNumber}:K`;
-}
+      globalRange = `Class Data!A${rowNumber}:K`;
+      }
 
-          console.log("if", globalRange);
+
 
 resolve('Worked');
 
 
 
 });
+}
+module.exports.resetItemDetails = () =>
+{
+
+itemDetails = [{
+  title: 's89',
+  age:   'str2'
+}];
+  module.exports.itemDetails = itemDetails;
+
+
 }

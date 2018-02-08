@@ -61,17 +61,44 @@ $(function() {
   $('button[rel="create"]').click(function() {
     makeRequest('POST', '/spreadsheets', function(err, spreadsheet) {
       if (err) return showError(err);
-      window.location.reload();
+      // window.location.reload();
     });
   });
-  $('button[rel="sync"]').click(function() {
-    var spreadsheetId = $(this).data('spreadsheetid');
-    var url = '/spreadsheets/' + spreadsheetId + '/sync';
-    makeRequest('POST', url, function(err) {
+  $('button[rel="createAnnouncements"]').click(function() {
+    makeRequest('POST', '/spreadsheetsAnnouncement', function(err, spreadsheet) {
       if (err) return showError(err);
-      showMessage('Sync complete.')
+      // window.location.reload();
     });
   });
+
+  $('button[rel="createNotes"]').click(function() {
+    makeRequest('POST', '/spreadsheetsNotes', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
+  $('button[rel="writeEvent"]').click(function() {
+    makeRequest('POST', '/spreadsheetsCreateEvent', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
+  $('button[rel="writeNotes"]').click(function() {
+    makeRequest('POST', '/spreadsheetsCreateNote', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
+  $('button[rel="writeAnnouncement"]').click(function() {
+    makeRequest('POST', '/spreadsheetsCreateAnnouncement', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
 });
 
 function makeRequest(method, url, callback) {

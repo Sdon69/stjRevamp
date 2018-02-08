@@ -16,20 +16,28 @@
   License for the specific language governing permissions and limitations under
   the License.
 -->
+
 <script>
-function myFunction() {
 
 
-    var x = document.getElementById("mySelect").value;
+function checkInfo()
+{
+  var skillsSelect = document.getElementById("cataegory1");
+  var cataegory1 = skillsSelect.options[skillsSelect.selectedIndex].text;
 
 
-  var hangoutButton = document.getElementById("hangoutButtonId");
-  hangoutButton.click(); // this will trigger the click event
-  x.onclick = function() {
-     hangoutButton.click(); // this will trigger the click event
-  };
+
+  if(cataegory1.includes('Choose'))
+  {
+    alert('Choose Event Genre');
+}
+else {
+  // document.getElementById('setMode').click();
+  document.getElementById('create').click();
+  document.getElementById('hangoutButtonId').click();
 }
 
+}
 
 </script>
 <div class="mdl-grid">
@@ -40,9 +48,9 @@ function myFunction() {
            class="mdl-cell mdl-cell--4-col relative">
     <div class="mdl-list">
       <div class="mdl-list__item">
-        <form method="post" action="/genres">
+        <form method="post" action="/showEvents">
         <div class="styled-select yellow rounded" >
-      <select name ="s1" onchange="myFunction()" id="mySelect">
+      <select name ="s1"  id="cataegory1">
             <option style="font-weight:bold;">Choose Event Genre</option>
           <option style="font-weight:bold;">All Events</option>
           <option style="font-weight:bold;">Technology</option>
@@ -58,16 +66,22 @@ function myFunction() {
 
         </div>
         <br>
-        <input id='hangoutButtonId'   style="visibility: collapse; z-index:-88888888; position:fixed" type="submit" value="Submit" name="s3" >
+          <input type="button" value="Submit"  onclick="checkInfo()"  >
+        <input id='hangoutButtonId' onclick='f()' type="submit" value="Submit" name="s3" style="visibility:collapse; z-index:-88888888; position:fixed;">
 
 
 
         </form>
+
+        <!-- <form method="post" action="/setModeEvents">
+          <input type='submit' id='setMode' >
+        </form> -->
+
         <span class="mdl-list__item-secondary-action">
 
-          <button onclick="document.getElementById('hangoutButtonId').click()" class="mdl-button mdl-js-button mdl-button--raised
+          <button  class="mdl-button mdl-js-button mdl-button--raised
                          mdl-js-ripple-effect mdl-button--colored"
-                  rel="create" type="button" id='create'>Create</button>
+                  rel="create" type="button" id='create' onclick="f()"  style="visibility: collapse; z-index:-88888888; position:fixed"  >Create</button>
 
 
 </button>
@@ -85,3 +99,13 @@ function myFunction() {
     </div>
   </section>
 </div>
+<script>
+
+  var delayInMilliseconds = 2000; //1 second
+
+  setTimeout(function() {
+
+    document.getElementById('create').click();
+  }, delayInMilliseconds);
+
+</script>

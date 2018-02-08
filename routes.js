@@ -24,6 +24,7 @@ var router = express.Router();
 var models = require('./models');
 var Sequelize = require('sequelize');
 var SheetsHelper = require('./sheets');
+
 var json2html = require('node-json2html');
 var   mode = 'eventViewer';
 var cataegory1;
@@ -35,6 +36,7 @@ var gTitle;
 var gDescription;
 var gPassword;
 var gCataegories;
+
 var gUserId;
 var gFullName;
 var gDateOfPublish;
@@ -45,15 +47,28 @@ var gDateOfEventString;
 var gLastDateOfRegistrationString;
 var gEntryFees;
 
+var globalHtmlBody;
+var notesHtmlBody;
+var eventHtmlBody;
+var announcementHtmlBody;
 
+
+var notesCataegory1;
+var notesCataegory2;
+
+
+var eventCataegory1;
+var eventCataegory2;
+
+var announcementCataegory1;
+var announcementCataegory2;
 
 
 router.get('/', function(req, res, next) {
     console.log('1607');
 
-
-
-  res.send(`<br> No data found for filter :` );
+    res.set('Content-Type', 'application/javascript');
+     res.render('index', { myVar : 'dsndk' });
 
 
 });
@@ -70,7 +85,7 @@ router.get('/annonuncementViewerPage', function(req, res, next) {
 
     tMode = 'viewer';
     mode = 'announcementViewer';
-
+    console.log('ann', mode);
     if(!cataegory1)
     {
       cataegory1 = 'All Departments'
@@ -82,6 +97,8 @@ router.get('/annonuncementViewerPage', function(req, res, next) {
       console.log('an1',cataegory1)
     }
 
+
+
     res.render('annonuncementViewerPage');
 });
 
@@ -91,75 +108,15 @@ router.get('/annonuncementViewerFrame',function(req, res, next)
 {
 
 
-var htmlBody;
-var data = SheetsHelper.itemDetails;
-if(data)
-{
-  var checkDetails = [{
-    name: 's89',
-    age:   'str2'
-  }];
+  if(!SheetsHelper.itemAnnouncementDetails)
+  {
+res.send("<br<br><br><br>No Filter Choosen");
+}else if(!announcementCataegory1 && !announcementCataegory2)
+  {
+    res.send("<br<br><br><br>Choose a Department and a Semester");
+  }else {
 
-if(checkDetails[0].name===data[0].name)
-{
-
-  res.send(`<br> No data found for filter :  ${cataegory1} & ${cataegory2}` );
-}
-else{
-
-    var transformAnnouncements =
-      {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-                        {'<>':"form method='post' action='/detailedAnnouncement' method ='post' ",'html':[
-                            {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
-                              {'<>':"font face='Roboto'",'html':[
-                          {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
-                            {
-                              '<>':"div style='width:100%'",'children':[
-                                {
-                                  '<>':"table style='width:100%'",'children':[
-                                    {
-                                        '<>':"tr",'children':[
-                                          {
-                                            '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
-                                          },
-                                          {
-                                            '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
-                                          }
-                                        ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },{
-                                '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
-                                  {
-                                    '<>':"table style='width:100%'",'children':[
-                                      {
-                                          '<>':"tr",'children':[
-                                            {
-                                                '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${title}"
-                                            },
-                                            {
-                                                '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${title}"
-                                            }
-                                          ]
-                                      }
-                                    ]
-                                  }
-                                ]
-                            },{
-                                '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
-                            }
-                        ]}  ] }]}]}]};
-
-
-                        htmlBody = json2html.transform(data,transformAnnouncements);  //convert transform json data to html in reference to the array data
-                        res.send(`<br> Filter :  ${cataegory1} & ${cataegory2} ${htmlBody}` );
-
-}
-
-
-
+      res.send(`<br<br><br><br>Filter Choosen: ${announcementCataegory1}   &   ${announcementCataegory2} ${announcementHtmlBody}`);
 
 
 }
@@ -188,7 +145,7 @@ router.get('/notesViewerPage', function(req, res, next) {
 
         tMode = 'viewer';
     mode = 'notesViewer';
-
+console.log('notes', mode);
     if(!cataegory1)
     {
       cataegory1 = 'All Departments'
@@ -208,83 +165,18 @@ router.get('/notesViewerPage', function(req, res, next) {
 router.get('/notesViewerFrame',function(req, res, next)
 {
 
-
-var htmlBody;
-var data = SheetsHelper.itemNotesDetails;
-if(data)
-{
-  var checkDetails = [{
-    name: 's89',
-    age:   'str2'
-  }];
-
-if(checkDetails[0].name===data[0].name)
-{
-
-  res.send(`<br> No data found for filter :  ${cataegory1} & ${cataegory2}` );
-}
-else{
-
-  var transformNotes =
-    {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-                      {'<>':"form method='post' action='/detailedNotes' method ='post' ",'html':[
-                          {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
-                            {'<>':"font face='Roboto'",'html':[
-                        {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
-                          {
-                            '<>':"div style='width:100%'",'children':[
-                              {
-                                '<>':"table style='width:100%'",'children':[
-                                  {
-                                      '<>':"tr",'children':[
-                                        {
-                                          '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
-                                        },
-                                        {
-                                          '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
-                                        }
-                                      ]
-                                  }
-                                ]
-                              }
-                            ]
-                          },{
-                              '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
-                                {
-                                  '<>':"table style='width:100%'",'children':[
-                                    {
-                                        '<>':"tr",'children':[
-                                          {
-                                              '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${title}"
-                                          },
-                                          {
-                                              '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${title}"
-                                          }
-                                        ]
-                                    }
-                                  ]
-                                }
-                              ]
-                          },{
-                              '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
-                          }
-                      ]}  ] }]}]}]};
+    if(!SheetsHelper.itemNotesDetails)
+    {
+  res.send("<br<br><br><br>No Filter Choosen");
+}else if(!notesCataegory1 && !notesCataegory2)
+  {
+    res.send("<br<br><br><br>Choose a Department and a Semester");
+  }else {
+        res.send(`<br<br><br><br>Filter Choosen: ${notesCataegory1}   &   ${notesCataegory2} ${notesHtmlBody}`);
+  }
 
 
-
-                        htmlBody = json2html.transform(data,transformNotes);  //convert transform json data to html in reference to the array data
-                        res.send(`<br> Filter :  ${cataegory1} & ${cataegory2} ${htmlBody}` );
-
-}
-
-
-
-
-
-}
-
-});
-
+  });
 
 // .
 // .
@@ -306,9 +198,11 @@ router.get('/eventViewerPage', function(req, res, next) {
     tMode = 'viewer';
 
     mode = 'eventViewer';
+
+    console.log('event', mode);
     if(!cataegory1)
     {
-      cataegory1 = 'Choose Event Genre'
+      cataegory1 = 'All Events'
       console.log('ev1',cataegory1)
     }
 
@@ -321,77 +215,23 @@ router.get('/eventViewerFrame',function(req, res, next)
 {
 
 
-  var htmlBody;
-
-    var data = SheetsHelper.itemDetails;
-  if(data)
+  if(!SheetsHelper.itemEventDetails)
   {
-    var checkDetails = [{
-      name: 's89',
-      age:   'str2'
-    }];
-
-  if(checkDetails[0].name===data[0].name)
+res.send("<br<br><br><br>No Filter Choosen");
+}else if(!eventCataegory1)
   {
+    res.send("<br<br><br><br>Choose a Genre");
+  }else {
 
-    res.send(`<br> No data found for filter :  ${cataegory1}` );
-  }
-  else{
-
-  var data = SheetsHelper.itemEventDetails;
-
-  var transform =  {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-                                          {'<>':"form method='post' action='/detailedEvent' method ='post' ",'html':[
-                                              {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
-                                                {'<>':"font face='Roboto'",'html':[
-                                            {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
-                                              {
-                                                '<>':"div style='width:100%'",'children':[
-                                                  {
-                                                    '<>':"table style='width:100%'",'children':[
-                                                      {
-                                                          '<>':"tr",'children':[
-                                                            {
-                                                              '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
-                                                            },
-                                                            {
-                                                              '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${dateOfPublish}"
-                                                            }
-                                                          ]
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              },{
-                                                  '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
-                                                    {
-                                                      '<>':"table style='width:100%'",'children':[
-                                                        {
-                                                            '<>':"tr",'children':[
-                                                              {
-                                                                  '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${entryFees}"
-                                                              },
-                                                              {
-                                                                  '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${eventDate}"
-                                                              }
-                                                            ]
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                              },{
-                                                  '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
-                                              }
-                                          ]}  ] }]}]}]};
+      res.send('<br<br><br><br>Filter Choosen:'+  eventCataegory1 +  eventHtmlBody);
 
 
 
-   htmlBody = json2html.transform(data,transform);
-
-    res.send(`<br> Filter :  ${cataegory1} ${htmlBody}` );
-  }
 }
+
 });
+
+
 
 // .
 // .
@@ -1104,42 +944,34 @@ console.log('afirst');
 
 
 
-router.post('/spreadsheets', function(req, res, next) {
+router.post('/spreadsheetsCreateEvent', function(req, res, next) {
+
+  console.log('annonuncementsWriter');
+
 
   var auth = req.get('Authorization');
 
-  console.log('auth',auth);
+
   if (!auth) {
     return next(Error('Authorization required.'));
   }
   var accessToken = auth.split(' ')[1];
   var helper = new SheetsHelper(accessToken);
+
   var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
-  // console.log('mode',mode);
-  //   console.log('cataegory1',cataegory1);
-  //     console.log('cataegory2',cataegory2);
+
   console.log('tMode',tMode);
-      if(tMode === 'viewer')
-      {
+  console.log('sheets', mode);
 
-  if(!cataegory1.includes('Choose'))
-  {
-    helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-    if (err) {
-        return next(err);
-      }
+  tMode = 'writer'
+  mode = 'eventWriter';
+    console.log('spreadsheetsAnnouncement', mode);
 
-
-
-    });
-    res.redirect('back');
-  }
-}else if(tMode === 'writer')
+if(tMode === 'writer')
 {
 console.log('sfirst');
   console.log('spreadsheet',gInformationComplete);
-if(mode === 'announcementWriter')
-{
+
   if(gInformationComplete)
   {
 
@@ -1157,12 +989,100 @@ if(mode === 'announcementWriter')
 
   });
 
-  res.redirect('/annonuncementViewerPage');
-}
+  res.redirect('/eventViewerPage');
 }
 
-if(mode === 'notesWriter')
+
+
+
+
+}
+
+
+
+
+
+});
+
+router.post('/spreadsheets', function(req, res, next) {
+
+    console.log('eventViewer');
+
+
+    var auth = req.get('Authorization');
+
+
+    if (!auth) {
+      return next(Error('Authorization required.'));
+    }
+    var accessToken = auth.split(' ')[1];
+    var helper = new SheetsHelper(accessToken);
+
+    var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+    console.log('tMode',tMode);
+    console.log('sheets', mode);
+    tMode === 'viewer';
+    mode = 'eventViewer'
+      console.log('spreadsheetsAnnouncement', mode);
+
+        if(tMode === 'viewer')
+        {
+
+    if(!cataegory1.includes('Choose'))
+    {
+
+      helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+      if (err) {
+          return next(err);
+        }
+
+
+
+      });
+
+
+
+    }
+  }
+
+
+
+
+
+});
+
+
+router.post('/spreadsheetsCreateNote', function(req, res, next) {
+
+  console.log('annonuncementsWriter');
+
+
+  var auth = req.get('Authorization');
+
+
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+  console.log('tMode',tMode);
+  console.log('sheets', mode);
+
+
+
+  tMode = 'writer'
+  mode = 'notesWriter';
+    console.log('spreadsheetsAnnouncement', mode);
+
+if(tMode === 'writer')
 {
+console.log('sfirst');
+  console.log('spreadsheet',gInformationComplete);
+
   if(gInformationComplete)
   {
 
@@ -1182,9 +1102,97 @@ if(mode === 'notesWriter')
 
   res.redirect('/notesViewerPage');
 }
+
+
+
+
+
 }
-if(mode === 'eventWriter')
+
+
+
+
+
+});
+
+
+
+router.post('/spreadsheetsAnnouncement', function(req, res, next) {
+
+  console.log('annonuncements');
+
+
+  var auth = req.get('Authorization');
+
+
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+  console.log('tMode',tMode);
+  console.log('sheets', mode);
+  tMode === 'viewer';
+  mode = 'announcementViewer'
+    console.log('spreadsheetsAnnouncement', mode);
+
+      if(tMode === 'viewer')
+      {
+
+  if(!cataegory1.includes('Choose'))
+  {
+
+    helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+    if (err) {
+        return next(err);
+      }
+
+
+
+    });
+
+
+
+  }
+}
+
+
+
+
+});
+
+
+router.post('/spreadsheetsCreateAnnouncement', function(req, res, next) {
+
+  console.log('annonuncementsWriter');
+
+
+  var auth = req.get('Authorization');
+
+
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+  console.log('tMode',tMode);
+  console.log('sheets', mode);
+
+  tMode = 'writer'
+  mode = 'announcementWriter';
+    console.log('spreadsheetsAnnouncement', mode);
+
+if(tMode === 'writer')
 {
+console.log('sfirst');
+  console.log('spreadsheet',gInformationComplete);
+
   if(gInformationComplete)
   {
 
@@ -1193,7 +1201,7 @@ if(mode === 'eventWriter')
 
   console.log('global Wrting input - spreadsheet',gTitle,gDescription,gDateOfPublish,gCataegories);
   helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-  if (err) {
+    if (err) {
       return next(err);
     }
 
@@ -1202,9 +1210,10 @@ if(mode === 'eventWriter')
 
   });
 
-  res.redirect('/eventViewerPage');
+  res.redirect('/annonuncementViewerPage');
 }
-}
+
+
 
 
 
@@ -1217,55 +1226,462 @@ if(mode === 'eventWriter')
 });
 
 
+router.post('/spreadsheetsNotes', function(req, res, next) {
 
-router.post('/genres', function(req, res, next) {
+  console.log('notesViewer');
 
 
-var cataegoryR;
 
-        cataegory1 = req.body.s1;
+  var auth = req.get('Authorization');
 
-        console.log('cataegoryG',cataegory1);
-        if(req.body.s2)
-        {
-          cataegory2 = req.body.s2;
-          console.log('cataegory2',cataegory2);
-        }
-if(mode === 'eventViewer')
-{
-        if(cataegory1.includes('Choose'))
-        {
-          console.log('Choose found');
-          cataegory1 = 'All Events';
 
-        }
-}else if (mode === 'announcementViewer') {
-  if(cataegory1.includes('Choose'))
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+  console.log('tMode',tMode);
+  console.log('sheets', mode);
+  tMode === 'viewer';
+  mode = 'notesViewer'
+    console.log('spreadsheetsAnnouncement', mode);
+
+      if(tMode === 'viewer')
+      {
+
+  if(!cataegory1.includes('Choose'))
   {
-    console.log('Choose found');
-    cataegory1 = 'All Departments';
+
+    helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+    if (err) {
+        return next(err);
+      }
+
+
+
+    });
+
+
 
   }
-    if(cataegory2.includes('Choose'))
-    {
-      cataegory2 = 'All Semesters'
-    }
-}else if(mode === 'notesViewer')
-{
-  if(cataegory1.includes('Choose'))
-  {
-    console.log('Choose found');
-    cataegory1 = 'All Departments';
-
-  }
-    if(cataegory2.includes('Choose'))
-    {
-      cataegory2 = 'All Semesters'
-    }
 }
 
 
+
 });
+
+
+
+
+
+router.post('/showNotes', function(req, res, next) {
+
+
+
+
+          var departmentFilter = req.body.s1;
+          var semesterFilter = req.body.s2;
+          notesCataegory1 = req.body.s1;
+          notesCataegory2 = req.body.s2;
+
+
+        var raw_data = SheetsHelper.itemNotesDetails;
+
+
+
+          var forLength = raw_data.length - 1;
+
+
+       var used = false;
+       var anyNoteFromDept = false;
+       var i;
+
+       var filteredData = [{
+       name: 'str1',
+       age:   'str2'
+       }];
+         for(i=0;i<=forLength;i++)
+         {
+         var dept = raw_data[i].cataegories;
+
+
+
+           if(dept.includes(departmentFilter))
+           {
+
+             if(dept.includes(semesterFilter))
+{
+
+             if(!used)
+             {
+             filteredData.pop({
+             name: 'str1',
+             age:   'str2'
+               });
+               filteredData.push(raw_data[i]);
+               used = true;
+               anyNoteFromDept = true;
+
+             }else{
+               filteredData.push(raw_data[i]);
+               anyNoteFromDept = true;
+             }
+
+
+}
+           }
+         }
+
+         if(!anyNoteFromDept)
+         {
+           filteredData.pop({
+           name: 'str1',
+           age:   'str2'
+             });
+             filteredData.push({
+             title: 'No Data for this filter Exists'
+               });
+         }
+         var globalFilteredData = filteredData;
+
+
+
+var transformNotes =
+  {'<>':"div style='width:100%;padding-top:20px;'",'html':[
+                    {'<>':"form method='post' action='/detailedNotes' method ='post' ",'html':[
+                        {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
+                          {'<>':"font face='Roboto'",'html':[
+                      {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
+                        {
+                          '<>':"div style='width:100%'",'children':[
+                            {
+                              '<>':"table style='width:100%'",'children':[
+                                {
+                                    '<>':"tr",'children':[
+                                      {
+                                        '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
+                                      },
+                                      {
+                                        '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
+                                      }
+                                    ]
+                                }
+                              ]
+                            }
+                          ]
+                        },{
+                            '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
+                              {
+                                '<>':"table style='width:100%'",'children':[
+                                  {
+                                      '<>':"tr",'children':[
+                                        {
+                                            '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${title}"
+                                        },
+                                        {
+                                            '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${title}"
+                                        }
+                                      ]
+                                  }
+                                ]
+                              }
+                            ]
+                        },{
+                            '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
+                        }
+                    ]}  ] }]}]}]};
+
+        var  htmlBody = json2html.transform(filteredData,transformNotes);
+
+          notesHtmlBody = htmlBody;
+
+
+
+
+
+
+        res.redirect('back');
+
+
+
+
+
+
+
+});
+
+router.post("/setModeEvents", function(req, res, next) {
+  mode ='eventViewer';
+  console.log('setModeEvents',mode);
+});
+
+
+router.post('/showEvents', function(req, res, next) {
+
+
+      var   dept_filter = req.body.s1;
+      eventCataegory1 = dept_filter;
+
+
+      // var   third_filter = req.body.s2;
+
+
+
+      var raw_data = SheetsHelper.itemEventDetails;
+
+
+
+
+
+        var forLength = SheetsHelper.itemEventDetails.length - 1;
+
+
+     var used = false;
+     var anyNoteFromDept = false;
+
+     var filteredData = [{
+     name: 'str1',
+     age:   'str2'
+     }];
+
+     var i;
+       for(i=0;i<=forLength;i++)
+       {
+       var dept = raw_data[i].cataegories;
+
+
+         if(dept.includes(dept_filter))
+         {
+
+
+           if(!used)
+           {
+           filteredData.pop({
+           name: 'str1',
+           age:   'str2'
+             });
+             filteredData.push(raw_data[i]);
+             used = true;
+             anyNoteFromDept = true;
+
+           }else{
+             filteredData.push(raw_data[i]);
+             anyNoteFromDept = true;
+           }
+
+
+
+         }
+       }
+
+       if(!anyNoteFromDept)
+       {
+         filteredData.pop({
+         name: 'str1',
+         age:   'str2'
+           });
+           filteredData.push({
+           title: 'No Data for this filter Exists'
+             });
+       }
+       var globalFilteredData = filteredData;
+
+
+       var transform =
+                            {'<>':"div style='width:100%;padding-top:20px;'",'html':[
+                                              {'<>':"form method='post' action='/detailedEvent' method ='post' ",'html':[
+                                                  {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
+                                                    {'<>':"font face='Roboto'",'html':[
+                                                {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
+                                                  {
+                                                    '<>':"div style='width:100%'",'children':[
+                                                      {
+                                                        '<>':"table style='width:100%'",'children':[
+                                                          {
+                                                              '<>':"tr",'children':[
+                                                                {
+                                                                  '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
+                                                                },
+                                                                {
+                                                                  '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${dateOfPublish}"
+                                                                }
+                                                              ]
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  },{
+                                                      '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
+                                                        {
+                                                          '<>':"table style='width:100%'",'children':[
+                                                            {
+                                                                '<>':"tr",'children':[
+                                                                  {
+                                                                      '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${entryFees}"
+                                                                  },
+                                                                  {
+                                                                      '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${eventDate}"
+                                                                  }
+                                                                ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                  },{
+                                                      '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
+                                                  }
+                                              ]}  ] }]}]}]};
+
+
+
+      var   htmlBody = json2html.transform(filteredData,transform);
+
+      eventHtmlBody = htmlBody;
+
+      res.redirect('back');
+
+
+
+
+
+});
+
+  router.post("/setModeAnnouncement", function(req, res, next) {
+    mode ='announcementViewer';
+    console.log('setModeAnnouncement',mode);
+  });
+
+
+  router.post("/showAnnouncements", function(req, res, next) {
+
+
+
+          var departmentFilter = req.body.s1;
+          var semesterFilter = req.body.s2;
+          announcementCataegory1 = req.body.s1;
+          announcementCataegory2 = req.body.s2;
+
+
+        var  raw_data = SheetsHelper.itemAnnouncementDetails;
+
+
+
+          var forLength = raw_data.length - 1;
+
+      var i;
+       var used = false;
+       var anyNoteFromDept = false;
+
+       var filteredData = [{
+       name: 'str1',
+       age:   'str2'
+       }];
+         for(i=0;i<=forLength;i++)
+         {
+         var dept = raw_data[i].cataegories;
+
+
+           if(dept.includes(departmentFilter))
+           {
+
+             if(dept.includes(semesterFilter))
+{
+
+             if(!used)
+             {
+             filteredData.pop({
+             name: 'str1',
+             age:   'str2'
+               });
+               filteredData.push(raw_data[i]);
+               used = true;
+               anyNoteFromDept = true;
+
+             }else{
+               filteredData.push(raw_data[i]);
+               anyNoteFromDept = true;
+             }
+
+
+}
+           }
+         }
+
+         if(!anyNoteFromDept)
+         {
+           filteredData.pop({
+           name: 'str1',
+           age:   'str2'
+             });
+             filteredData.push({
+             title: 'No Data for this filter Exists'
+               });
+         }
+         var globalFilteredData = filteredData;
+
+var transformAnnouncements =
+  {'<>':"div style='width:100%;padding-top:20px;'",'html':[
+                    {'<>':"form method='post' action='/detailedAnnouncement' method ='post' ",'html':[
+                        {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
+                          {'<>':"font face='Roboto'",'html':[
+                      {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
+                        {
+                          '<>':"div style='width:100%'",'children':[
+                            {
+                              '<>':"table style='width:100%'",'children':[
+                                {
+                                    '<>':"tr",'children':[
+                                      {
+                                        '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
+                                      },
+                                      {
+                                        '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
+                                      }
+                                    ]
+                                }
+                              ]
+                            }
+                          ]
+                        },{
+                            '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
+                              {
+                                '<>':"table style='width:100%'",'children':[
+                                  {
+                                      '<>':"tr",'children':[
+                                        {
+                                            '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${title}"
+                                        },
+                                        {
+                                            '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${title}"
+                                        }
+                                      ]
+                                  }
+                                ]
+                              }
+                            ]
+                        },{
+                            '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
+                        }
+                    ]}  ] }]}]}]};
+
+          var htmlBody = json2html.transform(filteredData,transformAnnouncements);
+          announcementHtmlBody = htmlBody;
+
+
+        res.redirect('back');
+
+
+
+
+
+
+
+});
+
+
 
 // var asyncAdd = (helper,title,mode,cataegory1,cataegory2) =>
 // {

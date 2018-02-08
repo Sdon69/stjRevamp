@@ -16,27 +16,31 @@
   License for the specific language governing permissions and limitations under
   the License.
 -->
+
 <script>
 
 
+function checkInfo()
+{
+  var skillsSelect = document.getElementById("cataegory1");
+  var cataegory1 = skillsSelect.options[skillsSelect.selectedIndex].text;
 
-function myFunction() {
+  var skillsSelect2 = document.getElementById("cataegory2");
+  var cataegory2 = skillsSelect2.options[skillsSelect2.selectedIndex].text;
 
-
-    var x = document.getElementById("mySelect").value;
-
-
-  var hangoutButton = document.getElementById("hangoutButtonId");
-  hangoutButton.click(); // this will trigger the click event
-  x.onclick = function() {
-     hangoutButton.click(); // this will trigger the click event
-  };
+  if(cataegory1.includes('Choose'))
+  {
+    alert('Choose a Department');
+}else if (cataegory2.includes('Choose')) {
+    alert('Choose a Semester');
+}
+else {
+  document.getElementById('hangoutButtonId').click();
 }
 
-
+}
 
 </script>
-
 
 <div class="mdl-grid">
 
@@ -46,9 +50,9 @@ function myFunction() {
            class="mdl-cell mdl-cell--4-col relative">
     <div class="mdl-list">
       <div class="mdl-list__item">
-        <form method="post" action="/genres">
+        <form method="post" action="/showNotes">
         <div class="styled-select yellow rounded" >
-            <select name ="s1" onchange="myFunction()" id="mySelect">
+            <select name ="s1" onchange="myFunction()" id="cataegory1">
               <option style="font-weight:bold;">Choose Department</option>
               <option style="font-weight:bold;">All Departments</option>
         <option style="font-weight:bold;">Art</option>
@@ -59,7 +63,7 @@ function myFunction() {
         <option style="font-weight:bold;">Other</option>
               </select>
 
-              <select name ="s2" onchange="myFunction()" id="mySelect">
+              <select name ="s2" onchange="myFunction()" id="cataegory2">
                   <option style="font-weight:bold;">Choose  Semester</option>
                 <option style="font-weight:bold;">All Semesters</option>
   <option style="font-weight:bold;">First Semester</option>
@@ -72,16 +76,16 @@ function myFunction() {
 
         </div>
         <br>
-        <input id='hangoutButtonId' onclick='f()'  style="visibility: collapse; z-index:-88888888; position:fixed" type="submit" value="Submit" name="s3" >
-
+        <input id='hangoutButtonId' onclick='f()' type="submit" value="Submit" name="s3" style="visibility: collapse; z-index:-88888888; position:fixed"   >
+  <input type="button" value="Submit"  onclick="checkInfo()"  >
 
 
         </form>
         <span class="mdl-list__item-secondary-action">
 
-          <button onclick="document.getElementById('hangoutButtonId').click()" class="mdl-button mdl-js-button mdl-button--raised
+          <button class="mdl-button mdl-js-button mdl-button--raised
                          mdl-js-ripple-effect mdl-button--colored"
-                  rel="create" type="button" id='create'>Create</button>
+                  rel="createNotes" type="button" id='create'  style="visibility: collapse; z-index:-88888888; position:fixed" >Create</button>
 
 
 </button>
@@ -99,3 +103,14 @@ function myFunction() {
     </div>
   </section>
 </div>
+
+<script>
+
+  var delayInMilliseconds = 2000; //1 second
+
+  setTimeout(function() {
+
+    document.getElementById('create').click();
+  }, delayInMilliseconds);
+
+</script>
