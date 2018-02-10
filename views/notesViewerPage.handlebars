@@ -17,30 +17,7 @@
   the License.
 -->
 
-<script>
 
-
-function checkInfo()
-{
-  var skillsSelect = document.getElementById("cataegory1");
-  var cataegory1 = skillsSelect.options[skillsSelect.selectedIndex].text;
-
-  var skillsSelect2 = document.getElementById("cataegory2");
-  var cataegory2 = skillsSelect2.options[skillsSelect2.selectedIndex].text;
-
-  if(cataegory1.includes('Choose'))
-  {
-    alert('Choose a Department');
-}else if (cataegory2.includes('Choose')) {
-    alert('Choose a Semester');
-}
-else {
-  document.getElementById('hangoutButtonId').click();
-}
-
-}
-
-</script>
 
 <div class="mdl-grid">
 
@@ -76,7 +53,7 @@ else {
 
         </div>
         <br>
-        <input id='hangoutButtonId' onclick='f()' type="submit" value="Submit" name="s3" style="visibility: collapse; z-index:-88888888; position:fixed"   >
+        <input id='hangoutButtonId'  type="submit" value="Submit" name="s3" style="visibility: collapse; z-index:-88888888; position:fixed"   onclick="submitClick()" >
   <input type="button" value="Submit"  onclick="checkInfo()"  >
 
 
@@ -90,9 +67,9 @@ else {
 
 </button>
         </span>
-        <iframe src= "/notesViewerFrame" style="position:fixed; top:22%; left:0px; bottom:10%; right:0px; width:100%; height:80%; border:none; margin:0; padding:0; overflow:hidden; z-index:-1;">
+        <!-- <iframe src= "/notesViewerFrame" style="position:fixed; top:22%; left:0px; bottom:10%; right:0px; width:100%; height:80%; border:none; margin:0; padding:0; overflow:hidden; z-index:-1;">
           Your browser doesn't support iframes
-      </iframe>
+      </iframe> -->
       </div>
       {{#each spreadsheets}}
       <div class="mdl-list__item">
@@ -103,14 +80,180 @@ else {
     </div>
   </section>
 </div>
+<div id="myDiv" style="height:100%,width:100%;">        </div>
 
 <script>
 
-  var delayInMilliseconds = 2000; //1 second
 
-  setTimeout(function() {
 
-    document.getElementById('create').click();
-  }, delayInMilliseconds);
+var delayInMilliseconds = 2000; //1 second
 
+setTimeout(function() {
+
+  document.getElementById('create').click();
+}, delayInMilliseconds);
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
+<script>
+var gCataegory1;
+var gCataegory2;
+
+function checkInfo()
+{
+  var skillsSelect = document.getElementById("cataegory1");
+  var cataegory1 = skillsSelect.options[skillsSelect.selectedIndex].text;
+  gCataegory1 = cataegory1;
+  var skillsSelect2 = document.getElementById("cataegory2");
+  var cataegory2 = skillsSelect2.options[skillsSelect2.selectedIndex].text;
+  gCataegory2 = cataegory2;
+
+  if(cataegory1.includes('Choose'))
+  {
+    alert('Choose a Department');
+}else if (cataegory2.includes('Choose')) {
+    alert('Choose a Semester');
+}
+else {
+
+
+  // document.getElementById('create').click();
+  document.getElementById('hangoutButtonId').click();
+}
+
+}
+function submitClick()
+{
+var myValue = '{{isInformationAvailable}}';
+var isTrueSet = (myValue == 'true');
+if(isTrueSet)
+{
+
+
+
+
+
+
+var departmentFilter = gCataegory1;
+var semesterFilter = gCataegory2;
+
+
+var hello = '{{dataFromAnnouncement}}';
+var res = hello.replace(/&quot;/g, '"');
+
+
+
+
+
+var raw_data =  JSON.parse(res);
+
+
+
+        var forLength = raw_data.length - 1;
+
+    var i;
+     var used = false;
+     var anyNoteFromDept = false;
+
+     var filteredData = [{
+     name: 'str1',
+     age:   'str2'
+     }];
+       for(i=0;i<=forLength;i++)
+       {
+       var dept = raw_data[i].cataegories;
+
+
+         if(dept.includes(departmentFilter))
+         {
+
+           if(dept.includes(semesterFilter))
+{
+
+           if(!used)
+           {
+           filteredData.pop({
+           name: 'str1',
+           age:   'str2'
+             });
+             filteredData.push(raw_data[i]);
+             used = true;
+             anyNoteFromDept = true;
+
+           }else{
+             filteredData.push(raw_data[i]);
+             anyNoteFromDept = true;
+           }
+
+
+}
+         }
+       }
+
+       if(!anyNoteFromDept)
+       {
+         filteredData.pop({
+         name: 'str1',
+         age:   'str2'
+           });
+           filteredData.push({
+           title: 'No Data for this filter Exists'
+             });
+       }
+       var globalFilteredData = filteredData;
+
+
+
+var t ={'<>':"div style='width:100%;padding-top:20px;'",'html':[
+                  {'<>':"form method='post' action='/detailedNotes' method ='post' ",'html':[
+                      {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
+                        {'<>':"font face='Roboto'",'html':[
+                    {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
+                      {
+                        '<>':"div style='width:100%'",'children':[
+                          {
+                            '<>':"table style='width:100%'",'children':[
+                              {
+                                  '<>':"tr",'children':[
+                                    {
+                                      '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
+                                    },
+                                    {
+                                      '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
+                                    }
+                                  ]
+                              }
+                            ]
+                          }
+                        ]
+                      },{
+                          '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
+                            {
+                              '<>':"table style='width:100%'",'children':[
+                                {
+                                    '<>':"tr",'children':[
+                                      {
+                                          '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${title}"
+                                      },
+                                      {
+                                          '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${title}"
+                                      }
+                                    ]
+                                }
+                              ]
+                            }
+                          ]
+                      },{
+                          '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
+                      }
+                  ]}  ] }]}]}]};
+var d = filteredData;
+
+var transformedHtml =  json2html.transform(d,t) ;
+// document.write(transformedHtml);
+
+document.getElementById("myDiv").innerHTML=transformedHtml;
+}
+}
 </script>
