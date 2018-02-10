@@ -131,7 +131,7 @@ var cataegory2;
   }
 
 
-console.log('sheetId',sheetId);
+
 
     self.service.spreadsheets.values.get({
         spreadsheetId: sheetId,
@@ -141,7 +141,7 @@ console.log('sheetId',sheetId);
           console.log('The API returned an error: ' + err);
           return;
         }
-        console.log('spreadsheetId',sheetId);
+  
         var rows = response.values;
         if (rows.length === 0) {
           console.log('No data found.');

@@ -98,30 +98,21 @@ router.get('/annonuncementViewerPage', function(req, res, next) {
     }
 
 
+    var  raw_data = SheetsHelper.itemAnnouncementDetails;
+    announcementHtmlBody =  JSON.stringify(raw_data);
 
-    res.render('annonuncementViewerPage');
+
+    res.render('annonuncementViewerPage',{
+      pageTitle: 'About Page',
+      dataFromAnnouncement:announcementHtmlBody,
+      isInformationAvailable:'true'
+
+    });
 });
 
 
 
-router.get('/annonuncementViewerFrame',function(req, res, next)
-{
 
-
-  if(!SheetsHelper.itemAnnouncementDetails)
-  {
-res.send("<br<br><br><br>No Filter Choosen");
-}else if(!announcementCataegory1 && !announcementCataegory2)
-  {
-    res.send("<br<br><br><br>Choose a Department and a Semester");
-  }else {
-
-      res.send(`<br<br><br><br>Filter Choosen: ${announcementCataegory1}   &   ${announcementCataegory2} ${announcementHtmlBody}`);
-
-
-}
-
-});
 
 // .
 // .
@@ -1122,6 +1113,8 @@ router.post('/spreadsheetsAnnouncement', function(req, res, next) {
   console.log('annonuncements');
 
 
+
+
   var auth = req.get('Authorization');
 
 
@@ -1559,119 +1552,47 @@ router.post('/showEvents', function(req, res, next) {
 
 
 
-          var departmentFilter = req.body.s1;
-          var semesterFilter = req.body.s2;
-          announcementCataegory1 = req.body.s1;
-          announcementCataegory2 = req.body.s2;
+  //         var departmentFilter = req.body.s1;
+  //         var semesterFilter = req.body.s2;
+  //         announcementCataegory1 = req.body.s1;
+  //         announcementCataegory2 = req.body.s2;
+  //
+  //
+  //       var  raw_data = SheetsHelper.itemAnnouncementDetails;
+  //       announcementHtmlBody =  JSON.stringify(raw_data);
+  //
+  //       console.log(announcementHtmlBody);
+  //
+  //
+  //
+  //
+  //
+  //
+  //         console.log('outtt' ,announcementCataegory1,announcementCataegory2 );
+  //         router.get('/annonuncementViewerPage',function(req, res, next)
+  //         {
+  //
+  // console.log('innnn',announcementCataegory1,announcementCataegory2);
+  //           if(!SheetsHelper.itemAnnouncementDetails)
+  //           {
+  //         res.send("<br<br><br><br>No Filter Choosen");
+  //         }else if(!announcementCataegory1 && !announcementCataegory2)
+  //           {
+  //             res.send("<br<br><br><br>Choose a Department and a Semester");
+  //           }else {
+  //
+  //             res.render('annonuncementViewerFrame.hbs',{
+  //                   pageTitle: 'About Page',
+  //                   dataFromAnnouncement:announcementHtmlBody,
+  //                   isInformationAvailable:'true'
+  //
+  //                 });
+  //         }
+  //
+  //         });
 
-
-        var  raw_data = SheetsHelper.itemAnnouncementDetails;
-
-
-
-          var forLength = raw_data.length - 1;
-
-      var i;
-       var used = false;
-       var anyNoteFromDept = false;
-
-       var filteredData = [{
-       name: 'str1',
-       age:   'str2'
-       }];
-         for(i=0;i<=forLength;i++)
-         {
-         var dept = raw_data[i].cataegories;
-
-
-           if(dept.includes(departmentFilter))
-           {
-
-             if(dept.includes(semesterFilter))
-{
-
-             if(!used)
-             {
-             filteredData.pop({
-             name: 'str1',
-             age:   'str2'
-               });
-               filteredData.push(raw_data[i]);
-               used = true;
-               anyNoteFromDept = true;
-
-             }else{
-               filteredData.push(raw_data[i]);
-               anyNoteFromDept = true;
-             }
-
-
-}
-           }
-         }
-
-         if(!anyNoteFromDept)
-         {
-           filteredData.pop({
-           name: 'str1',
-           age:   'str2'
-             });
-             filteredData.push({
-             title: 'No Data for this filter Exists'
-               });
-         }
-         var globalFilteredData = filteredData;
-
-var transformAnnouncements =
-  {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-                    {'<>':"form method='post' action='/detailedAnnouncement' method ='post' ",'html':[
-                        {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
-                          {'<>':"font face='Roboto'",'html':[
-                      {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
-                        {
-                          '<>':"div style='width:100%'",'children':[
-                            {
-                              '<>':"table style='width:100%'",'children':[
-                                {
-                                    '<>':"tr",'children':[
-                                      {
-                                        '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
-                                      },
-                                      {
-                                        '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
-                                      }
-                                    ]
-                                }
-                              ]
-                            }
-                          ]
-                        },{
-                            '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
-                              {
-                                '<>':"table style='width:100%'",'children':[
-                                  {
-                                      '<>':"tr",'children':[
-                                        {
-                                            '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${title}"
-                                        },
-                                        {
-                                            '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${title}"
-                                        }
-                                      ]
-                                  }
-                                ]
-                              }
-                            ]
-                        },{
-                            '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
-                        }
-                    ]}  ] }]}]}]};
-
-          var htmlBody = json2html.transform(filteredData,transformAnnouncements);
-          announcementHtmlBody = htmlBody;
-
-
-        res.redirect('back');
+        // 
+        // res.redirect('back');
 
 
 

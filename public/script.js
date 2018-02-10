@@ -24,6 +24,8 @@ $(function() {
   });
 });
 
+
+
 function setSpinnerActive(isActive) {
   if (isActive) {
     $('#spinner').addClass('is-active');
@@ -65,6 +67,7 @@ $(function() {
     });
   });
   $('button[rel="createAnnouncements"]').click(function() {
+
     makeRequest('POST', '/spreadsheetsAnnouncement', function(err, spreadsheet) {
       if (err) return showError(err);
       // window.location.reload();
@@ -106,6 +109,7 @@ function makeRequest(method, url, callback) {
   if (!auth.isSignedIn.get()) {
     return callback(new Error('Signin required.'));
   }
+
   var accessToken = auth.currentUser.get().getAuthResponse().access_token;
   setSpinnerActive(true);
   $.ajax(url, {
