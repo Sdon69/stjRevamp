@@ -17,123 +17,6 @@
   the License.
 -->
 <script>
-var isSemesterChecked;
-var isDepartmentChecked;
-var cataegoryString = 'All Departments All Semesters';
-function concatCataegoryString()
-{
-
-             var semester = ['1'];
-             semester.pop('1');
-
-  if(document.event.semester0.checked)
-  {
-     semester.push(document.event.semester0.value);
-  isSemesterChecked = true;
-  }
-  if(document.event.semester1.checked)
-  {
-     semester.push(document.event.semester1.value);
-  isSemesterChecked = true;
-  }
-  if(document.event.semester2.checked)
-  {
-    semester.push(document.event.semester2.value);
-  isSemesterChecked = true;
-  }
-  if(document.event.semester3.checked)
-  {
-    semester.push(document.event.semester3.value);
-  isSemesterChecked = true;
-  }
-  if(document.event.semester4.checked)
-  {
-    semester.push(document.event.semester4.value);
-  isSemesterChecked = true;
-  }
-  if(document.event.semester5.checked)
-  {
-    semester.push(document.event.semester5.value);
-  isSemesterChecked = true;
-  }
-
-
-
-
-  var semesterString = 'All Semesters'.concat(semester);
-
-  var department = ['1'];
-  department.pop('1');
-
-
-
-  if(document.event.department0.checked)
-  {
-      department.push(document.event.department0.value);
-isDepartmentChecked = true;
-  }
-  if(document.event.department1.checked)
-  {
-      department.push(document.event.department1.value);
-isDepartmentChecked = true;
-  }
-  if(document.event.department2.checked)
-  {
-      department.push(document.event.department2.value);
-isDepartmentChecked = true;
-  }
-  if(document.event.department3.checked)
-  {
-      department.push(document.event.department3.value);
-isDepartmentChecked = true;
-  }
-  if(document.event.department4.checked)
-  {
-      department.push(document.event.department4.value);
-isDepartmentChecked = true;
-  }
-  if(document.event.department5.checked)
-  {
-      department.push(document.event.department5.value);
-isDepartmentChecked = true;
-  }
-
-
-
-
-
-
-    if(!department)
-    {
-      // alert('Choose Atleast one Department');
-    }
-    else if(1<department.length){
-    for(i=0;i<=department.length - 1;i++)
-    {
-      cataegoryString = cataegoryString.concat(department[i]);
-    }
-    }else {
-      cataegoryString = cataegoryString.concat(department);
-    }
-
-  if(!semester)
-  {
-    // alert('Choose Atleast one Semester');
-  }
-  else if(1<semester.length){
-  for(i=0;i<=semester.length - 1;i++)
-  {
-    cataegoryString = cataegoryString.concat(semester[i]);
-  }
-  }else {
-    cataegoryString = cataegoryString.concat(semester);
-  }
-
-
-
-
-
-}
 
 
 
@@ -152,23 +35,63 @@ var desc = document.event.eventDesc.value;
 var pass_check = document.event.pass_check.value;
 
 
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
-
-  var yyyy = today.getFullYear();
-  if(dd<10){
-  dd='0'+dd;
-  }
-  if(mm<10){
-  mm='0'+mm;
-  }
-  var today = dd+'/'+mm+'/'+yyyy;
 
 
 
+if(document.event.semester0.checked)
+{
+var isSemesterChecked = true;
+}
+else if(document.event.semester1.checked)
+{
+var isSemesterChecked = true;
+}
+else if(document.event.semester2.checked)
+{
+var isSemesterChecked = true;
+}
+else if(document.event.semester3.checked)
+{
+var isSemesterChecked = true;
+}
+else if(document.event.semester4.checked)
+{
+var isSemesterChecked = true;
+}
+else if(document.event.semester5.checked)
+{
+var isSemesterChecked = true;
+}
 
-concatCataegoryString();
+
+
+
+if(document.event.department0.checked)
+{
+var isDepartmentChecked = true;
+}
+else if(document.event.department1.checked)
+{
+var isDepartmentChecked = true;
+}
+else if(document.event.department2.checked)
+{
+var isDepartmentChecked = true;
+}
+else if(document.event.department3.checked)
+{
+var isDepartmentChecked = true;
+}
+else if(document.event.department4.checked)
+{
+var isDepartmentChecked = true;
+}
+else if(document.event.department5.checked)
+{
+var isDepartmentChecked = true;
+}
+
+
 
 
 
@@ -180,7 +103,6 @@ concatCataegoryString();
 
 if(title.length < 1)
 {
-
 
   alert('Enter the Event Title.');
 }
@@ -206,37 +128,18 @@ else if (!isSemesterChecked) {
 }
 else{
 
-   document.getElementById('cataegoryStringText').value = cataegoryString;
-   document.getElementById('todayDateText').value = today;
+  // document.getElementById('create').click();
+  //   window.location.href = "/annonuncementViewerPage";
 
+  document.getElementById('info').value = "yourValueHere";
 
-
-
-     document.getElementById('hangoutButtonId').click();
-
-     var delayInMilliseconds = 10; //1 second
-
-     setTimeout(function() {
-
-       document.getElementById('create').click();
-            window.location.href = "/annonuncementViewerPage";
-     }, delayInMilliseconds);
-
-
+isInformationAvailable =  document.event.information.value;
 
 
 }
 
 
-
-
-
-
-
 }
-
-
-
 
 </script>
 <div class="mdl-grid">
@@ -277,9 +180,8 @@ else{
 
     <br>
 
-      <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
-  <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse;" >
-<input type="button" value="Submit"  onclick="check()"    >
+    <input type='text' name='information' value='false'  id='info'>
+<input type="button" value="Submit"  onclick="check()"  >
 
             <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
         </form>
