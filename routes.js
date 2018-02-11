@@ -40,7 +40,7 @@ var gCataegories;
 var gUserId;
 var gFullName;
 var gDateOfPublish;
-var gInformationComplete = false;
+
 var gSemester;
 var gDepartment;
 var gDateOfEventString;
@@ -265,7 +265,7 @@ router.get('/annonuncementWriterPage', function(req, res, next) {
     tMode = 'writer';
     console.log(tMode);
     mode = 'announcementWriter';
-    gInformationComplete = false;
+
 
 
 
@@ -278,7 +278,7 @@ router.get('/notesWriterPage', function(req, res, next) {
     tMode = 'writer';
     console.log(tMode);
     mode = 'notesWriter';
-    gInformationComplete = false;
+
 
 
 
@@ -290,7 +290,7 @@ router.get('/eventWriterPage', function(req, res, next) {
     tMode = 'writer';
     console.log(tMode);
     mode = 'eventWriter';
-    gInformationComplete = false;
+
 
 
 
@@ -320,7 +320,7 @@ router.post('/announcementWriteCheck', function(req, res, next) {
     gUserId = userId;
     gFullName = fullName;
     gDateOfPublish = req.body.todayTextName;
-    gInformationComplete = true; // Delete : useless function remove it from and /spreadsheet function
+
 
 
 
@@ -337,235 +337,21 @@ router.post('/eventsWriteCheck', function(req, res, next) {
 
 
 
-      var  eventTitle = req.body.eventTitle;
-      var  eventDesc  = req.body.eventDesc;
-      var  entryFees = req.body.entryFees;
-      var  pass_check = req.body.pass_check;
-      var  date_of_event = req.body.date_of_event;
-      var  lastDateOfRegistration = req.body.lastDateOfRegistration;
-        var isGenreChecked = false;
-        var isDateOfEventPast = false;
-        var isLastDateofRegistrationPast = false;
 
-        var genres = ['1'];
-        genres.pop('1');
-        var genreString = 'All Events'
-    var  g0 = req.body.genres0;
-    var  g1 = req.body.genres1;
-    var  g2 = req.body.genres2;
-    var  g3 = req.body.genres3;
-    var  g4 = req.body.genres4;
-    var  g5 = req.body.genres5;
-    var  g6 = req.body.genres6;
-        var informationComplete = true;
-        if(g0)
-        {
-        genres.push(g0);
-        isGenreChecked = true;
-      }
-        if(g1)
-        {
-        genres.push(g1);
-        isGenreChecked = true;
-      }
-        if(g2)
-        {
-          genres.push(g3);
-        isGenreChecked = true;
-      }
-        if(g4)
-    {    genres.push(g4);
-        isGenreChecked = true;}
-        if(g5)
-      {  genres.push(g5);
-        isGenreChecked = true;}
-        if(g6)
-    {    genres.push(g6);
-        isGenreChecked = true;}
+      var fullName = "Sample Name";
+      var userId = "SampleId";
 
-        var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
-
-  var yyyy = today.getFullYear();
-  if(dd<10){
-      dd='0'+dd;
-  }
-  if(mm<10){
-      mm='0'+mm;
-  }
-  var today = dd+'/'+mm+'/'+yyyy;
-  var dateToday = today;
-  if(date_of_event.length > 2)
-  {
-  var dateOfEventArray = date_of_event.split("-");
-  var dateOfEventYear = dateOfEventArray[0];
-  var dateOfEventMonth = dateOfEventArray[1];
-  var dateOfEventDay = dateOfEventArray[2];
-  var dateOfEventString = `${dateOfEventDay}/${dateOfEventMonth}/${dateOfEventYear} `;
-  console.log(dateOfEventString);
-
-  }
-
-  if(lastDateOfRegistration.length > 2)
-  {
-    var lastDateOfRegistrationArray = lastDateOfRegistration.split("-");
-    var lastDateOfRegistrationYear = lastDateOfRegistrationArray[0];
-    var lastDateOfRegistrationMonth = lastDateOfRegistrationArray[1];
-    var lastDateOfRegistrationDay = lastDateOfRegistrationArray[2];
-    var lastDateOfRegistrationString = `${lastDateOfRegistrationDay}/${lastDateOfRegistrationMonth}/${lastDateOfRegistrationYear} `;
-    console.log(lastDateOfRegistrationString);
-  }
-
-
-
-
-  if(dateOfEventYear<yyyy)
-  {
-    isDateOfEventPast = true;
-  }
-  if (dateOfEventMonth < mm) {
-    if(dateOfEventYear<yyyy)
-    {
-      isDateOfEventPast = true;
-    }
-  }
-
-
-  if (dateOfEventDay < dd) {
-   if (dateOfEventMonth < mm) {
-       if(dateOfEventYear < yyyy){
-  isDateOfEventPast = true;
-
-        }
-      }
-    }
-
-    if(lastDateOfRegistrationYear < yyyy)
-    {
-  isLastDateofRegistrationPast = true;
-    }
-
-    if(lastDateOfRegistrationMonth < mm)
-    {
-      if(lastDateOfRegistrationYear < yyyy)
-      {
-    isLastDateofRegistrationPast = true;
-      }
-    }
-
-
-  if (lastDateOfRegistrationDay < dd)
-  {
-   if(lastDateOfRegistrationMonth < mm)
-   {
-     if(lastDateOfRegistrationYear < yyyy)
-     {
-  isLastDateofRegistrationPast = true;
-     }
-   }
-  }
-
-
-
-  if(eventTitle.length < 1)
-  {
-  informationComplete = false;
-  console.log(informationComplete + '1');
-  }
-  else if (eventDesc.length < 1) {
-  informationComplete = false;
-  console.log(informationComplete + '2');
-  }
-  else if (entryFees.length < 1) {
-    informationComplete = false;
-    console.log(informationComplete + '3');
-  }
-  else if (pass_check.length < 1) {
-  informationComplete = false;
-  console.log(informationComplete + '4');
-  }
-  else if(date_of_event.length < 2)
-  {
-
-  informationComplete = false;
-  console.log(informationComplete + "5");
-  }
-  else if(isDateOfEventPast)
-  {
-  informationComplete = false;
-  console.log(informationComplete + "6");
-  }
-
-  else if(lastDateOfRegistration.length < 2)
-  {
-
-  informationComplete = false;
-  console.log(informationComplete + '7' );
-  }
-  else if(isLastDateofRegistrationPast)
-  {
-  informationComplete = false;
-  console.log(informationComplete + '8' );
-  }
-  else if (!isGenreChecked) {
-
-  informationComplete = false;
-  console.log(informationComplete + '9' );
-  }
-
-  if(informationComplete)
-  {
-
-  }
-  else {
-    console.log('booh');
-  }
-
-
-  if(!genres)
-  {
-    console.log('Choose Atleast one genre');
-  }
-  else if(1<genres.length){
-  for(i=0;i<=genres.length - 1;i++)
-  {
-    genreString = genreString.concat(genres[i]);
-  }
-  }else {
-    genreString = genreString.concat(genres);
-  }
-  console.log(genreString);
-
-  var fullName = "Sample Name";
-  var userId = "SampleId";
-
-
-
-  if(informationComplete)
-  {
-
-    gTitle = eventTitle;
-    gDescription = eventDesc;
-    gCataegories = genreString;
+    gTitle = req.body.eventTitle;
+    gDescription =  req.body.eventDesc;
+    gEntryFees = req.body.entryFees;
+    gCataegories = req.body.cataegoryTextName;
+    gDateOfPublish = req.body.todayTextName;
+    gDateOfEventString = req.body.date_of_event;
+    gLastDateOfRegistrationString = req.body.lastDateOfRegistration;
     gUserId = userId;
     gFullName = fullName;
-    gDateOfPublish = dateToday
-    gDateOfEventString = dateOfEventString;
-    gLastDateOfRegistrationString = lastDateOfRegistrationString;
-    gEntryFees = entryFees;
-    gInformationComplete = informationComplete;
-
-    console.log('writeCheck',gInformationComplete);
 
 
-
-
-
-  }
-  else {
-  gInformationComplete = informationComplete;
-  }
 
 
 });
@@ -573,200 +359,19 @@ router.post('/eventsWriteCheck', function(req, res, next) {
 
 router.post('/notesWriteCheck', function(req, res, next) {
 
-console.log('afirst');
-        var title = req.body.eventTitle;
-        var description  = req.body.eventDesc;
-
-        var pass_check = req.body.pass_check;
-
-        var isDepartmentChecked = false;
-
-        var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
-
-  var yyyy = today.getFullYear();
-  if(dd<10){
-      dd='0'+dd;
-  }
-  if(mm<10){
-      mm='0'+mm;
-  }
-  var today = dd+'/'+mm+'/'+yyyy;
-
-  var dateOfPublish = today;
-
-
-        var department = ['1'];
-        department.pop('1');
-        var cataegoryString = 'All Departments All Semesters'
-      var  d0 = req.body.department0;
-      var  d1 = req.body.department1;
-      var  d2 = req.body.department2;
-      var  d3 = req.body.department3;
-      var  d4 = req.body.department4;
-      var  d5 = req.body.department5;
-
-        var informationComplete = true;
-        if(d0)
-        {
-        department.push(d0);
-        isDepartmentChecked = true;
-      }
-        if(d1)
-        {
-        department.push(d1);
-        isDepartmentChecked = true;
-      }
-        if(d2)
-        {
-          department.push(d2);
-        isDepartmentChecked = true;
-      }
-      if(d3)
-      {
-        department.push(d3);
-      isDepartmentChecked = true;
-    }
-        if(d4)
-    {    department.push(d4);
-        isDepartmentChecked = true;}
-        if(d5)
-      {  department.push(d5);
-        isDepartmentChecked = true;}
-
-  console.log(department);
-        var isSemesterChecked = false;
-
-
-            var semester = ['1'];
-            semester.pop('1');
-
-        var    s0 = req.body.semester0;
-        var    s1 = req.body.semester1;
-        var    s2 = req.body.semester2;
-        var    s3 = req.body.semester3;
-        var    s4 = req.body.semester4;
-        var    s5 = req.body.semester5;
-
-            var informationComplete = true;
-            if(s0)
-            {
-            semester.push(s0);
-            isSemesterChecked = true;
-          }
-            if(s1)
-            {
-            semester.push(s1);
-            isSemesterChecked = true;
-          }
-            if(s2)
-            {
-              semester.push(s2);
-            isSemesterChecked = true;
-          }
-          if(s3)
-          {
-            semester.push(s3);
-          isSemesterChecked = true;
-        }
-            if(s4)
-        {    semester.push(s4);
-            isSemesterChecked = true;}
-            if(s5)
-          {  semester.push(s5);
-            isSemesterChecked = true;}
-
-
-
-  if(title.length < 1)
-  {
-  informationComplete = false;
-  console.log(informationComplete + '1');
-  }
-  else if (description.length < 1) {
-  informationComplete = false;
-  console.log(informationComplete + '2');
-  }
-
-  else if (pass_check.length < 1) {
-  informationComplete = false;
-  console.log(informationComplete + '4');
-  }
-
-
-  else if (!isDepartmentChecked) {
-
-  informationComplete = false;
-    console.log(informationComplete + '9' );
-    }
-
-
-    else if (!isSemesterChecked) {
-
-    informationComplete = false;
-      console.log(informationComplete + '10' );
-      }
+          var userId = 'SampleId';
+          var fullName = 'SampleName'
 
 
 
 
-  if(!department)
-  {
-    console.log('Choose Atleast one Department');
-  }
-  else if(1<department.length){
-  for(i=0;i<=department.length - 1;i++)
-  {
-    cataegoryString = cataegoryString.concat(department[i]);
-  }
-  }else {
-    cataegoryString = cataegoryString.concat(department);
-  }
-  console.log(cataegoryString);
+      gTitle = req.body.eventTitle;
+      gDescription = req.body.eventDesc;
+      gCataegories = req.body.cataegoryTextName;
+      gUserId = userId;
+      gFullName = fullName;
+      gDateOfPublish = req.body.todayTextName;
 
-
-
-  if(!semester)
-  {
-    console.log('Choose Atleast one Semester');
-  }
-  else if(1<semester.length){
-  for(i=0;i<=semester.length - 1;i++)
-  {
-    cataegoryString = cataegoryString.concat(semester[i]);
-  }
-  }else {
-    cataegoryString = cataegoryString.concat(semester);
-  }
-  console.log(cataegoryString);
-
-
-  var fullName = "Sample Name";
-  var userId = "SampleId";
-
-
-
-  if(informationComplete)
-  {
-
-    gTitle = title;
-    gDescription = description;
-    gCataegories = cataegoryString;
-    gUserId = userId;
-    gFullName = fullName;
-    gDateOfPublish = dateOfPublish
-  gInformationComplete = informationComplete;
-    console.log('writeCheck',gInformationComplete);
-
-  console.log('hurrah',title,description,cataegoryString,userId,fullName,dateOfPublish);
-
-
-
-  }
-  else {
-  gInformationComplete = informationComplete;
-  }
 
 
 });
@@ -809,10 +414,8 @@ router.post('/spreadsheetsCreateEvent', function(req, res, next) {
 if(tMode === 'writer')
 {
 console.log('sfirst');
-  console.log('spreadsheet',gInformationComplete);
 
-  if(gInformationComplete)
-  {
+
 
 
 
@@ -829,7 +432,7 @@ console.log('sfirst');
   });
 
   res.redirect('/eventViewerPage');
-}
+
 
 
 
@@ -920,10 +523,9 @@ router.post('/spreadsheetsCreateNote', function(req, res, next) {
 if(tMode === 'writer')
 {
 console.log('sfirst');
-  console.log('spreadsheet',gInformationComplete);
 
-  if(gInformationComplete)
-  {
+
+
 
 
 
@@ -940,7 +542,7 @@ console.log('sfirst');
   });
 
   res.redirect('/notesViewerPage');
-}
+
 
 
 
@@ -1032,10 +634,7 @@ router.post('/spreadsheetsCreateAnnouncement', function(req, res, next) {
 if(tMode === 'writer')
 {
 console.log('sfirst');
-  console.log('spreadsheet',gInformationComplete);
 
-  if(gInformationComplete)
-  {
 
 
 
@@ -1052,7 +651,7 @@ console.log('sfirst');
   });
 
   res.redirect('/annonuncementViewerPage');
-}
+
 
 
 

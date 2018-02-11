@@ -17,21 +17,130 @@
   the License.
 -->
 <script>
-function myFunction() {
+var isSemesterChecked;
+var isDepartmentChecked;
+var cataegoryString = 'All Departments All Semesters';
+function concatCataegoryString()
+{
+
+             var semester = ['1'];
+             semester.pop('1');
+
+  if(document.event.semester0.checked)
+  {
+     semester.push(document.event.semester0.value);
+  isSemesterChecked = true;
+  }
+  if(document.event.semester1.checked)
+  {
+     semester.push(document.event.semester1.value);
+  isSemesterChecked = true;
+  }
+  if(document.event.semester2.checked)
+  {
+    semester.push(document.event.semester2.value);
+  isSemesterChecked = true;
+  }
+  if(document.event.semester3.checked)
+  {
+    semester.push(document.event.semester3.value);
+  isSemesterChecked = true;
+  }
+  if(document.event.semester4.checked)
+  {
+    semester.push(document.event.semester4.value);
+  isSemesterChecked = true;
+  }
+  if(document.event.semester5.checked)
+  {
+    semester.push(document.event.semester5.value);
+  isSemesterChecked = true;
+  }
 
 
-    var x = document.getElementById("mySelect").value;
 
 
-  var hangoutButton = document.getElementById("hangoutButtonId");
-  hangoutButton.click(); // this will trigger the click event
-  x.onclick = function() {
-     hangoutButton.click(); // this will trigger the click event
-  };
+  var semesterString = 'All Semesters'.concat(semester);
+
+  var department = ['1'];
+  department.pop('1');
+
+
+
+  if(document.event.department0.checked)
+  {
+      department.push(document.event.department0.value);
+isDepartmentChecked = true;
+  }
+  if(document.event.department1.checked)
+  {
+      department.push(document.event.department1.value);
+isDepartmentChecked = true;
+  }
+  if(document.event.department2.checked)
+  {
+      department.push(document.event.department2.value);
+isDepartmentChecked = true;
+  }
+  if(document.event.department3.checked)
+  {
+      department.push(document.event.department3.value);
+isDepartmentChecked = true;
+  }
+  if(document.event.department4.checked)
+  {
+      department.push(document.event.department4.value);
+isDepartmentChecked = true;
+  }
+  if(document.event.department5.checked)
+  {
+      department.push(document.event.department5.value);
+isDepartmentChecked = true;
+  }
+
+
+
+
+
+
+    if(!department)
+    {
+      // alert('Choose Atleast one Department');
+    }
+    else if(1<department.length){
+    for(i=0;i<=department.length - 1;i++)
+    {
+      cataegoryString = cataegoryString.concat(department[i]);
+    }
+    }else {
+      cataegoryString = cataegoryString.concat(department);
+    }
+
+  if(!semester)
+  {
+    // alert('Choose Atleast one Semester');
+  }
+  else if(1<semester.length){
+  for(i=0;i<=semester.length - 1;i++)
+  {
+    cataegoryString = cataegoryString.concat(semester[i]);
+  }
+  }else {
+    cataegoryString = cataegoryString.concat(semester);
+  }
+
+
+
+
+
 }
+
+
 
 function check()
 {
+
+
 
 
 var title = document.event.eventTitle.value;
@@ -43,63 +152,23 @@ var desc = document.event.eventDesc.value;
 var pass_check = document.event.pass_check.value;
 
 
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
 
-
-
-if(document.event.semester0.checked)
-{
-var isSemesterChecked = true;
-}
-else if(document.event.semester1.checked)
-{
-var isSemesterChecked = true;
-}
-else if(document.event.semester2.checked)
-{
-var isSemesterChecked = true;
-}
-else if(document.event.semester3.checked)
-{
-var isSemesterChecked = true;
-}
-else if(document.event.semester4.checked)
-{
-var isSemesterChecked = true;
-}
-else if(document.event.semester5.checked)
-{
-var isSemesterChecked = true;
-}
+  var yyyy = today.getFullYear();
+  if(dd<10){
+  dd='0'+dd;
+  }
+  if(mm<10){
+  mm='0'+mm;
+  }
+  var today = dd+'/'+mm+'/'+yyyy;
 
 
 
 
-if(document.event.department0.checked)
-{
-var isDepartmentChecked = true;
-}
-else if(document.event.department1.checked)
-{
-var isDepartmentChecked = true;
-}
-else if(document.event.department2.checked)
-{
-var isDepartmentChecked = true;
-}
-else if(document.event.department3.checked)
-{
-var isDepartmentChecked = true;
-}
-else if(document.event.department4.checked)
-{
-var isDepartmentChecked = true;
-}
-else if(document.event.department5.checked)
-{
-var isDepartmentChecked = true;
-}
-
-
+concatCataegoryString();
 
 
 
@@ -111,6 +180,8 @@ var isDepartmentChecked = true;
 
 if(title.length < 1)
 {
+
+
   alert('Enter the Event Title.');
 }
 else if (desc.length < 1) {
@@ -130,15 +201,42 @@ else if (!isDepartmentChecked) {
 }
 
 else if (!isSemesterChecked) {
-  alert('Choose Atleast one Semester')
+  alert('Choose Atleast one Semester');
+
 }
 else{
-    window.location.href = "/notesViewerPage";
-  document.getElementById('create').click();
-}
+
+   document.getElementById('cataegoryStringText').value = cataegoryString;
+   document.getElementById('todayDateText').value = today;
+
+
+
+
+     document.getElementById('hangoutButtonId').click();
+
+     var delayInMilliseconds = 10; //0.01 second
+
+     setTimeout(function() {
+
+       document.getElementById('create').click();
+            window.location.href = "/notesViewerPage";
+     }, delayInMilliseconds);
+
+
 
 
 }
+
+
+
+
+
+
+
+}
+
+
+
 
 </script>
 <div class="mdl-grid">
@@ -153,32 +251,35 @@ else{
 
         <form method="post" action="/notesWriteCheck" name='event'>
 
-    <input type='text' placeholder="Notes Title" onchange="myFunction()" onblur="myFunction()"  id="mySelect" name='eventTitle'/><br>
-    <input type='text' placeholder="Notes Description" onchange="myFunction()" onblur="myFunction()" id="mySelect" name='eventDesc'><br>
+    <input type='text' placeholder="Event Title"     id="mySelect" name='eventTitle'/><br>
+    <input type='text' placeholder="Event Description"   id="mySelect" name='eventDesc'><br>
 
-    <input type='password' placeholder="Confirm Password" onchange="myFunction()" onblur="myFunction()" id="mySelect" name='pass_check'><br>
+    <input type='password' placeholder="Confirm Password"   id="mySelect" name='pass_check'><br>
     <br>
     Department(s) Concerned:<br>
-    <input type="checkbox" name="department0" value="Art" onchange="myFunction()" id="mySelect">Art<br>
-    <input type="checkbox" name="department1" value="Commerce" onchange="myFunction()" id="mySelect">Commerce<br>
-    <input type="checkbox" name="department2" value="Management" onchange="myFunction()" id="mySelect">Management<br>
-    <input type="checkbox" name="department3" value="Education" onchange="myFunction()" id="mySelect">Education<br>
-    <input type="checkbox" name="department4" value="Science" onchange="myFunction()" id="mySelect">Science<br>
-    <input type="checkbox" name="department5" value="Other" onchange="myFunction()" id="mySelect">Other<br>
+    <input type="checkbox" name="department0" value="Art"  id="mySelect">Art<br>
+    <input type="checkbox" name="department1" value="Commerce"  id="mySelect">Commerce<br>
+    <input type="checkbox" name="department2" value="Management"  id="mySelect">Management<br>
+    <input type="checkbox" name="department3" value="Education"  id="mySelect">Education<br>
+    <input type="checkbox" name="department4" value="Science"  id="mySelect">Science<br>
+    <input type="checkbox" name="department5" value="Other"  id="mySelect">Other<br>
 
     <br>
 
 
     Semesters(s) Concerned:<br>
-    <input type="checkbox" name="semester0" value="First Semester" onchange="myFunction()" id="mySelect">First Semester<br>
-    <input type="checkbox" name="semester1" value="Second Semester" onchange="myFunction()" id="mySelect">Second Semester<br>
-    <input type="checkbox" name="semester2" value="Third Semester" onchange="myFunction()" id="mySelect">Third Semester<br>
-    <input type="checkbox" name="semester3" value="Fourth Semester" onchange="myFunction()" id="mySelect">Fourth Semester<br>
-    <input type="checkbox" name="semester4" value="Fifth Semester" onchange="myFunction()" id="mySelect">Fifth Semester<br>
-    <input type="checkbox" name="semester5" value="Sixth and Above Semesters" onchange="myFunction()" id="mySelect">Sixth and Above Semesters<br>
+    <input type="checkbox" name="semester0" value="First Semester"  id="mySelect">First Semester<br>
+    <input type="checkbox" name="semester1" value="Second Semester"  id="mySelect">Second Semester<br>
+    <input type="checkbox" name="semester2" value="Third Semester"  id="mySelect">Third Semester<br>
+    <input type="checkbox" name="semester3" value="Fourth Semester"  id="mySelect">Fourth Semester<br>
+    <input type="checkbox" name="semester4" value="Fifth Semester"  id="mySelect">Fifth Semester<br>
+    <input type="checkbox" name="semester5" value="Sixth and Above Semesters"  id="mySelect">Sixth and Above Semesters<br>
 
     <br>
-<input type="button" value="Submit"  onclick="check()"  >
+
+      <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
+  <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse;" >
+<input type="button" value="Submit"  onclick="check()"    >
 
             <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
         </form>

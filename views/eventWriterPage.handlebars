@@ -17,17 +17,65 @@
   the License.
 -->
 <script>
-function myFunction() {
 
+var isGenreChecked = false;
+var cataegoryString = 'All Events';
+function concatCataegoryString()
+{
 
-    var x = document.getElementById("mySelect").value;
+    var genreString = 'All Events'
+  var genres = ['1'];
+  genres.pop('1');
+    alert('check1');
+  if(document.event.genres0.checked)
+  {
+  isGenreChecked = true;
+  genres.push(document.event.genres0.value);
+  }
+  if(document.event.genres1.checked)
+  {
+  isGenreChecked = true;
+  genres.push(document.event.genres1.value);
+  }
+  if(document.event.genres2.checked)
+  {
+  isGenreChecked = true;
+  genres.push(document.event.genres2.value);
+  }
+  if(document.event.genres3.checked)
+  {
+  isGenreChecked = true;
+  genres.push(document.event.genres3.value);
+  }
+  if(document.event.genres4.checked)
+  {
+  isGenreChecked = true;
+  genres.push(document.event.genres4.value);
+  }
+  if(document.event.genres5.checked)
+  {
+  isGenreChecked = true;
+  genres.push(document.event.genres5.value);
+  }
+  if(document.event.genres6.checked)
+  {
+  isGenreChecked = true;
+  genres.push(document.event.genres6.value);
+  }
 
-
-  var hangoutButton = document.getElementById("hangoutButtonId");
-  hangoutButton.click(); // this will trigger the click event
-  x.onclick = function() {
-     hangoutButton.click(); // this will trigger the click event
-  };
+    alert('check2');
+  if(!genres)
+  {
+    console.log('Choose Atleast one genre');
+  }
+  else if(1<genres.length){
+  for(i=0;i<=genres.length - 1;i++)
+  {
+    cataegoryString = cataegoryString.concat(genres[i]);
+  }
+  }else {
+    cataegoryString = cataegoryString.concat(genres);
+  }
 }
 
 function check()
@@ -68,41 +116,14 @@ var lastDateOfRegistrationYear = lastDateOfRegistrationArray[0];
 var lastDateOfRegistrationMonth = lastDateOfRegistrationArray[1];
 var lastDateOfRegistrationDay = lastDateOfRegistrationArray[2];
 var lastDateOfRegistrationString = `${lastDateOfRegistrationDay}/${lastDateOfRegistrationMonth}/${lastDateOfRegistrationYear} `;
-var isGenreChecked = false;
+// var isGenreChecked = false;
 var isDateOfEventPast = false;
 var isLastDateofRegistrationPast = false;
-// var genres =
 
 
+concatCataegoryString();
+    alert('check3');
 
-if(document.event.genres0.checked)
-{
-var isGenreChecked = true;
-}
-else if(document.event.genres1.checked)
-{
-var isGenreChecked = true;
-}
-else if(document.event.genres2.checked)
-{
-var isGenreChecked = true;
-}
-else if(document.event.genres3.checked)
-{
-var isGenreChecked = true;
-}
-else if(document.event.genres4.checked)
-{
-var isGenreChecked = true;
-}
-else if(document.event.genres5.checked)
-{
-var isGenreChecked = true;
-}
-else if(document.event.genres6.checked)
-{
-var isGenreChecked = true;
-}
 
 if(dateOfEventYear<yyyy)
 {
@@ -186,15 +207,31 @@ alert('The last day of Registration can not be in past');
 
 
 else if (!isGenreChecked) {
-  alert('Choose Atleast one Genre')
+  alert('Choose Atleast one genres')
 }
 
 
 
 else{
 
-  document.getElementById('create').click();
-    window.location.href = "/eventViewerPage";
+    alert('check4');
+     document.getElementById('cataegoryStringText').value = cataegoryString;
+     document.getElementById('todayDateText').value = today;
+
+
+
+
+       document.getElementById('hangoutButtonId').click();
+
+       var delayInMilliseconds = 10; //0.01 second
+
+       setTimeout(function() {
+
+         document.getElementById('create').click();
+              window.location.href = "/eventViewerPage";
+       }, delayInMilliseconds);
+
+
 }
 
 
@@ -214,25 +251,27 @@ else{
         <form method="post" action="/eventsWriteCheck" name='event'>
 
 
-          <input type='text' placeholder="Event Title" name='eventTitle' onchange="myFunction()" id="mySelect"/><br>
-          <input type='text' placeholder="Event Description" name='eventDesc' onchange="myFunction()" id="mySelect"><br>
-          <input type='number' placeholder="Entry Fees" name='entryFees' onchange="myFunction()" id="mySelect"><br>
-          <input type='password' placeholder="Confirm Password" name='pass_check' onchange="myFunction()" id="mySelect"><br>
+          <input type='text' placeholder="Event Title" name='eventTitle'  id="mySelect"/><br>
+          <input type='text' placeholder="Event Description" name='eventDesc'  id="mySelect"><br>
+          <input type='number' placeholder="Entry Fees" name='entryFees'  id="mySelect"><br>
+          <input type='password' placeholder="Confirm Password" name='pass_check'  id="mySelect"><br>
           Date of Event:
-          <input type="date" name='date_of_event' onchange="myFunction()" id="mySelect"><br>
+          <input type="date" name='date_of_event'  id="mySelect"><br>
           Last Date of Registration:
-          <input type="date" name='lastDateOfRegistration' onchange="myFunction()" id="mySelect"><br>
+          <input type="date" name='lastDateOfRegistration'  id="mySelect"><br>
           Genres:<br>
-          <input type="checkbox" name="genres0" value="Technology" onchange="myFunction()" id="mySelect">Technology<br>
-          <input type="checkbox" name="genres1" value="Social Gathering" onchange="myFunction()" id="mySelect">Social Gathering<br>
-          <input type="checkbox" name="genres2" value="Debate" onchange="myFunction()" id="mySelect">Debate<br>
-          <input type="checkbox" name="genres3" value="Social Awareness" onchange="myFunction()" id="mySelect">Social Awareness<br>
-          <input type="checkbox" name="genres4" value="Convention" onchange="myFunction()" id="mySelect">Convention<br>
-          <input type="checkbox" name="genres5" value="Sports" onchange="myFunction()" id="mySelect">Sports<br>
-          <input type="checkbox" name="genres6" value="Other" onchange="myFunction()" id="mySelect">Other<br>
+          <input type="checkbox" name="genres0" value="Technology"  id="mySelect">Technology<br>
+          <input type="checkbox" name="genres1" value="Social Gathering"  id="mySelect">Social Gathering<br>
+          <input type="checkbox" name="genres2" value="Debate"  id="mySelect">Debate<br>
+          <input type="checkbox" name="genres3" value="Social Awareness"  id="mySelect">Social Awareness<br>
+          <input type="checkbox" name="genres4" value="Convention"  id="mySelect">Convention<br>
+          <input type="checkbox" name="genres5" value="Sports"  id="mySelect">Sports<br>
+          <input type="checkbox" name="genres6" value="Other"  id="mySelect">Other<br>
 
 <br>
-<input type="button" value="Submit"  onclick="check()"  >
+<input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
+<input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse;" >
+<input type="button" value="Submit"  onclick="check()"    >
 
             <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
         </form>
