@@ -64,7 +64,7 @@ module.exports = SheetsHelper;
  * @param  {Function} callback The callback function.
  */
 SheetsHelper.prototype.createSpreadsheet = function(title,mode,cataegory11,cataegory12,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, callback) {
-console.log('outsheet',mode);
+// console.log('outsheet',mode);
   var self = this;
 
 var tMode = tMode;
@@ -141,7 +141,7 @@ var cataegory2;
           console.log('The API returned an error: ' + err);
           return;
         }
-  
+
         var rows = response.values;
         if (rows.length === 0) {
           console.log('No data found.');
@@ -588,7 +588,7 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
           globalRange = `Stj Teacher Notes!A${rowNumber}:G`;
           uniqueIdNumber = rowNumber;
-          console.log(uniqueIdNumber);
+
           if (mode === 'eventWriter') {
 
       globalRange = `Class Data!A${rowNumber}:K`;

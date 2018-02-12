@@ -63,6 +63,79 @@ var eventCataegory2;
 var announcementCataegory1;
 var announcementCataegory2;
 
+var initialRun = true;
+
+
+if(initialRun)
+{
+
+    var helper = new SheetsHelper('ya29.GlxgBcnoCCGAklIAFS2su9gDIvr0mUh51fs0owW7gBMH5ZutklodFcfnflcaNaujxH33EkKsnqQvOMCprTQGfzWJahXV3_QOnCeQU3HtIWYlDVPVffqvPN97APHE2A');
+    tMode === 'viewer';
+    mode = 'announcementViewer'
+    helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+    if (err) {
+        return next(err);
+      }
+
+   });
+   tMode === 'viewer';
+   mode = 'notesViewer'
+   helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+   if (err) {
+       return next(err);
+     }
+
+  });
+  tMode === 'viewer';
+  mode = 'eventViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  initialRun = false;
+}
+
+
+setInterval(function(){
+  var helper = new SheetsHelper('ya29.GlxgBcnoCCGAklIAFS2su9gDIvr0mUh51fs0owW7gBMH5ZutklodFcfnflcaNaujxH33EkKsnqQvOMCprTQGfzWJahXV3_QOnCeQU3HtIWYlDVPVffqvPN97APHE2A');
+  tMode === 'viewer';
+  mode = 'announcementViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+ });
+ tMode === 'viewer';
+ mode = 'notesViewer'
+ helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+ if (err) {
+     return next(err);
+   }
+
+});
+tMode === 'viewer';
+mode = 'eventViewer'
+helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+if (err) {
+    return next(err);
+  }
+
+});
+}, 10000);
+//
+// setInterval(function(){
+//
+//
+//
+//
+//
+//
+//  }, 3000);
+
 
 router.get('/', function(req, res, next) {
     console.log('1607');
@@ -136,7 +209,7 @@ router.get('/notesViewerPage', function(req, res, next) {
 
     tMode = 'viewer';
     mode = 'notesViewer';
-console.log('notes', mode);
+
     if(!cataegory1)
     {
       cataegory1 = 'All Departments'
@@ -153,7 +226,7 @@ console.log('notes', mode);
 
 
     notesHtmlBody =  JSON.stringify(raw_data);
-console.log(notesHtmlBody);
+
 
     res.render('notesViewerPage',{
       pageTitle: 'About Page',
@@ -299,12 +372,18 @@ router.get('/eventWriterPage', function(req, res, next) {
 
 
 
-// router.get('/annonuncementWriterFrame', function(req, res, next) {
-//
-//
-//
-//     res.render('annonuncementWriterFrame.hbs');
-// });
+router.get('/signUp', function(req, res, next) {
+
+    tMode = 'writer';
+
+    mode = 'signUp';
+
+
+
+
+    res.render('signUp.handlebars');
+});
+
 
 router.post('/announcementWriteCheck', function(req, res, next) {
 
@@ -395,6 +474,8 @@ router.post('/spreadsheetsCreateEvent', function(req, res, next) {
 
   var auth = req.get('Authorization');
 
+  console.log(auth);
+
 
   if (!auth) {
     return next(Error('Authorization required.'));
@@ -459,6 +540,7 @@ router.post('/spreadsheets', function(req, res, next) {
     }
     var accessToken = auth.split(' ')[1];
     var helper = new SheetsHelper(accessToken);
+    console.log(accessToken);
 
     var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 
@@ -508,7 +590,7 @@ router.post('/spreadsheetsCreateNote', function(req, res, next) {
   }
   var accessToken = auth.split(' ')[1];
   var helper = new SheetsHelper(accessToken);
-
+    console.log(accessToken);
   var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 
   console.log('tMode',tMode);
@@ -572,7 +654,7 @@ router.post('/spreadsheetsAnnouncement', function(req, res, next) {
     return next(Error('Authorization required.'));
   }
   var accessToken = auth.split(' ')[1];
-  var helper = new SheetsHelper(accessToken);
+  var helper = new SheetsHelper('ya29.GlxgBcnoCCGAklIAFS2su9gDIvr0mUh51fs0owW7gBMH5ZutklodFcfnflcaNaujxH33EkKsnqQvOMCprTQGfzWJahXV3_QOnCeQU3HtIWYlDVPVffqvPN97APHE2A');
 
   var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 

@@ -1,0 +1,236 @@
+<!--
+  Copyright 2016 Google, Inc.
+
+  Licensed to the Apache Software Foundation (ASF) under one or more contributor
+  license agreements. See the NOTICE file distributed with this work for
+  additional information regarding copyright ownership. The ASF licenses this
+  file to you under the Apache License, Version 2.0 (the "License"); you may not
+  use this file except in compliance with the License. You may obtain a copy of
+  the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  License for the specific language governing permissions and limitations under
+  the License.
+-->
+<script>
+
+
+function check()
+{
+
+
+var userIdData = {{userIdData}};
+var classData = {{classData}};
+var sectionData = {{sectionData}}
+
+
+var firstName = document.event.firstName.value;
+var lastName = document.event.lastName.value;
+var userId = document.event.userId.value;
+var password = document.event.password.value;
+var confirmPassword = document.event.confirmPassword.value;
+var semester = document.event.semester.value;
+var department = document.event.department.value;
+var className = document.event.className.value;
+var section = document.event.section.value;
+var emailAddress = document.event.emailAddress.value;
+var phoneNo = document.event.phoneNo.value;
+
+
+var pass_check = document.event.pass_check.value;
+
+
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+
+  var yyyy = today.getFullYear();
+  if(dd<10){
+  dd='0'+dd;
+  }
+  if(mm<10){
+  mm='0'+mm;
+  }
+  var today = dd+'/'+mm+'/'+yyyy;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if(firstName.length < 1)
+{
+
+  alert('Enter First Name');
+}
+else if (lastName.length < 1) {
+    alert('Enter Last Name');
+}
+else if (password.length < 1) {
+    alert('Enter Password');
+}else if (password.length < 8 ) {
+    alert('Minimum size of Password is 8 Characters');
+}else if(password != confirmPassword)
+{
+    alert('Passwords do not match ');
+}else if(semester.includes('Choose'))
+{
+  alert('Choose a Semester');
+}
+else if(department.includes('Choose'))
+{
+  alert('Choose a Department');
+}
+else if(className.includes('Choose'))
+{
+  alert('Choose a Class');
+}else if(section.includes('Choose'))
+{
+  alert('Choose a Section');
+}else if (emailAddress.length < 1) {
+    alert('Enter Email Address');
+}else if (!emailAddress.includes('@')) {
+    alert('Invalid Email');
+}else if (!emailAddress.includes('.')) {
+    alert('Invalid Email');
+}else if (phoneNo.length < 10) {
+    alert('Enter Valid Phone No');
+}
+
+
+
+
+
+
+else if (!isDepartmentChecked) {
+  alert('Choose Atleast one Department')
+}
+
+else if (!isSemesterChecked) {
+  alert('Choose Atleast one Semester');
+
+}
+else{
+
+   document.getElementById('cataegoryStringText').value = cataegoryString;
+   document.getElementById('todayDateText').value = today;
+
+
+
+
+     document.getElementById('hangoutButtonId').click();
+
+     var delayInMilliseconds = 10; //0.01 second
+
+     setTimeout(function() {
+
+       document.getElementById('create').click();
+            window.location.href = "/annonuncementViewerPage";
+     }, delayInMilliseconds);
+
+
+
+
+}
+
+
+
+
+
+
+
+}
+
+
+
+
+</script>
+<div class="mdl-grid">
+
+
+  <!-- Show spreadsheets -->
+  <section id="spreadsheets2"
+           class="mdl-cell mdl-cell--4-col relative">
+    <div class="mdl-list">
+      <div class="mdl-list__item">
+
+
+        <form method="post" action="/announcementWriteCheck" name='event'>
+
+    <input type='text' placeholder="First Name"    name='firstName'/><br>
+    <input type='text' placeholder="Last Name"  name='lastName'><br>
+        <input type='text' placeholder="User Id"  name='userId'><br>
+<input type='password' placeholder="Password"  name='password'><br>
+    <input type='password' placeholder="Confirm Password"  name='confirmPassword'><br>
+    <br>
+    <select name ="semester">
+  <option style="font-weight:bold;">Choose Semester</option>
+  <option style="font-weight:bold;">First Semester</option>
+  <option style="font-weight:bold;">Second Semester </option>
+  <option style="font-weight:bold;">Third Semester</option>
+  <option style="font-weight:bold;">Fourth Semester</option>
+  <option style="font-weight:bold;">Fifth Semester</option>
+  <option style="font-weight:bold;">Sixth and Above Semesters</option>
+      </select>
+  <select name ="department">
+      <option style="font-weight:bold;">Choose Department</option>
+      <option style="font-weight:bold;">All Departments</option>
+  <option style="font-weight:bold;">Art</option>
+  <option style="font-weight:bold;">Commerce</option>
+  <option style="font-weight:bold;">Management</option>
+  <option style="font-weight:bold;">Education</option>
+  <option style="font-weight:bold;">Science</option>
+  <option style="font-weight:bold;">Other</option>
+      </select>
+
+
+  <select name ="className">
+      <option style="font-weight:bold;">Choose Class</option>
+  </select>
+
+  <select name ="section">
+      <option style="font-weight:bold;">Choose Section</option>
+  </select>
+
+    <input type='text' placeholder="Email Address"    name='emailAddress'/><br>
+
+      <input type='number' placeholder="Phone No."    name='phoneNo'/><br>
+
+      <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
+  <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse;" >
+<input type="button" value="Submit"  onclick="check()"    >
+
+            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
+        </form>
+        <br><br>
+      <span class="mdl-list__item-secondary-action" style="position:relative; ">
+
+        <button  class="mdl-button mdl-js-button mdl-button--raised
+                       mdl-js-ripple-effect mdl-button--colored"
+                rel="writeAnnouncement" type="button" id='create'  style="position:relative;">Create</button>
+
+
+</button>
+      </span>
+      </div>
+      {{#each spreadsheets}}
+      <div class="mdl-list__item">
+
+
+      </div>
+      {{/each}}
+    </div>
+  </section>
+</div>
