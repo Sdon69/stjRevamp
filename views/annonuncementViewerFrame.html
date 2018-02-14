@@ -1,115 +1,24 @@
 
+<script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
-  <script>
-
-  var departmentFilter = 'All Departments';
-  var semesterFilter = 'All Semesters';
-
-  t = 
-
-        var raw_data =  [{"title":"ANN2352","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"2","datePublished":"08/02/2018","dottedString":"kljkl...."},{"title":"1704","description":"280118","cataegories":"All Departments All SemestersEducationSecond Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"3","datePublished":"28/01/2018","dottedString":"280118...."},{"title":"Vivamus eu","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationSecond Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"4","datePublished":"23-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Orci varius","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationThird Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"5","datePublished":"23-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Sed et velit","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"6","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Proin congue","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"7","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Mauris at egestas","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"8","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Vivamus eu","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"9","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Orci varius","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"10","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Mauris at","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"11","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Sjzj","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersManagementFourth Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"12","datePublished":"23-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Suspendisse q","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"13","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"18","description":"sa","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"14","datePublished":"06/02/2018","dottedString":"sa...."},{"title":"Curabitur quis","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"15","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Sed et velit","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"16","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"Proin congue","description":"Lorem ipsum dolor sit amet, ","cataegories":"All Departments All SemestersEducationFirst Semester","publisherId":"Pruja124","fullName":"Divua Fig","uniqueId":"17","datePublished":"22-Nov-2017","dottedString":"Lorem ipsum dolor sit amet, ...."},{"title":"1704","description":"280118","cataegories":"All Departments All SemestersCommerceThird Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"20","datePublished":"28/01/2018","dottedString":"280118...."},{"title":"title,description,cataegories,userId,fullName,rowNumber,dateOfPublish","description":"5455","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"21","datePublished":"28/01/2018","dottedString":"5455...."},{"title":"sadxxsas22","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"22","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"sadxxsas22sa","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"23","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"sadxxsas22","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"24","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"sadxxsas22sa","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"25","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"sadxxsas22","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"26","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"sadxxsas22","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"27","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"sadxxsas22","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"28","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"sadxxsas22","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"29","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"sadxxsas22","description":"my atlantisc","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"30","datePublished":"05/02/2018","dottedString":"my atlantisc...."},{"title":"asa","description":"sasa","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"31","datePublished":"05/02/2018","dottedString":"sasa...."},{"title":"d","description":"saasa","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"32","datePublished":"05/02/2018","dottedString":"saasa...."},{"title":"2358","description":"da","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"33","datePublished":"05/02/2018","dottedString":"da...."},{"title":"20","description":"saas","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"34","datePublished":"06/02/2018","dottedString":"saas...."},{"title":"21","description":"as","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"35","datePublished":"06/02/2018","dottedString":"as...."},{"title":"52","description":"52","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"36","datePublished":"06/02/2018","dottedString":"52...."},{"title":"1724","description":"saas","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"37","datePublished":"06/02/2018","dottedString":"saas...."},{"title":"assa","description":"dsa","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"38","datePublished":"06/02/2018","dottedString":"dsa...."},{"title":"18","description":"sa","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"39","datePublished":"06/02/2018","dottedString":"sa...."},{"title":"18","description":"sa","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"40","datePublished":"06/02/2018","dottedString":"sa...."},{"title":"18","description":"sa","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"41","datePublished":"06/02/2018","dottedString":"sa...."},{"title":"sasa","description":"saas","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"42","datePublished":"06/02/2018","dottedString":"saas...."},{"title":"1724","description":"saas","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"43","datePublished":"06/02/2018","dottedString":"saas...."},{"title":"1724","description":"saas","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"44","datePublished":"06/02/2018","dottedString":"saas...."},{"title":"1724","description":"saas","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"45","datePublished":"06/02/2018","dottedString":"saas...."},{"title":"1724","description":"saas","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"46","datePublished":"06/02/2018","dottedString":"saas...."},{"title":"1724","description":"saas","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"47","datePublished":"06/02/2018","dottedString":"saas...."},{"title":"17441","description":"145","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"48","datePublished":"06/02/2018","dottedString":"145...."},{"title":"1846","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"49","datePublished":"08/02/2018","dottedString":"kljkl...."},{"title":"ANN","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"50","datePublished":"08/02/2018","dottedString":"kljkl...."},{"title":"ANN2352","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"51","datePublished":"08/02/2018","dottedString":"kljkl...."},{"title":"ANN2356","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"52","datePublished":"08/02/2018","dottedString":"kljkl...."},{"title":"ANN2356","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"53","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN2356","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"54","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN2356","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"55","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0014","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"56","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0016","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"57","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0018","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"58","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0018","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"59","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0018","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"60","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0028","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"61","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0101","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"62","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0174","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"63","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0247","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"64","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0320","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"65","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN0101","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"66","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"ANN010129","description":"kljkl","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"67","datePublished":"09/02/2018","dottedString":"kljkl...."},{"title":"sada","description":"das","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"68","datePublished":"08/02/2018","dottedString":"das...."},{"title":"42424","description":"das","cataegories":"All Departments All SemestersArtFirst Semester","publisherId":"SampleId","fullName":"Sample Name","uniqueId":"69","datePublished":"08/02/2018","dottedString":"das...."}];
-            var forLength = raw_data.length - 1;
-
-        var i;
-         var used = false;
-         var anyNoteFromDept = false;
-
-         var filteredData = [{
-         name: 'str1',
-         age:   'str2'
-         }];
-           for(i=0;i<=forLength;i++)
-           {
-           var dept = raw_data[i].cataegories;
+if (typeof(Storage) !== "undefined") {
+    // Code for localStorage/sessionStorage.
 
 
-             if(dept.includes(departmentFilter))
-             {
+alert(localStorage.getItem("fullName"));
+alert(localStorage.getItem("userId"));
+alert(localStorage.getItem("password"));
+alert(localStorage.getItem("semester"));
+alert(localStorage.getItem("department"));
+alert(localStorage.getItem("className"));
+alert(localStorage.getItem("section"));
+alert(localStorage.getItem("emailAddress"));
+alert(localStorage.getItem("phoneNo"));
 
-               if(dept.includes(semesterFilter))
-  {
-
-               if(!used)
-               {
-               filteredData.pop({
-               name: 'str1',
-               age:   'str2'
-                 });
-                 filteredData.push(raw_data[i]);
-                 used = true;
-                 anyNoteFromDept = true;
-
-               }else{
-                 filteredData.push(raw_data[i]);
-                 anyNoteFromDept = true;
-               }
+} else {
+    // Sorry! No Web Storage support..
+      document.write('dont support');
+}
 
 
-  }
-             }
-           }
-
-           if(!anyNoteFromDept)
-           {
-             filteredData.pop({
-             name: 'str1',
-             age:   'str2'
-               });
-               filteredData.push({
-               title: 'No Data for this filter Exists'
-                 });
-           }
-           var globalFilteredData = filteredData;
-
-
-
-    var t =  {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-                        {'<>':"form method='post' action='/detailedAnnouncement' method ='post' ",'html':[
-                            {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
-                              {'<>':"font face='Roboto'",'html':[
-                          {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
-                            {
-                              '<>':"div style='width:100%'",'children':[
-                                {
-                                  '<>':"table style='width:100%'",'children':[
-                                    {
-                                        '<>':"tr",'children':[
-                                          {
-                                            '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
-                                          },
-                                          {
-                                            '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
-                                          }
-                                        ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },{
-                                '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
-                                  {
-                                    '<>':"table style='width:100%'",'children':[
-                                      {
-                                          '<>':"tr",'children':[
-                                            {
-                                                '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${title}"
-                                            },
-                                            {
-                                                '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${title}"
-                                            }
-                                          ]
-                                      }
-                                    ]
-                                  }
-                                ]
-                            },{
-                                '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
-                            }
-                        ]}  ] }]}]}]};
-
-
-    var d = filteredData;
-
-    document.write( json2html.transform(d,t) );
 </script>

@@ -101,12 +101,13 @@
 
 
 
-  // var delayInMilliseconds = 2000; //1 second
-  //
-  // setTimeout(function() {
-  //
-  //   document.getElementById('create').click();
-  // }, delayInMilliseconds);
+
+  var delayInMilliseconds = 2000; //1 second
+
+  setTimeout(function() {
+
+    document.getElementById('create').click();
+  }, delayInMilliseconds);
 
 </script>
 
@@ -114,6 +115,18 @@
   <script>
 var gCataegory1;
 var gCataegory2;
+
+
+
+
+function loadData() // Not used till Now
+{
+
+  var sSemester   = localStorage.getItem("semester");
+  gCataegory1 = sSemester;
+  var sDepartment = localStorage.getItem("department");
+  gCataegory2 = sDepartment;
+}
 
   function checkInfo()
   {
@@ -138,6 +151,11 @@ var gCataegory2;
   }
 
   }
+
+  function d()
+  {
+     window.location.href = "/detailedAnnouncement";
+  }
 function submitClick()
 {
 var myValue = '{{isInformationAvailable}}';
@@ -156,11 +174,6 @@ var isTrueSet = (myValue == 'true');
 
 var hello = '{{dataFromAnnouncement}}';
 var res = hello.replace(/&quot;/g, '"');
-
-
-
-
-
 
 var raw_data =  JSON.parse(res);
 
@@ -222,8 +235,8 @@ var raw_data =  JSON.parse(res);
 
 
   var t = {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-                      {'<>':"form method='post' action='/detailedAnnouncement' method ='post' ",'html':[
-                          {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
+                      {'<>':"form ",'html':[
+                          {'<>':"input type='button' onclick='d()' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
                             {'<>':"font face='Roboto'",'html':[
                         {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
                           {

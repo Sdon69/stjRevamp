@@ -67,9 +67,9 @@ var emailAddress = document.event.emailAddress.value;
 
 var phoneNo = document.event.phoneNo.value;
 
+var loadedPassword = localStorage.getItem("password");
 
-
-
+var currentPassword = document.event.currentPassword.value;
 
 
 
@@ -161,6 +161,9 @@ var semesterString;
 
   document.getElementById('cataegoryStringText').value = semesterString;
 
+  if(loadedPassword == currentPassword)
+  {
+
   var userId = document.event.userId.value;
   var idExists = false;
   for(i = 0;i<userIdData.length;i++)
@@ -168,6 +171,10 @@ var semesterString;
     if(userIdData[i].userId == userId)
     {
       idExists = true;
+      if(userId == loadedUserId)
+      {
+        idExists = false;
+      }
     }
 
   }
@@ -177,9 +184,8 @@ if(!idExists)
 {
   if (typeof(Storage) !== "undefined") {
       // Code for localStorage/sessionStorage.
-
-      localStorage.setItem("firstName", firstName);
-      localStorage.setItem("lastname", lastName);
+      var fullName = firstName.concat(" " + lastName )
+      localStorage.setItem("fullName", fullName );
       localStorage.setItem("userId", userId);
       localStorage.setItem("password", password);
       localStorage.setItem("semester", semester);
@@ -189,14 +195,9 @@ if(!idExists)
       localStorage.setItem("emailAddress", emailAddress);
       localStorage.setItem("phoneNo", phoneNo);
 
-  alert(localStorage.getItem("userId"));
-  alert(localStorage.getItem("password"));
-  alert(localStorage.getItem("semester"));
-  alert(localStorage.getItem("department"));
-  alert(localStorage.getItem("className"));
-  alert(localStorage.getItem("section"));
-  alert(localStorage.getItem("emailAddress"));
-  alert(localStorage.getItem("phoneNo"));
+
+
+
 
   } else {
       // Sorry! No Web Storage support..
@@ -226,7 +227,9 @@ if(!idExists)
 }
 
 
-
+}else {
+  alert('Password entered in the current password field is incorrect.')
+}
 
 }
 
@@ -252,13 +255,16 @@ if(!idExists)
       <div class="mdl-list__item">
 
 
-        <form method="post" action="/signupWriteCheck" name='event'>
+        <form method="post" action="/editProfileCheck" name='event'>
 
     <input type='text' placeholder="First Name"    name='firstName'/><br>
     <input type='text' placeholder="Last Name"  name='lastName'><br>
-        <input type='text' placeholder="User Id"  name='userId'><br>
+    <input type='text' placeholder="User Id"  name='userId' style="visibility:collapse;z-index:-5;position:fixed;">
+        <font size="2">
+        <span id="demo">  </span> (User id is Permanent)</font>
+        <br>
 <input type='password' placeholder="Password"  name='password'><br>
-    <input type='password' placeholder="Confirm Password"  name='confirmPassword'><br>
+    <input type='password' placeholder="Retype Password"  name='confirmPassword'><br>
     <br>
     <select name ="semester" >
   <option style="font-weight:bold;">Choose Semester</option>
@@ -292,8 +298,9 @@ if(!idExists)
     <input type='text' placeholder="Email Address"    name='emailAddress'/><br>
 
       <input type='number' placeholder="Phone No."    name='phoneNo'/><br>
-
-<input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
+    <font size="2">  Type your current password to confirm changes: </font>
+<input type='password' placeholder="Current Password"  name='currentPassword' onpaste="return false;"/><br>
+<input type='text' name='cataegoryTextName'   id='cataegoryStringText'  style="visibility:collapse;" >
 <input type="button" value="Submit"  onclick="check()"    >
 
             <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
@@ -303,7 +310,7 @@ if(!idExists)
 
         <button  class="mdl-button mdl-js-button mdl-button--raised
                        mdl-js-ripple-effect mdl-button--colored"
-                rel="writeUserId" type="button" id='create'  style="position:relative;visibility:collapse;">Create</button>
+                rel="editUserId" type="button" id='create'  style="position:relative;visibility:collapse;">Create</button>
                 <button  class="mdl-button mdl-js-button mdl-button--raised
                                mdl-js-ripple-effect mdl-button--colored"
                         rel="getDataForUserId" type="button" id='getData'  style="position:relative;visibility:collapse;">Create</button>
@@ -385,7 +392,7 @@ sel.appendChild(opt);
 
 
       var opt = document.createElement('option');
-
+      var loadedUserId = localStorage.getItem("userId");
       if(classData[i].department == department)
       {
 
@@ -483,4 +490,33 @@ $('button.reset').click(
         });
     });
 
+</script>
+
+<script>
+var loadedFirstName = localStorage.getItem("firstName");
+var loadedLastName = localStorage.getItem("lastname");
+var loadedUserId = localStorage.getItem("userId");
+var loadedPassword = localStorage.getItem("password");
+var loadedSemester = localStorage.getItem("semester");
+var loadedDepartment = localStorage.getItem("department");
+var loadedClassName = localStorage.getItem("className");
+var loadedSection = localStorage.getItem("section");
+var loadedEmailAddress = localStorage.getItem("emailAddress");
+var loadedPhoneNo = localStorage.getItem("phoneNo");
+
+ document.getElementById("demo").innerHTML = loadedUserId;
+
+
+
+document.event.firstName.value  =   loadedFirstName;
+document.event.lastName.value = loadedLastName;
+document.event.userId.value = loadedUserId;
+document.event.password.value = loadedPassword;
+document.event.semester.value = loadedSemester;
+document.event.confirmPassword.value = loadedPassword;
+// document.event.department.value = loadedDepartment
+// document.event.className.value = loadedClassName
+// document.event.section.value = loadedSection
+document.event.emailAddress.value = loadedEmailAddress;
+document.event.phoneNo.value = loadedPhoneNo;
 </script>

@@ -1,13 +1,11 @@
 <script>
-  function htmlDecode(input){
-    var e = document.createElement('div');
-    e.innerHTML = input;
-    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-  }
-  var myVar = JSON.parse(htmlDecode("<%= JSON.stringify(myVar) %>"));
+alert(localStorage.getItem("fullName"));
+alert(localStorage.getItem("userId"));
+alert(localStorage.getItem("password"));
+alert(localStorage.getItem("semester"));
+alert(localStorage.getItem("department"));
+alert(localStorage.getItem("className"));
+alert(localStorage.getItem("section"));
+alert(localStorage.getItem("emailAddress"));
+alert(localStorage.getItem("phoneNo"));
 </script>
-<!-- <form action="/test" method="post">
-  <input type='text' onchange="f()">
-  <input type="submit" value="submit">
-</form>
-hello -->

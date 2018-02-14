@@ -106,6 +106,27 @@ $(function() {
     });
   });
 
+  $('button[rel="writeUserId"]').click(function() {
+    makeRequest('POST', '/spreadsheetsCreateUserId', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
+  $('button[rel="getDataForUserId"]').click(function() {
+    makeRequest('POST', '/spreadsheetsgetDataForUserId', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
+  $('button[rel="editUserId"]').click(function() {
+    makeRequest('POST', '/spreadsheetsEditUserId', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
 });
 
 function makeRequest(method, url, callback) {

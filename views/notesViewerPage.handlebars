@@ -100,6 +100,15 @@
 var gCataegory1;
 var gCataegory2;
 
+function loadData() // Not used till Now
+{
+
+  var sSemester   = localStorage.getItem("semester");
+  gCataegory1 = sSemester;
+  var sDepartment = localStorage.getItem("department");
+  gCataegory2 = sDepartment;
+}
+
 function checkInfo()
 {
   var skillsSelect = document.getElementById("cataegory1");

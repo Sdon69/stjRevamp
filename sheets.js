@@ -33,6 +33,7 @@ var itemDetails_Gl;
   var eventRowNumber;
   var noteRowNumber;
 
+
 var itemDetails = [{
   title: 's89',
   age:   'str2'
@@ -63,7 +64,7 @@ module.exports = SheetsHelper;
  * @param  {string}   title    The name of the spreadsheet.
  * @param  {Function} callback The callback function.
  */
-SheetsHelper.prototype.createSpreadsheet = function(title,mode,cataegory11,cataegory12,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, callback) {
+SheetsHelper.prototype.createSpreadsheet = function(title,mode,cataegory11,cataegory12,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo, callback) {
 // console.log('outsheet',mode);
   var self = this;
 
@@ -100,10 +101,22 @@ var cataegory2;
   else if(mode === 'notesViewer')
   {
     sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
-    range = 'Stj Teacher Notes!A2:G';
+    range = 'Stj Teacher Notes!A2:J';
    cataegory1 = 'All Departments';
    cataegory2 = 'All Semesters';
-  }
+ }else if (mode === 'sectionViewer') {
+   sheetId = '1fzxyzBACml4GPghMpplfziKPgtgfYUQYwqwVXye7usI';
+   range = 'Sections!A2:S';
+ }else if (mode === 'classViewer') {
+   sheetId = '1fzxyzBACml4GPghMpplfziKPgtgfYUQYwqwVXye7usI';
+   range = 'Class Name!A2:S';
+ }else if (mode === 'subjectViewer') {
+   sheetId = '1fzxyzBACml4GPghMpplfziKPgtgfYUQYwqwVXye7usI';
+   range = 'Subjects!A2:S';
+ }else if (mode === 'userIdFeed') {
+   sheetId = '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU';
+   range = 'Class Data!A2:S';
+ }
 
 
   if(mode === 'announcementWriter')
@@ -111,7 +124,7 @@ var cataegory2;
 
 
     sheetId = '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs';
-    range = 'Stj Teacher Notes!A2:F';
+    range = 'Stj Teacher Notes!A2:I';
 
   }
   if(mode === 'notesWriter')
@@ -119,7 +132,7 @@ var cataegory2;
 
 
       sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
-      range = 'Stj Teacher Notes!A2:G';
+      range = 'Stj Teacher Notes!A2:J';
 
   }
   if(mode === 'eventWriter')
@@ -129,6 +142,23 @@ var cataegory2;
     range = 'Class Data!A2:K';
 
   }
+
+  if(mode === 'userIdWriter')
+  {
+
+    sheetId = '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU';
+    range = 'Class Data!A2:J';
+
+  }
+
+  if(mode === 'userIdEditor')
+  {
+
+    sheetId = '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU';
+    range = 'Class Data!A2:J';
+
+  }
+
 
 
 
@@ -154,7 +184,7 @@ var cataegory2;
             module.exports.itemDetails = itemDetails;
 
 
-            asyncAdd(rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used).then((message) =>
+            asyncAdd(rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used,gSignupUserId).then((message) =>
             {
 
 
@@ -174,7 +204,7 @@ var cataegory2;
 
 
                     sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
-                    range = 'Stj Teacher Notes!A2:G';
+                    range = 'Stj Teacher Notes!A2:J';
                     inputRes = {
                                   values: [ [gTitle,gDescription,gCataegories,gUserId,gFullName,uniqueIdNumber,gDateOfPublish]]
                       }
@@ -187,6 +217,26 @@ var cataegory2;
                   range = 'Class Data!A2:K';
                   inputRes = {
                                 values: [ [gTitle,gDescription,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gCataegories,gUserId,gFullName,"A",uniqueIdNumber]]
+
+                    }
+                }
+                if(mode === 'userIdWriter')
+                {
+
+                  sheetId = '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU';
+                  range = 'Class Data!A2:J';
+                  inputRes = {
+                                values: [ [gSignupUserId,gPassword,gFirstName,gLastName,gClassName,gSection,gEmailAddress,gPhoneNo,'d',gSemester],['0']]
+
+                    }
+                }
+                if(mode === 'userIdEditor')
+                {
+
+                  sheetId = '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU';
+                  range = 'Class Data!A2:J';
+                  inputRes = {
+                                values: [ [gSignupUserId,gPassword,gFirstName,gLastName,gClassName,gSection,gEmailAddress,gPhoneNo,'d',gSemester]]
 
                     }
                 }
@@ -224,7 +274,7 @@ return;
 };
 
 
-var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
+var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used,gSignupUserId) =>
 {
   return new Promise((resolve, reject) =>
   {
@@ -518,6 +568,105 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
 
+            }else if (mode === 'sectionViewer') {
+
+                  var section = row[0];
+                  var className = row[1];
+
+                  if(!used)
+                  {
+
+                  itemDetails.pop({
+                       title: 'str1',
+                       age:   'str2'
+                         });
+                         itemDetails.push({
+                           section: section,
+                           className: className,
+                         });
+used = true;
+}else{
+  itemDetails.push({
+    section: section,
+    className: className,
+  });
+}
+
+                          module.exports.itemSectionDetails = itemDetails;
+
+
+            }else if (mode === 'subjectViewer') {
+
+                  var subject = row[0];
+                  var department = row[1];
+
+
+                  if(!used)
+                  {
+                  itemDetails.pop({
+                       title: 'str1',
+                       age:   'str2'
+                         });
+                         itemDetails.push({
+                           subject: subject,
+                           department: department,
+                         });
+                         used = true;
+                       }else{
+                         itemDetails.push({
+                           subject: subject,
+                           department: department,
+                         });
+                       }
+
+                           module.exports.itemSubjectDetails = itemDetails;
+
+            }else if (mode === 'classViewer') {
+
+                  var className = row[0];
+                  var department = row[1];
+
+
+                  if(!used)
+                  {
+                  itemDetails.pop({
+                       title: 'str1',
+                       age:   'str2'
+                         });
+                         itemDetails.push({
+                           className: className,
+                           department: department,
+                         });
+                         used = true;
+}else {
+  itemDetails.push({
+    className: className,
+    department: department,
+  });
+}
+
+  module.exports.itemClassDetails = itemDetails;
+            }else if (mode === 'userIdFeed') {
+            var userId = row[0];
+
+            if(!used)
+            {
+            itemDetails.pop({
+                 title: 'str1',
+                 age:   'str2'
+                   });
+                   itemDetails.push({
+                     userId: userId
+                   });
+                   used = true;
+                 }
+                 else{
+                   itemDetails.push({
+                     userId: userId
+                   });
+                 }
+
+                     module.exports.itemUseridDetails = itemDetails;
             }
             else if (mode === 'announcementWriter') {
 
@@ -560,6 +709,48 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
 
 
 
+            }else if (mode === 'userIdWriter') {
+
+
+
+
+              var Str1 = row[0];
+
+              if (Str1.includes("0"))
+              {
+
+
+
+
+                  break;
+              }
+              noteRowNumber++;
+              rowNumber++;
+              console.log('rowNumber',rowNumber);
+
+
+
+            }else if (mode === 'userIdEditor') {
+
+
+
+
+              var Str1 = row[0];
+
+              if (Str1 == gSignupUserId)
+              {
+
+
+
+
+                  break;
+              }
+              noteRowNumber++;
+              rowNumber++;
+              console.log('rowNumber',rowNumber);
+
+
+
             }  else if (mode === 'eventWriter') {
 
 
@@ -592,7 +783,11 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used) =>
           if (mode === 'eventWriter') {
 
       globalRange = `Class Data!A${rowNumber}:K`;
-      }
+    }else if (mode === 'userIdWriter') {
+        globalRange = `Class Data!A${rowNumber}:J`;
+    }else if (mode === 'userIdEditor') {
+        globalRange = `Class Data!A${rowNumber}:J`;
+    }
 
 
 

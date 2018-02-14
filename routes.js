@@ -34,15 +34,15 @@ var initialEnrty = true;
 var tMode;
 var gTitle;
 var gDescription;
-var gPassword;
+
 var gCataegories;
 
 var gUserId;
 var gFullName;
 var gDateOfPublish;
 
-var gSemester;
-var gDepartment;
+
+
 var gDateOfEventString;
 var gLastDateOfRegistrationString;
 var gEntryFees;
@@ -65,12 +65,27 @@ var announcementCataegory2;
 
 var initialRun = true;
 
+var gFirstName;
+var gLastName;
+var gSignupUserId;
+var gPassword;
+var gSemester;
+var gDepartment;
+var gClassName;
+var gSection;
+var gEmailAddress;
+var gPhoneNo;
+
+
+var globalAccessToken = 'ya29.GlxhBXcqpZB1tGkkNHwKz6gT2adRRQMdPLEz8Ud2Vr5aeVWfKqszcjLfNh3JfsXnd8LC6-5X2aP_8dkSDByJ6DJJkoM0jQ2HwtDvKksLM2NT-KzC_r4KWCUdjJL7Fg';
 
 if(initialRun)
 {
+    console.log('initialRun');
+    var helper = new SheetsHelper(globalAccessToken);
+    tMode = 'viewer';
 
-    var helper = new SheetsHelper('ya29.GlxgBcnoCCGAklIAFS2su9gDIvr0mUh51fs0owW7gBMH5ZutklodFcfnflcaNaujxH33EkKsnqQvOMCprTQGfzWJahXV3_QOnCeQU3HtIWYlDVPVffqvPN97APHE2A');
-    tMode === 'viewer';
+
     mode = 'announcementViewer'
     helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
     if (err) {
@@ -78,7 +93,7 @@ if(initialRun)
       }
 
    });
-   tMode === 'viewer';
+
    mode = 'notesViewer'
    helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
    if (err) {
@@ -86,7 +101,7 @@ if(initialRun)
      }
 
   });
-  tMode === 'viewer';
+
   mode = 'eventViewer'
   helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
   if (err) {
@@ -95,13 +110,51 @@ if(initialRun)
 
   });
 
+  mode = 'sectionViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'classViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'subjectViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'userIdFeed'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+
+
+
+
   initialRun = false;
 }
 
 
 setInterval(function(){
-  var helper = new SheetsHelper('ya29.GlxgBcnoCCGAklIAFS2su9gDIvr0mUh51fs0owW7gBMH5ZutklodFcfnflcaNaujxH33EkKsnqQvOMCprTQGfzWJahXV3_QOnCeQU3HtIWYlDVPVffqvPN97APHE2A');
-  tMode === 'viewer';
+
+  console.log('Interval');
+      var helper = new SheetsHelper(globalAccessToken);
+  tMode = 'viewer';
   mode = 'announcementViewer'
   helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
   if (err) {
@@ -109,7 +162,7 @@ setInterval(function(){
     }
 
  });
- tMode === 'viewer';
+
  mode = 'notesViewer'
  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
  if (err) {
@@ -117,7 +170,7 @@ setInterval(function(){
    }
 
 });
-tMode === 'viewer';
+
 mode = 'eventViewer'
 helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
 if (err) {
@@ -125,7 +178,42 @@ if (err) {
   }
 
 });
-}, 10000);
+
+
+  mode = 'sectionViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'classViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'subjectViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'userIdFeed'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+
+}, 100000); //100 Seconds
 //
 // setInterval(function(){
 //
@@ -140,8 +228,53 @@ if (err) {
 router.get('/', function(req, res, next) {
     console.log('1607');
 
-    res.set('Content-Type', 'application/javascript');
-     res.render('index', { myVar : 'dsndk' });
+
+     res.render('profile', { myVar : 'dsndk' });
+
+
+});
+
+router.get('/profile', function(req, res, next) {
+
+
+
+     res.render('profile', { myVar : 'dsndk' });
+
+
+});
+
+router.get('/detailedAnnouncement', function(req, res, next) {
+
+
+
+     res.render('detailedAnnouncement.handlebars');
+
+
+});
+
+router.get('/editProfile', function(req, res, next) {
+    console.
+
+
+    tMode = 'writer';
+
+    mode = 'signUp';
+
+
+    var userIdData =JSON.stringify(SheetsHelper.itemUseridDetails);
+    var classData = JSON.stringify(SheetsHelper.itemClassDetails);
+    var sectionData = JSON.stringify(SheetsHelper.itemSectionDetails);
+
+
+
+
+      res.render('editProfile',{
+      pageTitle: 'About Page',
+      userIdData:userIdData,
+      classData:classData,
+      sectionData:sectionData
+
+    });
 
 
 });
@@ -379,10 +512,22 @@ router.get('/signUp', function(req, res, next) {
     mode = 'signUp';
 
 
+    var userIdData =JSON.stringify(SheetsHelper.itemUseridDetails);
+    var classData = JSON.stringify(SheetsHelper.itemClassDetails);
+    var sectionData = JSON.stringify(SheetsHelper.itemSectionDetails);
 
 
-    res.render('signUp.handlebars');
+
+
+      res.render('signUp.handlebars',{
+      pageTitle: 'About Page',
+      userIdData:userIdData,
+      classData:classData,
+      sectionData:sectionData
+
+    });
 });
+
 
 
 router.post('/announcementWriteCheck', function(req, res, next) {
@@ -401,15 +546,72 @@ router.post('/announcementWriteCheck', function(req, res, next) {
     gDateOfPublish = req.body.todayTextName;
 
 
+});
 
 
 
+router.post('/signupWriteCheck', function(req, res, next) {
+
+    gFirstName = req.body.firstName;
+
+    gLastName  = req.body.lastName;
+
+    gSignupUserId = req.body.userId;
+
+    gPassword =  req.body.password;
+
+    gSemester = req.body.cataegoryTextName;
+
+    gDepartment = req.body.department;
+
+    gClassName = req.body.className;
+
+    gSection = req.body.section;
+
+    gEmailAddress = req.body.emailAddress;
+
+    gPhoneNo =  req.body.phoneNo;
 
 
+
+    console.log('global Wrting input - userID',gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo);
 
 
 
 });
+
+
+
+router.post('/editProfileCheck', function(req, res, next) {
+
+    gFirstName = req.body.firstName;
+
+    gLastName  = req.body.lastName;
+
+    gSignupUserId = req.body.userId;
+
+    gPassword =  req.body.password;
+
+    gSemester = req.body.cataegoryTextName;
+
+    gDepartment = req.body.department;
+
+    gClassName = req.body.className;
+
+    gSection = req.body.section;
+
+    gEmailAddress = req.body.emailAddress;
+
+    gPhoneNo =  req.body.phoneNo;
+
+
+
+    console.log('global Wrting input - userID',gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo);
+
+
+
+});
+
 
 
 router.post('/eventsWriteCheck', function(req, res, next) {
@@ -474,7 +676,8 @@ router.post('/spreadsheetsCreateEvent', function(req, res, next) {
 
   var auth = req.get('Authorization');
 
-  console.log(auth);
+
+
 
 
   if (!auth) {
@@ -482,7 +685,7 @@ router.post('/spreadsheetsCreateEvent', function(req, res, next) {
   }
   var accessToken = auth.split(' ')[1];
   var helper = new SheetsHelper(accessToken);
-
+  globalAccessToken = accessToken;
   var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 
   console.log('tMode',tMode);
@@ -540,13 +743,13 @@ router.post('/spreadsheets', function(req, res, next) {
     }
     var accessToken = auth.split(' ')[1];
     var helper = new SheetsHelper(accessToken);
-    console.log(accessToken);
 
+      globalAccessToken = accessToken;
     var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 
     console.log('tMode',tMode);
     console.log('sheets', mode);
-    tMode === 'viewer';
+    tMode = 'viewer';
     mode = 'eventViewer'
       console.log('spreadsheetsAnnouncement', mode);
 
@@ -591,6 +794,7 @@ router.post('/spreadsheetsCreateNote', function(req, res, next) {
   var accessToken = auth.split(' ')[1];
   var helper = new SheetsHelper(accessToken);
     console.log(accessToken);
+      globalAccessToken = accessToken;
   var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 
   console.log('tMode',tMode);
@@ -654,13 +858,13 @@ router.post('/spreadsheetsAnnouncement', function(req, res, next) {
     return next(Error('Authorization required.'));
   }
   var accessToken = auth.split(' ')[1];
-  var helper = new SheetsHelper('ya29.GlxgBcnoCCGAklIAFS2su9gDIvr0mUh51fs0owW7gBMH5ZutklodFcfnflcaNaujxH33EkKsnqQvOMCprTQGfzWJahXV3_QOnCeQU3HtIWYlDVPVffqvPN97APHE2A');
-
+  var helper = new SheetsHelper(accessToken);
+  globalAccessToken = accessToken;
   var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 
   console.log('tMode',tMode);
   console.log('sheets', mode);
-  tMode === 'viewer';
+  tMode = 'viewer';
   mode = 'announcementViewer'
     console.log('spreadsheetsAnnouncement', mode);
 
@@ -690,6 +894,248 @@ router.post('/spreadsheetsAnnouncement', function(req, res, next) {
 });
 
 
+router.post('/spreadsheetsCreateUserId', function(req, res, next) {
+
+
+
+  var auth = req.get('Authorization');
+
+
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+  globalAccessToken = accessToken;
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+
+
+  tMode = 'writer'
+  mode = 'userIdWriter';
+    console.log('spreadsheetsCreateUserId', mode);
+
+
+console.log('sfirst');
+
+
+
+
+
+  console.log('global Wrting input - userID',gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo);
+  helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo, function(err, spreadsheet) {
+    if (err) {
+      return next(err);
+    }
+
+
+
+
+  });
+
+
+  mode = 'sectionViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'classViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'subjectViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'userIdFeed'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+    });
+
+  res.redirect('/annonuncementViewerPage');
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+router.post('/spreadsheetsEditUserId', function(req, res, next) {
+
+
+
+  var auth = req.get('Authorization');
+
+
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+  globalAccessToken = accessToken;
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+
+
+  tMode = 'writer'
+  mode = 'userIdEditor';
+    console.log('spreadsheetsCreateUserId', mode);
+
+
+console.log('sfirst');
+
+
+
+
+
+  console.log('global Wrting input - userID',gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo);
+  helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo, function(err, spreadsheet) {
+    if (err) {
+      return next(err);
+    }
+
+
+
+
+  });
+
+
+  mode = 'sectionViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'classViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'subjectViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'userIdFeed'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+    });
+
+  res.redirect('/annonuncementViewerPage');
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+router.post('/spreadsheetsgetDataForUserId', function(req, res, next) {
+
+
+
+  var auth = req.get('Authorization');
+
+
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+  globalAccessToken = accessToken;
+
+
+
+
+  mode = 'sectionViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'classViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'subjectViewer'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+
+  });
+
+  mode = 'userIdFeed'
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+    });
+
+  res.redirect('/annonuncementViewerPage');
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
 router.post('/spreadsheetsCreateAnnouncement', function(req, res, next) {
 
   console.log('annonuncementsWriter','first');
@@ -703,7 +1149,7 @@ router.post('/spreadsheetsCreateAnnouncement', function(req, res, next) {
   }
   var accessToken = auth.split(' ')[1];
   var helper = new SheetsHelper(accessToken);
-
+  globalAccessToken = accessToken;
   var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 
   console.log('tMode',tMode);
@@ -762,12 +1208,12 @@ router.post('/spreadsheetsNotes', function(req, res, next) {
   }
   var accessToken = auth.split(' ')[1];
   var helper = new SheetsHelper(accessToken);
-
+  globalAccessToken = accessToken;
   var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
 
   console.log('tMode',tMode);
   console.log('sheets', mode);
-  tMode === 'viewer';
+  tMode = 'viewer';
   mode = 'notesViewer'
     console.log('spreadsheetsAnnouncement', mode);
 
