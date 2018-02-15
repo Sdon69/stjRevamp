@@ -134,6 +134,7 @@ var departmentFilter = gCataegory1;
 
 
 var hello = '{{dataFromAnnouncement}}';
+
 var res = hello.replace(/&quot;/g, '"');
 
 
@@ -204,8 +205,8 @@ var raw_data =  JSON.parse(res);
 
 var t =
                      {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-                                       {'<>':"form method='post' action='/detailedEvent' method ='post' ",'html':[
-                                           {'<>':"input type='submit' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
+
+                                            {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;font-weight:550; ",'html':[
                                              {'<>':"font face='Roboto'",'html':[
                                          {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
                                            {
@@ -245,7 +246,7 @@ var t =
                                            },{
                                                '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
                                            }
-                                       ]}  ] }]}]}]};
+                                       ]}  ] }]}]};
 
 
 var d = filteredData;
@@ -254,6 +255,54 @@ var transformedHtml =  json2html.transform(d,t) ;
 // document.write(transformedHtml);
 
 document.getElementById("myDiv").innerHTML=transformedHtml;
+
+
+
+  $(function(){
+      $("button").click(function() {
+          var fired_button = $(this).val();
+          derivedUniqueIdNumber = fired_button;
+
+
+
+
+              for(i=0;i<=forLength;i++)
+              {
+              var uniqueId = raw_data[i].uniqueId;
+
+
+                if(derivedUniqueIdNumber === uniqueId)
+                {
+
+                var sortedTitle = raw_data[i].title;
+                var sortedDescription = raw_data[i].description;
+                var sortedDateOfPublish = raw_data[i].dateOfPublish;
+                var sortedEventDate = raw_data[i].eventDate;
+                var sortedLastDateofRegistration =  raw_data[i].lastDateofRegistration;
+                var sortedEntryFees =  raw_data[i].entryFees;
+
+
+                localStorage.setItem("sortedTitle", sortedTitle);
+                localStorage.setItem("sortedDescription", sortedDescription);
+                localStorage.setItem("sortedDateOfPublish", sortedDateOfPublish);
+                localStorage.setItem("sortedEventDate", sortedEventDate);
+                localStorage.setItem("sortedLastDateofRegistration", sortedLastDateofRegistration);
+                localStorage.setItem("sortedEntryFees", sortedEntryFees);
+
+
+
+
+                 window.location.href = "/detailedEvent";
+
+
+
+
+
+                }
+
+              }
+      });
+  });
 }
 }
 </script>

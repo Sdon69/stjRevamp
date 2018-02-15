@@ -1,11 +1,11 @@
-<script>
-alert(localStorage.getItem("fullName"));
-alert(localStorage.getItem("userId"));
-alert(localStorage.getItem("password"));
-alert(localStorage.getItem("semester"));
-alert(localStorage.getItem("department"));
-alert(localStorage.getItem("className"));
-alert(localStorage.getItem("section"));
-alert(localStorage.getItem("emailAddress"));
-alert(localStorage.getItem("phoneNo"));
-</script>
+<div style="position:fixed;z-index:8;background-color:#ffffff;width:100%;bottom:0%;">
+  <table style="width:100%;"><tr>
+<td><a href="annonuncementViewerPage" target="search_iframe">Announcement</a> </td>
+
+<td><a href="notesViewerPage" target="search_iframe">Notes</a> </td>
+<td><a href="eventViewerPage" target="search_iframe">Events</a> </td>
+<td><a href="eventViewerPage" target="search_iframe">Profile</a> </td>
+</tr>
+</table>
+</div>
+<iframe src="profile" width="100%" height="100%" name="search_iframe"  style="position:fixed; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:1;"></iframe>

@@ -229,7 +229,7 @@ router.get('/', function(req, res, next) {
     console.log('1607');
 
 
-     res.render('profile', { myVar : 'dsndk' });
+     res.render('index', { myVar : 'dsndk' });
 
 
 });
@@ -248,6 +248,24 @@ router.get('/detailedAnnouncement', function(req, res, next) {
 
 
      res.render('detailedAnnouncement.handlebars');
+
+
+});
+
+router.get('/detailedNotes', function(req, res, next) {
+
+
+
+     res.render('detailedNotes.handlebars');
+
+
+});
+
+router.get('/detailedEvent', function(req, res, next) {
+
+
+
+     res.render('detailedEvent.handlebars');
 
 
 });
@@ -416,9 +434,9 @@ router.get('/eventViewerPage', function(req, res, next) {
     }
     var  raw_data = SheetsHelper.itemEventDetails;
 
-    console.log(raw_data);
-    eventHtmlBody =  JSON.stringify(raw_data);
 
+    eventHtmlBody =  JSON.stringify(raw_data);
+    console.log(eventHtmlBody);
 
     res.render('eventViewerPage',{
       pageTitle: 'About Page',

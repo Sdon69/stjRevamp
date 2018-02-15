@@ -466,11 +466,11 @@ var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used,gSign
                                             fullName:fullName,
                                             uniqueId: uniqueId,
                                             cataegories:cataegories,
-                                                dottedString:dottedString
+                                            dottedString:dottedString
                                           });
                                         }
 
-
+                                        console.log(itemDetails);
                                         module.exports.itemEventDetails = itemDetails;
 
 

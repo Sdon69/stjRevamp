@@ -111,6 +111,7 @@
 
 </script>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
   <script>
 var gCataegory1;
@@ -152,10 +153,7 @@ function loadData() // Not used till Now
 
   }
 
-  function d()
-  {
-     window.location.href = "/detailedAnnouncement";
-  }
+var derivedUniqueIdNumber;
 function submitClick()
 {
 var myValue = '{{isInformationAvailable}}';
@@ -235,8 +233,8 @@ var raw_data =  JSON.parse(res);
 
 
   var t = {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-                      {'<>':"form ",'html':[
-                          {'<>':"input type='button' onclick='d()' value='${uniqueId}) \n Tap to Expand the content below'  style='background:#fff;color:#3f8acd;font-weight:550;' name='s3' ",'html':[
+
+                          {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;font-weight:550; ",'html':[
                             {'<>':"font face='Roboto'",'html':[
                         {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
                           {
@@ -276,7 +274,7 @@ var raw_data =  JSON.parse(res);
                           },{
                               '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
                           }
-                      ]}  ] }]}]}]};
+                      ]}  ] }]}]};
 
 
   var d = filteredData;
@@ -285,6 +283,52 @@ var raw_data =  JSON.parse(res);
   // document.write(transformedHtml);
 
   document.getElementById("myDiv").innerHTML=transformedHtml;
+
+
+
+
+  $(function(){
+      $("button").click(function() {
+          var fired_button = $(this).val();
+          derivedUniqueIdNumber = fired_button;
+
+
+
+
+              for(i=0;i<=forLength;i++)
+              {
+              var uniqueId = raw_data[i].uniqueId;
+
+
+                if(derivedUniqueIdNumber === uniqueId)
+                {
+
+                var sortedTitle = raw_data[i].title;
+
+                var sortedDescription = raw_data[i].description;
+                var sortedDateOfPublish = raw_data[i].datePublished;
+
+                var sortedFullName = raw_data[i].fullName;
+
+                localStorage.setItem("sortedTitle", sortedTitle);
+                localStorage.setItem("sortedDescription", sortedDescription);
+                localStorage.setItem("sortedDateOfPublish", sortedDateOfPublish);
+                localStorage.setItem("sortedFullName", sortedFullName);
+
+                 window.location.href = "/detailedAnnouncement";
+
+
+
+
+
+                }
+
+              }
+      });
+  });
+
 }
 }
 </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
