@@ -17,19 +17,473 @@
   the License.
 -->
 
+<style>
+
+* { box-sizing:border-box; }
+
+/* basic stylings ------------------------------------------ */
+body 				 { background:url(https://scotch.io/wp-content/uploads/2014/07/61.jpg); }
+
+h2 		 {
+  text-align:center;
+  margin-bottom:50px;
+}
+h2 small {
+  font-weight:normal;
+  color:#888;
+  display:block;
+}
+.footer 	{ text-align:center; }
+.footer a  { color:#53B2C8; }
+
+/* form starting stylings ------------------------------- */
+.group 			  {
+  position:relative;
+  margin-bottom:45px;
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  width:100%;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#3f8acd;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:100%; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:#3f8acd;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%;
+  width:100px;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+
+select 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  width:100%;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+select:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+select:focus ~ label, select:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#3f8acd;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:100%; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:#3f8acd;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+
+/* active state */
+select:focus ~ .bar:before, select:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%;
+  width:100px;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+select:focus ~ .highlight {
+  -webkit-animation:selectHighlighter 0.3s ease;
+  -moz-animation:selectHighlighter 0.3s ease;
+  animation:selectHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes selectHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes selectHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes selectHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+
+
+</style>
+
+
+
+
+  <!-- Show spreadsheets -->
+
+
+        <form method="post" action="/signupWriteCheck" name='event'>
+    <div class="form-style-2">
+
+              <div class="group">
+    <input type='text' placeholder="First Name"    name='firstName'/>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+</div>  <div class="group">
+    <input type='text' placeholder="Last Name"  name='lastName'>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+</div>  <div class="group">
+        <input type='text' placeholder="User Id"  name='userId'>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+    </div>  <div class="group">
+<input type='password' placeholder="Password"  name='password'>
+<span class="highlight"></span>
+<span class="bar"></span>
+</div>  <div class="group">
+    <input type='password' placeholder="Confirm Password"  name='confirmPassword'><br>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+</div><div class="group">
+    <select name ="semester" >
+  <option>Choose Semester</option>
+  <option>First Semester</option>
+  <option>Second Semester </option>
+  <option>Third Semester</option>
+  <option>Fourth Semester</option>
+  <option>Fifth Semester</option>
+  <option>Sixth and Above Semesters</option>
+      </select>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+  </div> <div class="group">
+  <select  name ="department" id ="department" onchange="clickDepartment()" onclick="clickDepartment()">
+      <option >Choose Department</option>
+
+  <option>Art</option>
+  <option>Commerce</option>
+  <option>Management</option>
+  <option>Education</option>
+  <option>Science</option>
+  <option>Other</option>
+      </select>
+
+    </select>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+  </div> <div class="group">
+  <select name ="className"  id ="className" onclick="clickClassName()" onchange="clickClassName()">
+      <option>Choose Class</option>
+  </select>
+</select>
+<span class="highlight"></span>
+<span class="bar"></span>
+</div> <div class="group">
+  <select name ="section" id ="section"  onclick="clickSection()" onchange="clickSection()" >
+      <option>Choose Section</option>
+  </select>  </select>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+</div>
+  <div class="group">
+    <input type='text' placeholder="Email Address"    name='emailAddress'/><br>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+  </div>  <div class="group">
+      <input type='number' placeholder="Phone No."    name='phoneNo'/><br>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+    </div>
+<input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse; height:0px;" >
+<input type="button" value="Submit"  onclick="check()"  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;"    >
+
+            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
+          </div>
+        </form>
+        <br><br>
+      <span class="mdl-list__item-secondary-action" style="position:relative; ">
+
+        <button  class="mdl-button mdl-js-button mdl-button--raised
+                       mdl-js-ripple-effect mdl-button--colored"
+                rel="writeUserId" type="button" id='create'  style="position:relative;visibility:collapse;">Create</button>
+                <button  class="mdl-button mdl-js-button mdl-button--raised
+                               mdl-js-ripple-effect mdl-button--colored"
+                        rel="getDataForUserId" type="button" id='getData'  style="position:relative;visibility:collapse;">Create</button>
+
+
+
+
 
 <script>
 
 
 
-function savingData()
+  var delayInMilliseconds = 2000; //1 second
+
+  setTimeout(function() {
+
+    document.getElementById('getData').click();
+  }, delayInMilliseconds);
+
+</script>
+<script>
+
+
+
+function clickDepartment()
 {
 
 
+  var skillsSelect = document.getElementById("department");
+  var department = skillsSelect.options[skillsSelect.selectedIndex].text;
 
 
+  var classDataString = '{{classData}}';
+  classDataString = classDataString.replace(/&quot;/g, '"');
+  var classData = JSON.parse(classDataString);
+
+  var sel = document.getElementById('className');
+  // sel = skillsSelect;
+
+
+
+
+function removeOptions(sel)
+{
+    var i;
+    for(i = sel.options.length - 1 ; i >= 0 ; i--)
+    {
+        sel.remove(i);
+    }
+}
+
+
+//using the function:
+removeOptions(document.getElementById("className"));
+removeOptions(document.getElementById("section"));
+
+  var sectionSel = document.getElementById('section');
+var opt = document.createElement('option');
+opt.innerHTML = 'Choose Section';
+opt.value =  'Choose Section';
+sectionSel.appendChild(opt);
+
+var opt = document.createElement('option');
+opt.innerHTML = 'Choose Class';
+opt.value =  'Choose Class';
+sel.appendChild(opt);
+
+  for(var i = 0; i < classData.length; i++) {
+
+
+      var opt = document.createElement('option');
+
+      if(classData[i].department == department)
+      {
+
+        opt.innerHTML = classData[i].className;
+        opt.value = classData[i].className;
+        sel.appendChild(opt);
+      }
+
+    }
 
 }
+
+
+var userIdDataString = '{{userIdData}}';
+userIdDataString = userIdDataString.replace(/&quot;/g, '"');
+var userIdData = JSON.parse(userIdDataString);
+
+
+
+function clickClassName()
+{
+
+  var deptName = document.getElementById("department").value;
+
+if(!deptName.includes('Choose'))
+{
+
+
+  var sectionDataString = '{{sectionData}}';
+  sectionDataString = sectionDataString.replace(/&quot;/g, '"');
+  var sectionData = JSON.parse(sectionDataString);
+
+  var skillsSelect = document.getElementById("className");
+  var className = skillsSelect.options[skillsSelect.selectedIndex].text;
+
+    var sel = document.getElementById('section');
+
+    function removeOptions(sel)
+    {
+        var i;
+        for(i = sel.options.length - 1 ; i >= 0 ; i--)
+        {
+            sel.remove(i);
+        }
+    }
+    //using the function:
+    removeOptions(document.getElementById("section"));
+
+    var opt = document.createElement('option');
+    opt.innerHTML = 'Choose Section';
+    opt.value =  'Choose Section';
+    sel.appendChild(opt);
+
+
+    for(var i = 0; i < sectionData.length; i++) {
+
+
+        var opt = document.createElement('option');
+      if(sectionData[i].className == className)
+      {
+
+        opt.innerHTML = sectionData[i].section;
+        opt.value = sectionData[i].section;
+        sel.appendChild(opt);
+      }
+    }
+
+
+}else{
+  alert('First Choose a department');
+}
+
+}
+function clickSection()
+{
+  var sectName = document.getElementById("className").value;
+
+if(sectName.includes('Choose'))
+{
+    alert('First Choose a Class');
+}
+
+}
+
+$('button.reset').click(
+    function () {
+        $(this).prevAll('input').val(function(){
+            switch (this.type){
+                case 'text':
+                    return this.defaultValue;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = this.defaultChecked;
+            }
+        });
+    });
+
+</script>
+
+<script>
+
+
+
 
 
 
@@ -233,247 +687,5 @@ if(!idExists)
 
 
 
-
-</script>
-<div class="mdl-grid">
-
-
-  <!-- Show spreadsheets -->
-  <section id="spreadsheets2"
-           class="mdl-cell mdl-cell--4-col relative">
-    <div class="mdl-list">
-      <div class="mdl-list__item">
-
-
-        <form method="post" action="/signupWriteCheck" name='event'>
-
-    <input type='text' placeholder="First Name"    name='firstName'/><br>
-    <input type='text' placeholder="Last Name"  name='lastName'><br>
-        <input type='text' placeholder="User Id"  name='userId'><br>
-<input type='password' placeholder="Password"  name='password'><br>
-    <input type='password' placeholder="Confirm Password"  name='confirmPassword'><br>
-    <br>
-    <select name ="semester" >
-  <option style="font-weight:bold;">Choose Semester</option>
-  <option style="font-weight:bold;">First Semester</option>
-  <option style="font-weight:bold;">Second Semester </option>
-  <option style="font-weight:bold;">Third Semester</option>
-  <option style="font-weight:bold;">Fourth Semester</option>
-  <option style="font-weight:bold;">Fifth Semester</option>
-  <option style="font-weight:bold;">Sixth and Above Semesters</option>
-      </select>
-  <select  name ="department" id ="department" onchange="clickDepartment()" onclick="clickDepartment()">
-      <option style="font-weight:bold;" >Choose Department</option>
-
-  <option style="font-weight:bold;">Art</option>
-  <option style="font-weight:bold;">Commerce</option>
-  <option style="font-weight:bold;">Management</option>
-  <option style="font-weight:bold;">Education</option>
-  <option style="font-weight:bold;">Science</option>
-  <option style="font-weight:bold;">Other</option>
-      </select>
-
-
-  <select name ="className"  id ="className" onclick="clickClassName()" onchange="clickClassName()">
-      <option style="font-weight:bold;">Choose Class</option>
-  </select>
-
-  <select name ="section" id ="section"  onclick="clickSection()" onchange="clickSection()" >
-      <option style="font-weight:bold;">Choose Section</option>
-  </select>
-
-    <input type='text' placeholder="Email Address"    name='emailAddress'/><br>
-
-      <input type='number' placeholder="Phone No."    name='phoneNo'/><br>
-
-<input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
-<input type="button" value="Submit"  onclick="check()"    >
-
-            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
-        </form>
-        <br><br>
-      <span class="mdl-list__item-secondary-action" style="position:relative; ">
-
-        <button  class="mdl-button mdl-js-button mdl-button--raised
-                       mdl-js-ripple-effect mdl-button--colored"
-                rel="writeUserId" type="button" id='create'  style="position:relative;visibility:collapse;">Create</button>
-                <button  class="mdl-button mdl-js-button mdl-button--raised
-                               mdl-js-ripple-effect mdl-button--colored"
-                        rel="getDataForUserId" type="button" id='getData'  style="position:relative;visibility:collapse;">Create</button>
-
-
-</button>
-      </span>
-      </div>
-      {{#each spreadsheets}}
-      <div class="mdl-list__item">
-
-
-      </div>
-      {{/each}}
-    </div>
-  </section>
-</div>
-
-<script>
-
-
-
-  var delayInMilliseconds = 2000; //1 second
-
-  setTimeout(function() {
-
-    document.getElementById('getData').click();
-  }, delayInMilliseconds);
-
-</script>
-<script>
-
-
-
-function clickDepartment()
-{
-
-
-  var skillsSelect = document.getElementById("department");
-  var department = skillsSelect.options[skillsSelect.selectedIndex].text;
-
-
-  var classDataString = '{{classData}}';
-  classDataString = classDataString.replace(/&quot;/g, '"');
-  var classData = JSON.parse(classDataString);
-
-  var sel = document.getElementById('className');
-  // sel = skillsSelect;
-
-
-
-
-function removeOptions(sel)
-{
-    var i;
-    for(i = sel.options.length - 1 ; i >= 0 ; i--)
-    {
-        sel.remove(i);
-    }
-}
-
-
-//using the function:
-removeOptions(document.getElementById("className"));
-removeOptions(document.getElementById("section"));
-
-  var sectionSel = document.getElementById('section');
-var opt = document.createElement('option');
-opt.innerHTML = 'Choose Section';
-opt.value =  'Choose Section';
-sectionSel.appendChild(opt);
-
-var opt = document.createElement('option');
-opt.innerHTML = 'Choose Class';
-opt.value =  'Choose Class';
-sel.appendChild(opt);
-
-  for(var i = 0; i < classData.length; i++) {
-
-
-      var opt = document.createElement('option');
-
-      if(classData[i].department == department)
-      {
-
-        opt.innerHTML = classData[i].className;
-        opt.value = classData[i].className;
-        sel.appendChild(opt);
-      }
-
-    }
-
-}
-
-
-var userIdDataString = '{{userIdData}}';
-userIdDataString = userIdDataString.replace(/&quot;/g, '"');
-var userIdData = JSON.parse(userIdDataString);
-
-
-
-function clickClassName()
-{
-
-  var deptName = document.getElementById("department").value;
-
-if(!deptName.includes('Choose'))
-{
-
-
-  var sectionDataString = '{{sectionData}}';
-  sectionDataString = sectionDataString.replace(/&quot;/g, '"');
-  var sectionData = JSON.parse(sectionDataString);
-
-  var skillsSelect = document.getElementById("className");
-  var className = skillsSelect.options[skillsSelect.selectedIndex].text;
-
-    var sel = document.getElementById('section');
-
-    function removeOptions(sel)
-    {
-        var i;
-        for(i = sel.options.length - 1 ; i >= 0 ; i--)
-        {
-            sel.remove(i);
-        }
-    }
-    //using the function:
-    removeOptions(document.getElementById("section"));
-
-    var opt = document.createElement('option');
-    opt.innerHTML = 'Choose Section';
-    opt.value =  'Choose Section';
-    sel.appendChild(opt);
-
-
-    for(var i = 0; i < sectionData.length; i++) {
-
-
-        var opt = document.createElement('option');
-      if(sectionData[i].className == className)
-      {
-
-        opt.innerHTML = sectionData[i].section;
-        opt.value = sectionData[i].section;
-        sel.appendChild(opt);
-      }
-    }
-
-
-}else{
-  alert('First Choose a department');
-}
-
-}
-function clickSection()
-{
-  var sectName = document.getElementById("className").value;
-
-if(sectName.includes('Choose'))
-{
-    alert('First Choose a Class');
-}
-
-}
-
-$('button.reset').click(
-    function () {
-        $(this).prevAll('input').val(function(){
-            switch (this.type){
-                case 'text':
-                    return this.defaultValue;
-                case 'checkbox':
-                case 'radio':
-                    this.checked = this.defaultChecked;
-            }
-        });
-    });
 
 </script>

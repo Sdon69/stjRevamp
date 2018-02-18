@@ -16,6 +16,280 @@
   License for the specific language governing permissions and limitations under
   the License.
 -->
+
+<style>
+
+::placeholder {
+    color: #4489c8;
+    opacity: 1; /* Firefox */
+}
+
+* { box-sizing:border-box; }
+
+/* basic stylings ------------------------------------------ */
+body 				 { background:url(https://scotch.io/wp-content/uploads/2014/07/61.jpg); }
+
+h2 		 {
+  text-align:center;
+  margin-bottom:50px;
+}
+h2 small {
+  font-weight:normal;
+  color:#888;
+  display:block;
+}
+.footer 	{ text-align:center; }
+.footer a  { color:#53B2C8; }
+
+/* form starting stylings ------------------------------- */
+.group 			  {
+  position:relative;
+  margin-bottom:45px;
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  width:100%;
+  border:none;
+  border-bottom:1px solid #757575;
+
+  font-weight:450;
+  color:#4489c8;
+
+}
+input:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#3f8acd;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:100%; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:#3f8acd;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%;
+  width:100%;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+
+textarea 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  width:100%;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+textarea:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+textarea:focus ~ label, textarea:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#3f8acd;
+}
+
+/* BOTTOM BARS ================================= */
+.tbar 	{ position:relative; display:block; width:100%; }
+.tbar:before, .tbar:after 	{
+  content:'';
+  height:5px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:#3f8acd;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.tbar:before {
+  left:50%;
+}
+.tbar:after {
+  right:50%;
+}
+
+/* active state */
+textarea:focus ~ .tbar:before, textarea:focus ~ .tbar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:100%;
+
+
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+textarea:focus ~ .highlight {
+  -webkit-animation:textareaHighlighter 0.3s ease;
+  -moz-animation:textareaHighlighter 0.3s ease;
+  animation:textareaHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes textareaHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes textareaHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes textareaHighlighter {
+	from { background:#3f8acd; }
+  to 	{ width:0; background:transparent; }
+}
+
+
+</style>
+
+
+<font face="roboto">
+<div style="background:#ffffff; padding:20px;">
+        <form method="post" action="/notesWriteCheck" name='event'>
+
+
+
+              <div class="group">
+                    <input   type='text' placeholder="Concept" name='eventTitle'  id="mySelect"   required>
+                <span class="highlight"></span>
+                <span class="bar"></span>
+
+                </div>
+                <div class="group">
+                      <textarea name='eventDesc'  id="mySelect" placeholder="Notes" ></textarea> <span class="highlight"></span>
+                  <span class="tbar"></span>
+
+                </div>
+                    <div class="group">
+                    <input type='password' placeholder="Confirm Password" name='pass_check'  id="mySelect">  <span class="highlight"></span>
+                <span class="bar"></span>
+
+                </div>
+    <br> <font color="#3f8acd">
+    <b>
+    Department(s) Concerned:<br><br>
+    <input type="checkbox"  name="department0" value="Art"  style="width:auto; " id="mySelect">Art<br><br>
+    <input type="checkbox" name="department1" value="Commerce"  style="width:auto;" id="mySelect">Commerce<br><br>
+    <input type="checkbox" name="department2" value="Management" style="width:auto;" id="mySelect">Management<br><br>
+    <input type="checkbox" name="department3" value="Education" style="width:auto;" id="mySelect">Education<br><br>
+    <input type="checkbox" name="department4" value="Science" style="width:auto;" id="mySelect">Science<br><br>
+    <input type="checkbox" name="department5" value="Other" style="width:auto;" id="mySelect">Other<br><br>
+
+    <br>
+
+
+    Semesters(s) Concerned:<br><br>
+    <input type="checkbox" name="semester0" value="First Semester" style="width:auto;" id="mySelect">First Semester<br><br>
+    <input type="checkbox" name="semester1" value="Second Semester" style="width:auto;"style="width:auto;"  id="mySelect">Second Semester<br><br>
+    <input type="checkbox" name="semester2" value="Third Semester"  style="width:auto;" id="mySelect">Third Semester<br><br>
+    <input type="checkbox" name="semester3" value="Fourth Semester" style="width:auto;" id="mySelect">Fourth Semester<br><br>
+    <input type="checkbox" name="semester4" value="Fifth Semester" style="width:auto;" id="mySelect">Fifth Semester<br><br>
+    <input type="checkbox" name="semester5" value="Sixth and Above Semesters" style="width:auto;" id="mySelect">Sixth and Above Semesters<br><br>
+
+    <br>
+
+      <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse; height:0px;" >
+  <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse; height:0px; width:0;" >
+<input type="button" value="SUBMIT"  onclick="check()" style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;"    >
+
+            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
+
+        </form>
+
+      <span class="mdl-list__item-secondary-action" style="position:relative; ">
+
+        <button  class="mdl-button mdl-js-button mdl-button--raised
+                       mdl-js-ripple-effect mdl-button--colored"
+                rel="writeNotes" type="button" id='create' style="position:relative; visibility:collapse;">Create</button>
+
+              </div>
+              </font>
+
 <script>
 var isSemesterChecked;
 var isDepartmentChecked;
@@ -239,67 +513,3 @@ else{
 
 
 </script>
-<div class="mdl-grid">
-
-
-  <!-- Show spreadsheets -->
-  <section id="spreadsheets2"
-           class="mdl-cell mdl-cell--4-col relative">
-    <div class="mdl-list">
-      <div class="mdl-list__item">
-
-
-        <form method="post" action="/notesWriteCheck" name='event'>
-
-    <input type='text' placeholder="Event Title"     id="mySelect" name='eventTitle'/><br>
-    <input type='text' placeholder="Event Description"   id="mySelect" name='eventDesc'><br>
-
-    <input type='password' placeholder="Confirm Password"   id="mySelect" name='pass_check'><br>
-    <br>
-    Department(s) Concerned:<br>
-    <input type="checkbox" name="department0" value="Art"  id="mySelect">Art<br>
-    <input type="checkbox" name="department1" value="Commerce"  id="mySelect">Commerce<br>
-    <input type="checkbox" name="department2" value="Management"  id="mySelect">Management<br>
-    <input type="checkbox" name="department3" value="Education"  id="mySelect">Education<br>
-    <input type="checkbox" name="department4" value="Science"  id="mySelect">Science<br>
-    <input type="checkbox" name="department5" value="Other"  id="mySelect">Other<br>
-
-    <br>
-
-
-    Semesters(s) Concerned:<br>
-    <input type="checkbox" name="semester0" value="First Semester"  id="mySelect">First Semester<br>
-    <input type="checkbox" name="semester1" value="Second Semester"  id="mySelect">Second Semester<br>
-    <input type="checkbox" name="semester2" value="Third Semester"  id="mySelect">Third Semester<br>
-    <input type="checkbox" name="semester3" value="Fourth Semester"  id="mySelect">Fourth Semester<br>
-    <input type="checkbox" name="semester4" value="Fifth Semester"  id="mySelect">Fifth Semester<br>
-    <input type="checkbox" name="semester5" value="Sixth and Above Semesters"  id="mySelect">Sixth and Above Semesters<br>
-
-    <br>
-
-      <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
-  <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse;" >
-<input type="button" value="Submit"  onclick="check()"    >
-
-            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
-        </form>
-        <br><br>
-      <span class="mdl-list__item-secondary-action" style="position:relative; ">
-
-        <button  class="mdl-button mdl-js-button mdl-button--raised
-                       mdl-js-ripple-effect mdl-button--colored"
-                rel="writeNotes" type="button" id='create'  style="position:relative;">Create</button>
-
-
-</button>
-      </span>
-      </div>
-      {{#each spreadsheets}}
-      <div class="mdl-list__item">
-
-
-      </div>
-      {{/each}}
-    </div>
-  </section>
-</div>

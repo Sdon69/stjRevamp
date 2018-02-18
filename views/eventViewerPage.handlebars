@@ -18,17 +18,43 @@
 -->
 
 
-<div class="mdl-grid">
+    <style>
+
+
+
+
+    .float{
+    	position:fixed;
+    	width:60px;
+    	height:60px;
+    	bottom:40px;
+    	right:40px;
+    	background-color:#3f8acd;
+    	border-radius:50px;
+    	text-align:center;
+    	box-shadow: 2px 2px 3px #999;
+
+    }
+
+    .my-float{
+    	margin-top:22px;
+    }
+    </style>
+
+    <a href="/eventWriterPage">
+    <img src="bluePlus.jpg" class="float"></a>
+
+<div class="mdl-grid" style="padding:0;margin:0;background-color:#3f8acd;" >
 
 
   <!-- Show spreadsheets -->
   <section id="spreadsheets2"
-           class="mdl-cell mdl-cell--4-col relative">
-    <div class="mdl-list">
-      <div class="mdl-list__item">
+           class="mdl-cell mdl-cell--4-col relative" style="padding:0;margin:0;background-color:#3f8acd;">
+    <div class="mdl-list" style="padding:0;margin:0;background-color:#3f8acd; " >
+      <div class="mdl-list__item" style="padding:0;margin:0;background-color:#3f8acd;"><div style="width:100%; background-color:#3f8acd; ">
         <form>
-        <div class="styled-select yellow rounded" >
-      <select name ="s1"  id="cataegory1">
+        <table width="100%"><tr><td width="48%"><tr><td>
+      <select name ="s1"  id="cataegory1" style="background:#3f8acd; border:none; color:#ECE7E7; width:100%; ">
             <option style="font-weight:bold;">Choose Event Genre</option>
           <option style="font-weight:bold;">All Events</option>
           <option style="font-weight:bold;">Technology</option>
@@ -40,14 +66,16 @@
           <option style="font-weight:bold;">Other</option>
           </select>
 
+</td>
 
 
-        </div>
         <br>
-          <input type="button" value="Submit"  onclick="checkInfo()"  >
-        <input id='hangoutButtonId' onclick="submitClick()" type="button" value="Submit" name="s3" style="visibility:collapse; z-index:-88888888; position:fixed;">
-
-
+        <td width="52%"  >
+        <input id='hangoutButtonId'    type="button" value="button" name="s3"  style="visibility: collapse;" onclick="submitClick()" >
+        <input type="button" value="FILTER"  onClick="checkInfo()" style="padding:5%; padding-right:20%;
+        padding-left:20%; background-color:rgba(236,230,230,0.65); border:none; color:rgba(255,255,255,1.00);
+        font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600;  "  >
+      </td></tr></table>
 
         </form>
 
@@ -59,7 +87,8 @@
 
           <button  class="mdl-button mdl-js-button mdl-button--raised
                          mdl-js-ripple-effect mdl-button--colored"
-                  rel="create" type="button" id='create' onclick="f()"  style="visibility: collapse; z-index:-88888888; position:fixed"  >Create</button>
+                  rel="create" type="button" id='create' onclick="f()"
+                   style="visibility: collapse; "  >Create</button>
 
 
 </button>
@@ -206,9 +235,9 @@ var raw_data =  JSON.parse(res);
 var t =
                      {'<>':"div style='width:100%;padding-top:20px;'",'html':[
 
-                                            {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;font-weight:550; ",'html':[
+                                            {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
                                              {'<>':"font face='Roboto'",'html':[
-                                         {'<>':"div style='width:100%;padding-top:20px; padding-bottom:10px; margin-right:20px; background:#ffffff;border-width:1px; border-color:rgba(130,130,130,1.00);border-style: solid; border-top:none;border-left:none;'",'children':[
+                                         {'<>':"div style='width:100%; padding-bottom:10px; margin-right:20px; background:#ffffff;'",'children':[
                                            {
                                              '<>':"div style='width:100%'",'children':[
                                                {
@@ -216,10 +245,10 @@ var t =
                                                    {
                                                        '<>':"tr",'children':[
                                                          {
-                                                           '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:500; padding-top:25px'",'html':"${title}"
+                                                          '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:600; padding-top:25px;text-align:left;'",'html':"${title}"
                                                          },
                                                          {
-                                                           '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;' align='right'",'html':"${dateOfPublish}"
+                                                           '<>':"td style='padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;text-align: right;'' align='right'",'html':"${dateOfPublish}"
                                                          }
                                                        ]
                                                    }
@@ -233,10 +262,10 @@ var t =
                                                      {
                                                          '<>':"tr",'children':[
                                                            {
-                                                               '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;'",'html':"Entry Fees : ${entryFees}"
+                                                               '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;text-align: left; color:#000000;'",'html':"Entry Fees : ${entryFees}"
                                                            },
                                                            {
-                                                               '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;'",'html':"Date : ${eventDate}"
+                                                               '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;color:#000000;'",'html':"Date : ${eventDate}"
                                                            }
                                                          ]
                                                      }
@@ -244,7 +273,7 @@ var t =
                                                  }
                                                ]
                                            },{
-                                               '<>':"div style='margin-left:10x;margin-right:10x; font-size:12px; font-weight:450; padding-top:5px;'",'html':"${dottedString}"
+                                               '<>':"div style='font-size:12px; font-weight:450; padding-top:5px;text-align: left;color:#000000;'",'html':"${dottedString}"
                                            }
                                        ]}  ] }]}]};
 
