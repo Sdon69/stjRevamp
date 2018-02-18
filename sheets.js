@@ -20,6 +20,7 @@
 var google = require('googleapis');
 var googleAuth = require('google-auth-library');
 var util = require('util');
+const fs = require('fs');
 
 dept_filter = 'All Events';
 
@@ -780,6 +781,8 @@ used = true;
           globalRange = `Stj Teacher Notes!A${rowNumber}:G`;
           uniqueIdNumber = rowNumber;
 
+          saveInJson(mode,itemDetails);
+
           if (mode === 'eventWriter') {
 
       globalRange = `Class Data!A${rowNumber}:K`;
@@ -807,4 +810,10 @@ itemDetails = [{
   module.exports.itemDetails = itemDetails;
 
 
+}
+
+var saveInJson = (mode,jsonVar) =>
+{
+  var covertedJsonString = JSON.stringify(jsonVar);
+  fs.writeFileSync(`${mode}.json`, covertedJsonString);
 }

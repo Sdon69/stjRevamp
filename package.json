@@ -27,5 +27,9 @@
   },
   "devDependencies": {
     "nodemon": "^1.9.1"
-  }
+  },
+  "nodemonConfig": {
+   "ignore": ["notesViewer.json","eventViewer.json","announcementViewer.json" ]
+ }
+
 }

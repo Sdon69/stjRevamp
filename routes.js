@@ -24,6 +24,7 @@ var router = express.Router();
 var models = require('./models');
 var Sequelize = require('sequelize');
 var SheetsHelper = require('./sheets');
+const fs = require('fs');
 
 var json2html = require('node-json2html');
 var   mode = 'eventViewer';
@@ -75,6 +76,21 @@ var gClassName;
 var gSection;
 var gEmailAddress;
 var gPhoneNo;
+var announcementRawData;
+var eventRawData;
+var notesRawData;
+var classRawData;
+var sectionRawData;
+var subjectRawData;
+var userRawData;
+
+var globalLoadedString;
+
+var loadFromJson = (mode) =>
+{
+  var loadedString = fs.readFileSync(`${mode}.json`);
+  return loadedString;
+}
 
 
 var globalAccessToken = 'ya29.GlxhBXcqpZB1tGkkNHwKz6gT2adRRQMdPLEz8Ud2Vr5aeVWfKqszcjLfNh3JfsXnd8LC6-5X2aP_8dkSDByJ6DJJkoM0jQ2HwtDvKksLM2NT-KzC_r4KWCUdjJL7Fg';
@@ -82,65 +98,31 @@ var globalAccessToken = 'ya29.GlxhBXcqpZB1tGkkNHwKz6gT2adRRQMdPLEz8Ud2Vr5aeVWfKq
 if(initialRun)
 {
     console.log('initialRun');
-    var helper = new SheetsHelper(globalAccessToken);
+
     tMode = 'viewer';
 
 
-    mode = 'announcementViewer'
-    helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-    if (err) {
-        return next(err);
-      }
+    mode = 'announcementViewer';
 
-   });
+    announcementRawData = loadFromJson(mode);
 
-   mode = 'notesViewer'
-   helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-   if (err) {
-       return next(err);
-     }
-
-  });
+   mode = 'notesViewer';
+   notesRawData = loadFromJson(mode);
 
   mode = 'eventViewer'
-  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-  if (err) {
-      return next(err);
-    }
+  eventRawData = loadFromJson(mode);
 
-  });
-
-  mode = 'sectionViewer'
-  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-  if (err) {
-      return next(err);
-    }
-
-  });
-
-  mode = 'classViewer'
-  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-  if (err) {
-      return next(err);
-    }
-
-  });
-
-  mode = 'subjectViewer'
-  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-  if (err) {
-      return next(err);
-    }
-
-  });
-
-  mode = 'userIdFeed'
-  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
-  if (err) {
-      return next(err);
-    }
-
-  });
+  // mode = 'sectionViewer';
+  // sectionRawData = loadFromJson(mode);
+  //
+  // mode = 'classViewer';
+  // classRawData = loadFromJson(mode);
+  //
+  // mode = 'subjectViewer'
+  // subjectRawData = loadFromJson(mode);
+  //
+  // mode = 'userIdFeed'
+  // userRawData  = loadFromJson(mode);
 
 
 
@@ -322,13 +304,13 @@ router.get('/annonuncementViewerPage', function(req, res, next) {
     }
 
 
-    var  raw_data = SheetsHelper.itemAnnouncementDetails;
-    announcementHtmlBody =  JSON.stringify(raw_data);
+    var  raw_data = announcementRawData;
+
 
 
     res.render('annonuncementViewerPage',{
       pageTitle: 'About Page',
-      dataFromAnnouncement:announcementHtmlBody,
+      dataFromAnnouncement:raw_data,
       isInformationAvailable:'true'
 
     });
@@ -371,17 +353,15 @@ router.get('/notesViewerPage', function(req, res, next) {
       cataegory2 = 'All Semesters'
       console.log('an1',cataegory1)
     }
-    var  raw_data = SheetsHelper.itemNotesDetails;
+    var  raw_data = notesRawData;
 
 
 
-
-    notesHtmlBody =  JSON.stringify(raw_data);
 
 
     res.render('notesViewerPage',{
       pageTitle: 'About Page',
-      dataFromAnnouncement:notesHtmlBody,
+      dataFromAnnouncement:raw_data,
       isInformationAvailable:'true'
 
     });
@@ -432,10 +412,10 @@ router.get('/eventViewerPage', function(req, res, next) {
       cataegory1 = 'All Events'
       console.log('ev1',cataegory1)
     }
-    var  raw_data = SheetsHelper.itemEventDetails;
+    var  raw_data = eventRawData;
 
 
-    eventHtmlBody =  JSON.stringify(raw_data);
+    eventHtmlBody =  raw_data;
     console.log(eventHtmlBody);
 
     res.render('eventViewerPage',{
