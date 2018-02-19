@@ -24,7 +24,6 @@ var router = express.Router();
 var models = require('./models');
 var Sequelize = require('sequelize');
 var SheetsHelper = require('./sheets');
-var readingCheck = require('./readingCheck');
 const fs = require('fs');
 
 var json2html = require('node-json2html');
@@ -96,7 +95,6 @@ var loadFromJson = (mode) =>
   return loadedString;
 }
 
-readingCheck.getSomeData();
 
 var globalAccessToken = 'ya29.GlxhBXcqpZB1tGkkNHwKz6gT2adRRQMdPLEz8Ud2Vr5aeVWfKqszcjLfNh3JfsXnd8LC6-5X2aP_8dkSDByJ6DJJkoM0jQ2HwtDvKksLM2NT-KzC_r4KWCUdjJL7Fg';
 
@@ -261,19 +259,6 @@ router.get('/profile', function(req, res, next) {
 
 
      res.render('profile', { myVar : 'sampleString' });
-
-
-});
-
-router.get('/test', function(req, res, next) {
-
-
-
-var jsonVar = JSON.stringify(readingCheck.itemDetails);
-
-
-
-     res.send(jsonVar);
 
 
 });
