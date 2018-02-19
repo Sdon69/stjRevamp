@@ -127,6 +127,13 @@ $(function() {
     });
   });
 
+  $('button[rel="signinUserId"]').click(function() {
+    makeRequest('POST', '/spreadsheetsSigninUserId', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
 });
 
 function makeRequest(method, url, callback) {

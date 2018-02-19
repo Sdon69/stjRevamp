@@ -117,6 +117,12 @@ var cataegory2;
  }else if (mode === 'userIdFeed') {
    sheetId = '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU';
    range = 'Class Data!A2:S';
+ }else if (mode === 'userIdDetailedFeed') {
+   sheetId = '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU';
+   range = 'Class Data!A2:S';
+ }else if (mode === 'passwordCheck') {
+   sheetId = '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU';
+   range = 'Class Data!A2:S';
  }
 
 
@@ -185,7 +191,7 @@ var cataegory2;
             module.exports.itemDetails = itemDetails;
 
 
-            asyncAdd(rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used,gSignupUserId).then((message) =>
+            asyncAdd(rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used,gSignupUserId,gPassword).then((message) =>
             {
 
 
@@ -275,10 +281,13 @@ return;
 };
 
 
-var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used,gSignupUserId) =>
+var asyncAdd = (rows,mode,itemDetails,cataegory1,cataegory2,rowNumber,used,gSignupUserId,gPassword) =>
 {
   return new Promise((resolve, reject) =>
   {
+
+    var passwordRetrieved = 'none';
+    var passwordCorrect = false;
 
     for (var i = 0; i < rows.length; i++) {
 
@@ -668,6 +677,73 @@ used = true;
                  }
 
                      module.exports.itemUseridDetails = itemDetails;
+            }else if (mode == 'passwordCheck') {
+            var userId = row[0];
+
+
+            if(userId == gSignupUserId)
+            {
+              passwordRetrieved = row[1];
+              if(gPassword == passwordRetrieved)
+              {
+                  console.log('passwordRetrieved2',passwordRetrieved)
+                  passwordCorrect = true;
+                 module.exports.passwordRetrieved = passwordRetrieved;
+                 // module.exports.passwordRetrieved = passwordRetrieved;
+                   // module.exports.passwordFound = true;
+                   module.exports.passwordCorrect = passwordCorrect;
+                          console.log('sheetsPassword','right')
+                 break;
+              }else {
+                   module.exports.passwordCorrect = false;
+                   console.log('sheetsPassword','wrong')
+              }
+            }
+
+
+
+
+            }
+            else if (mode === 'userIdDetailedFeed') {
+            var userId =    row[0];
+            var firstName = row[2];
+            var lastname =  row[3];
+            var className = row[4];
+            var section =   row[5];
+            var emailId =   row[6];
+            var phoneNo =   row[7];
+            var semester =  row[9];
+
+            if(!used)
+            {
+            itemDetails.pop({
+                 title: 'str1',
+                 age:   'str2'
+                   });
+                   itemDetails.push({
+                     userId: userId,
+                     firstName: firstName,
+                     lastname: lastname,
+                     className: className,
+                     emailId: emailId,
+                     phoneNo: phoneNo,
+                     semester : semester
+                   });
+                   used = true;
+                 }
+                 else{
+                   itemDetails.push({
+                     userId: userId,
+                     firstName: firstName,
+                     lastname: lastname,
+                     className: className,
+                     emailId: emailId,
+                     phoneNo: phoneNo,
+                     semester : semester
+                   });
+                 }
+
+                     module.exports.itemUserDetailedDetails = itemDetails;
             }
             else if (mode === 'announcementWriter') {
 

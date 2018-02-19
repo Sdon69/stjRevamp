@@ -83,8 +83,11 @@ var classRawData;
 var sectionRawData;
 var subjectRawData;
 var userRawData;
+var userIdDetailedRawData;
 
 var globalLoadedString;
+
+var passwordFound = false;
 
 var loadFromJson = (mode) =>
 {
@@ -112,18 +115,20 @@ if(initialRun)
   mode = 'eventViewer'
   eventRawData = loadFromJson(mode);
 
-  // mode = 'sectionViewer';
-  // sectionRawData = loadFromJson(mode);
-  //
-  // mode = 'classViewer';
-  // classRawData = loadFromJson(mode);
-  //
-  // mode = 'subjectViewer'
-  // subjectRawData = loadFromJson(mode);
-  //
-  // mode = 'userIdFeed'
-  // userRawData  = loadFromJson(mode);
+  mode = 'sectionViewer';
+  sectionRawData = loadFromJson(mode);
 
+  mode = 'classViewer';
+  classRawData = loadFromJson(mode);
+
+  mode = 'subjectViewer';
+  subjectRawData = loadFromJson(mode);
+
+  mode = 'userIdFeed';
+  userRawData  = loadFromJson(mode);
+
+  mode = 'userIdDetailedFeed';
+  userIdDetailedRawData = loadFromJson(mode);
 
 
 
@@ -145,7 +150,7 @@ setInterval(function(){
 
  });
 
- mode = 'notesViewer'
+ mode = 'notesViewer';
  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
  if (err) {
      return next(err);
@@ -153,7 +158,7 @@ setInterval(function(){
 
 });
 
-mode = 'eventViewer'
+mode = 'eventViewer';
 helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
 if (err) {
     return next(err);
@@ -162,7 +167,7 @@ if (err) {
 });
 
 
-  mode = 'sectionViewer'
+  mode = 'sectionViewer';
   helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
   if (err) {
       return next(err);
@@ -170,7 +175,7 @@ if (err) {
 
   });
 
-  mode = 'classViewer'
+  mode = 'classViewer';
   helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
   if (err) {
       return next(err);
@@ -178,7 +183,7 @@ if (err) {
 
   });
 
-  mode = 'subjectViewer'
+  mode = 'subjectViewer';
   helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
   if (err) {
       return next(err);
@@ -186,13 +191,20 @@ if (err) {
 
   });
 
-  mode = 'userIdFeed'
+  mode = 'userIdFeed';
   helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
   if (err) {
       return next(err);
     }
 
   });
+
+  mode = 'userIdDetailedFeed';
+  helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+  if (err) {
+      return next(err);
+    }
+    });
 
 
 }, 100000); //100 Seconds
@@ -211,7 +223,31 @@ router.get('/', function(req, res, next) {
     console.log('1607');
 
 
-     res.render('index', { myVar : 'dsndk' });
+
+    var passwordCorrect = false;
+    var sampleString;
+    // passwordFound = SheetsHelper.passwordFound;
+    // console.log(passwordFound);
+    // if(passwordFound)
+    // {
+    // passwordCorrect = SheetsHelper.passwordCorrect;
+    // }
+    passwordCorrect = SheetsHelper.passwordCorrect;
+    if(passwordCorrect)
+    {
+    sampleString = 'check';
+    console.log('password = ','correct');
+
+    }else{
+    sampleString = 'hell';
+      console.log('password = ','wrong');
+    }
+
+    passwordCorrect = false;
+    console.log('sampleString',sampleString);
+
+
+     res.render('index', { myVar : sampleString });
 
 
 });
@@ -220,7 +256,9 @@ router.get('/profile', function(req, res, next) {
 
 
 
-     res.render('profile', { myVar : 'dsndk' });
+
+
+     res.render('profile', { myVar : 'sampleString' });
 
 
 });
@@ -233,6 +271,8 @@ router.get('/detailedAnnouncement', function(req, res, next) {
 
 
 });
+
+
 
 router.get('/detailedNotes', function(req, res, next) {
 
@@ -275,6 +315,19 @@ router.get('/editProfile', function(req, res, next) {
       sectionData:sectionData
 
     });
+
+
+});
+
+
+router.get('/signIn', function(req, res, next) {
+
+      var userIdData =  userIdDetailedRawData;
+
+
+     res.render('signIn.handlebars',{
+           userIdData:userIdData
+     });
 
 
 });
@@ -578,6 +631,24 @@ router.post('/signupWriteCheck', function(req, res, next) {
 
 });
 
+
+
+router.post('/signInWriteCheck', function(req, res, next) {
+
+
+  gSignupUserId = req.body.userId;
+
+  gPassword =  req.body.password;
+
+  console.log('passwordCheck',gPassword);
+
+
+
+
+
+
+
+});
 
 
 router.post('/editProfileCheck', function(req, res, next) {
@@ -892,6 +963,59 @@ router.post('/spreadsheetsAnnouncement', function(req, res, next) {
 });
 
 
+
+router.post('/spreadsheetsSigninUserId', function(req, res, next) {
+
+  console.log('annonuncements');
+
+
+
+
+  var auth = req.get('Authorization');
+
+
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+  globalAccessToken = accessToken;
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+  console.log('tMode',tMode);
+  console.log('sheets', mode);
+  tMode = 'viewer';
+  mode = 'passwordCheck'
+
+
+  console.log('passwordSheets',gPassword);
+
+
+
+
+  helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo, function(err, spreadsheet) {
+    if (err) {
+      return next(err);
+    }
+
+
+
+
+  });
+
+
+
+  // res.redirect('/');
+
+
+
+
+
+
+
+});
+
+
 router.post('/spreadsheetsCreateUserId', function(req, res, next) {
 
 
@@ -962,6 +1086,13 @@ console.log('sfirst');
       return next(err);
     }
     });
+
+    mode = 'userIdDetailedFeed'
+    helper.createSpreadsheet('title',mode,'cataegory1','cataegory2',tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees, function(err, spreadsheet) {
+    if (err) {
+        return next(err);
+      }
+      });
 
   res.redirect('/annonuncementViewerPage');
 

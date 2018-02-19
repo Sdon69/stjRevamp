@@ -26,13 +26,13 @@
 <img src="bluePencil.jpg" class="float"></a>
 <div style="background:#FFFFFF;">
 <div style="padding:5%;" >
-<div style="width:100%;  ">
+<div style="width:100%;  " id='theDiv'>
   <font face="Roboto">
   <table cellspacing="0" cellpadding="0" style="width:100%; ">
- <div > <tr style="background-color: #e7f0f9; "  ><td style="text-align:left; color:#4489c8;padding:5%;" >
-   First Name</td><td id = 'firstName'  style="text-align:right;color:#4489c8; font-weight:600;padding:5%;"> </td></tr></div></table>  <table cellspacing="0" cellpadding="0" style="width:100%; ">
+ <div > <tr style="background-color: #e7f0f9; "  ><td style="text-align:left; color:#4489c8;padding:5%;" id='firstNameTitle' >
+ First Name</td><td id = 'firstName'  style="text-align:right;color:#4489c8; font-weight:600;padding:5%;"> </td></tr></div></table>  <table cellspacing="0" cellpadding="0" style="width:100%; ">
  <div style=" margin-top:10%;"> 	  <tr  style="background-color: #e7f0f9;"><td style="text-align:left;padding:5%;color:#4489c8;">
-   Last Name</td><td id ='lastName' style="text-align:right;color:#4489c8; font-weight:600;padding:5%;"> </td></tr></div></table>
+    Last Name</td><td id ='lastName' style="text-align:right;color:#4489c8; font-weight:600;padding:5%;"> </td></tr></div></table>
   <table cellspacing="0" cellpadding="0" style="width:100%; ">
 
  <div style="margin-top:10%;"> 	  <tr  style="background-color: #e7f0f9;"><td style="text-align:left;padding:5%;color:#4489c8;">
@@ -84,6 +84,7 @@ var loadedPhoneNo = localStorage.getItem("phoneNo");
   document.getElementById("section").innerHTML = loadedSection;
   document.getElementById("email").innerHTML = loadedEmailAddress;
   document.getElementById("phoneNo").innerHTML = loadedPhoneNo;
+
 
 
 
