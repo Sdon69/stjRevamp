@@ -134,6 +134,13 @@ $(function() {
     });
   });
 
+  $('button[rel="appendAttendance"]').click(function() {
+    makeRequest('POST', '/spreadsheetsAppendAttendance', function(err, spreadsheet) {
+      if (err) return showError(err);
+      // window.location.reload();
+    });
+  });
+
 });
 
 function makeRequest(method, url, callback) {

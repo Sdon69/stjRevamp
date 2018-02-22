@@ -22,7 +22,7 @@
 * { box-sizing:border-box; }
 
 /* basic stylings ------------------------------------------ */
-body 				 { background:url(https://scotch.io/wp-content/uploads/2014/07/61.jpg); }
+
 
 h2 		 {
   text-align:center;
@@ -135,9 +135,12 @@ input:focus ~ .highlight {
 
   <!-- Show spreadsheets -->
 
+  <font face="roboto">
+  <div style="background:#ffffff; padding:20px; height:120vh;">
 
         <form method="post" action="/signInWriteCheck" name='event'>
-    <div class="form-style-2">
+
+
 
          <div class="group">
         <input type='text' placeholder="User Id"  name='userId'>
@@ -150,7 +153,7 @@ input:focus ~ .highlight {
 <span class="bar"></span>
 </div>
 
-<input type="button" value="Submit"  onclick="check()"  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;"    >
+<input type="button" value="Submit"  onclick="check()"  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF; width:100%;"    >
 
             <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
           </div>
@@ -166,7 +169,7 @@ input:focus ~ .highlight {
                         rel="getDataForUserId" type="button" id='getData'  style="position:relative;visibility:collapse;">Create</button>
 
 
-
+</div></font>
 
 
 <script>
@@ -267,9 +270,7 @@ else{
                 var semester =    userIdData[i].semester;
 
                 localStorage.setItem("firstName", firstName);
-
                 localStorage.setItem("lastname", lastName);
-
                 localStorage.setItem("userId", userId);
                 localStorage.setItem("semester", semester);
                 localStorage.setItem("className", className);

@@ -39,11 +39,11 @@ if(inputVar == 'hell')
     <td style="width:20%;padding-left:2px;"><a onclick="eventChange()" href="eventViewerPage" target="search_iframe"><img height=30px width=40px src = "events.png" id="eventsImg"></a> </td>
     <td style="width:20%;"  ><a href="profile" onclick="profileChange()"  target="search_iframe"><img height=36px width=30px style="margin-left:4px;" src = "profile.png" id="profileImg"></a> </td>
     </tr>
-<td style="width:20%;"><a href="annonuncementViewerPage" target="search_iframe"><span style="color:#3f8acd">Atten..</span></a> </td>
-<td style="width:20%;"><a href="notesViewerPage" target="search_iframe"><span style="color:#3f8acd">Annou..</span></a> </td>
-<td style="width:20%;"><a href="notesViewerPage" target="search_iframe"><span style="color:#3f8acd">Notes</span></a> </td>
-<td style="width:20%;"><a href="eventViewerPage" target="search_iframe"><span style="color:#3f8acd">Events</span></a> </td>
-<td style="width:20%;"  ><a href="profile" target="search_iframe"><span style="color:#3f8acd">Profile</span></a></td>
+<td style="width:20%;"><a href="annonuncementViewerPage" target="search_iframe"><span id='attendanceText' style="color:#3f8acd">Atten..</span></a> </td>
+<td style="width:20%;"><a href="notesViewerPage" target="search_iframe"><span id='announcementsText' style="color:#3f8acd">Annou..</span></a> </td>
+<td style="width:20%;"><a href="notesViewerPage" target="search_iframe"><span id='notesText' style="color:#3f8acd">Notes</span></a> </td>
+<td style="width:20%;"><a href="eventViewerPage" target="search_iframe"><span id='eventsText' style="color:#3f8acd">Events</span></a> </td>
+<td style="width:20%;"  ><a href="profile" target="search_iframe"><span id='profileText' style="color:#3f8acd">Profile</span></a></td>
 </tr>
 
 
@@ -59,10 +59,13 @@ profileChange();
 function attendanceChange()
 {
 document.getElementById('attendanceImg').src = 'attendance_grey.png';
+
 document.getElementById('annonuncementImg').src = 'announcements.png';
 document.getElementById('notesImg').src = 'notes.png';
 document.getElementById('eventsImg').src = 'events.png';
 document.getElementById('profileImg').src = 'profile.png';
+
+document.getElementById('attendanceText').style = "color:#4f4f4f";
 
 }
 
@@ -73,6 +76,10 @@ function announcementChange()
   document.getElementById('notesImg').src = 'notes.png';
   document.getElementById('eventsImg').src = 'events.png';
   document.getElementById('profileImg').src = 'profile.png';
+
+  document.getElementById('announcementsText').style = "color:#4f4f4f";
+
+
 }
 
 function notesChange()
@@ -82,6 +89,8 @@ function notesChange()
   document.getElementById('notesImg').src = 'notes_grey.png';
   document.getElementById('eventsImg').src = 'events.png';
   document.getElementById('profileImg').src = 'profile.png';
+
+  document.getElementById('notesText').style = "color:#4f4f4f";
 }
 
 function eventChange()
@@ -91,6 +100,8 @@ function eventChange()
   document.getElementById('notesImg').src = 'notes.png';
   document.getElementById('eventsImg').src = 'events_grey.png';
   document.getElementById('profileImg').src = 'profile.png';
+
+  document.getElementById('eventsText').style = "color:#4f4f4f";
 }
 
 function profileChange()
@@ -100,5 +111,7 @@ function profileChange()
   document.getElementById('notesImg').src = 'notes.png';
   document.getElementById('eventsImg').src = 'events.png';
   document.getElementById('profileImg').src = 'profile_grey.png';
+
+  document.getElementById('profileText').style = "color:#4f4f4f";
 }
 </script>

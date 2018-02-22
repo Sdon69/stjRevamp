@@ -131,6 +131,9 @@ if(initialRun)
   userIdDetailedRawData = loadFromJson(mode);
 
 
+  console.log(userIdDetailedRawData);
+
+
 
 
   initialRun = false;
@@ -263,6 +266,36 @@ router.get('/profile', function(req, res, next) {
 
 });
 
+router.get('/quickstart', function(req, res, next) {
+
+
+
+
+
+     res.render('quickstart', { myVar : 'sampleString' });
+
+
+});
+
+
+router.get('/attendance', function(req, res, next) {
+
+
+
+  var userIdData = userIdDetailedRawData;
+  var classData = classRawData;
+  var sectionData = sectionRawData;
+  var subjectData = subjectRawData;
+
+     res.render('attendance', {
+       userIdData:userIdData,
+       classData:classData,
+       sectionData:sectionData,
+       subjectData:subjectData
+ });
+
+
+});
 router.get('/detailedAnnouncement', function(req, res, next) {
 
 
@@ -594,6 +627,17 @@ router.post('/announcementWriteCheck', function(req, res, next) {
     gCataegories = req.body.cataegoryTextName;
     gUserId = userId;
     gFullName = fullName;
+    gDateOfPublish = req.body.todayTextName;
+
+
+});
+
+
+router.post('/attendanceAppendCheck', function(req, res, next) {
+
+
+
+    gCataegories = req.body.cataegoryTextName;
     gDateOfPublish = req.body.todayTextName;
 
 
@@ -989,6 +1033,58 @@ router.post('/spreadsheetsSigninUserId', function(req, res, next) {
 
 
   console.log('passwordSheets',gPassword);
+
+
+
+
+  helper.createSpreadsheet(title,mode,cataegory1,cataegory2,tMode,gTitle,gDescription,gCataegories,gUserId,gFullName,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gFirstName,gLastName,gSignupUserId,gPassword,gSemester,gDepartment,gClassName,gSection,gEmailAddress,gPhoneNo, function(err, spreadsheet) {
+    if (err) {
+      return next(err);
+    }
+
+
+
+
+  });
+
+
+
+  // res.redirect('/');
+
+
+
+
+
+
+
+});
+
+
+router.post('/spreadsheetsAppendAttendance', function(req, res, next) {
+
+  console.log('attendance');
+
+
+
+
+  var auth = req.get('Authorization');
+
+
+  if (!auth) {
+    return next(Error('Authorization required.'));
+  }
+  var accessToken = auth.split(' ')[1];
+  var helper = new SheetsHelper(accessToken);
+  globalAccessToken = accessToken;
+  var title = 'Orders (' + new Date().toLocaleTimeString() + ')';
+
+  console.log('tMode',tMode);
+  console.log('sheets', mode);
+  tMode = 'writer';
+  mode = 'attendanceAppender'
+
+
+
 
 
 

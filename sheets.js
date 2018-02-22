@@ -725,6 +725,7 @@ used = true;
                      firstName: firstName,
                      lastname: lastname,
                      className: className,
+                     section: section,
                      emailId: emailId,
                      phoneNo: phoneNo,
                      semester : semester
@@ -737,6 +738,7 @@ used = true;
                      firstName: firstName,
                      lastname: lastname,
                      className: className,
+                     section: section,
                      emailId: emailId,
                      phoneNo: phoneNo,
                      semester : semester
