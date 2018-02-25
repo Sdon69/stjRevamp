@@ -164,7 +164,7 @@ function submitClick()
 {
 var myValue = '{{isInformationAvailable}}';
 var isTrueSet = (myValue == 'true');
-  if(isTrueSet)
+if(isTrueSet)
   {
 
 
@@ -239,58 +239,55 @@ var raw_data =  JSON.parse(res);
 
 
 
-var t =
-                     {'<>':"div style='width:100%;padding-top:20px;'",'html':[
+             var t = {'<>':"div style='width:100%;padding-top:20px;'",'html':[
 
-                                            {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
-                                             {'<>':"font face='Roboto'",'html':[
-                                         {'<>':"div style='width:100%; padding-bottom:10px; margin-right:20px; background:#ffffff;'",'children':[
-                                           {
-                                             '<>':"div style='width:100%'",'children':[
-                                               {
-                                                 '<>':"table style='width:100%'",'children':[
+                                     {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
+                                       {'<>':"font face='Roboto'",'html':[
+                                           {'<>':"div style='width:100%; padding-bottom:10px; margin-right:20px; background:#ffffff;'",'children':[
+                                     {
+                                       '<>':"div style='width:100%'",'children':[
+                                         {
+                                        '<>':"table style='width:100%'",'children':[
+                                             {
+                                                 '<>':"tr",'children':[
                                                    {
-                                                       '<>':"tr",'children':[
-                                                         {
-                                                          '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:600; padding-top:25px;text-align:left;'",'html':"${title}"
-                                                         },
-                                                         {
-                                                           '<>':"td style='padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;text-align: right;'' align='right'",'html':"${dateOfPublish}"
-                                                         }
-                                                       ]
+                                                   '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:600; padding-top:25px;text-align:left;'",'html':"${title}"
+                                                   },
+                                                   {
+                                                     '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:450; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
                                                    }
                                                  ]
-                                               }
-                                             ]
-                                           },{
-                                               '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
-                                                 {
-                                                   '<>':"table style='width:100%'",'children':[
+                                             }
+                                           ]
+                                         }
+                                       ]
+                                     },{
+                                         '<>':"div style='margin-left:6px;  margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:600;'",'children':[
+                                           {
+                                             '<>':"table style='width:100%'",'children':[
+                                               {
+                                                   '<>':"tr",'children':[
                                                      {
-                                                         '<>':"tr",'children':[
-                                                           {
-                                                               '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;text-align: left; color:#000000;'",'html':"Entry Fees : ${entryFees}"
-                                                           },
-                                                           {
-                                                               '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;color:#000000;'",'html':"Date : ${eventDate}"
-                                                           }
-                                                         ]
+                                           '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;text-align: left; color:#000000;'",'html':"Author : ${fullName}"
                                                      }
                                                    ]
-                                                 }
-                                               ]
-                                           },{
-                                               '<>':"div style='font-size:12px; font-weight:450; padding-top:5px;text-align: left;color:#000000;'",'html':"${dottedString}"
+                                               }
+                                             ]
                                            }
-                                       ]}  ] }]}]};
+                                         ]
+                                     },{
+                                         '<>':"div style='font-size:12px; font-weight:450; padding-top:5px;text-align: left;color:#000000;'",'html':"${dottedString}"
+                                     }
+                                 ]}  ] }]}]};
 
 
-var d = filteredData;
+  var d = filteredData;
 
-var transformedHtml =  json2html.transform(d,t) ;
-// document.write(transformedHtml);
+  var transformedHtml =  json2html.transform(d,t) ;
+  // document.write(transformedHtml);
 
-document.getElementById("myDiv").innerHTML=transformedHtml;
+  document.getElementById("myDiv").innerHTML=transformedHtml;
+
 
 
 
@@ -311,22 +308,16 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
                 {
 
                 var sortedTitle = raw_data[i].title;
-                var sortedDescription = raw_data[i].description;
-                var sortedDateOfPublish = raw_data[i].dateOfPublish;
-                var sortedEventDate = raw_data[i].eventDate;
-                var sortedLastDateofRegistration =  raw_data[i].lastDateofRegistration;
-                var sortedEntryFees =  raw_data[i].entryFees;
 
+                var sortedDescription = raw_data[i].description;
+                var sortedDateOfPublish = raw_data[i].datePublished;
+
+                var sortedFullName = raw_data[i].fullName;
 
                 localStorage.setItem("sortedTitle", sortedTitle);
                 localStorage.setItem("sortedDescription", sortedDescription);
                 localStorage.setItem("sortedDateOfPublish", sortedDateOfPublish);
-                localStorage.setItem("sortedEventDate", sortedEventDate);
-                localStorage.setItem("sortedLastDateofRegistration", sortedLastDateofRegistration);
-                localStorage.setItem("sortedEntryFees", sortedEntryFees);
-
-
-
+                localStorage.setItem("sortedFullName", sortedFullName);
 
                  window.location.href = "/detailedAnnouncement";
 
@@ -339,6 +330,7 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
               }
       });
   });
+
 }
 }
 </script>
