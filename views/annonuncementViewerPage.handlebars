@@ -54,17 +54,16 @@
       <div class="mdl-list__item" style="padding:0;margin:0;background-color:#3f8acd;"><div style="width:100%; background-color:#3f8acd; ">
         <form>
         <table width="100%"><tr><td width="48%"><tr><td>
-      <select name ="s1"  id="cataegory1" style="background:#3f8acd; border:none; color:#ECE7E7; width:100%; ">
-            <option style="font-weight:bold;">Choose Event Genre</option>
-          <option style="font-weight:bold;">All Events</option>
-          <option style="font-weight:bold;">Technology</option>
-          <option style="font-weight:bold;">Social Gathering</option>
-          <option style="font-weight:bold;">Debate</option>
-          <option style="font-weight:bold;">Social Awareness</option>
-          <option style="font-weight:bold;">Convention</option>
-          <option style="font-weight:bold;">Sports</option>
-          <option style="font-weight:bold;">Other</option>
-          </select>
+          <select name ="s1" id="cataegory1" style="background:#3f8acd; border:none; color:#ECE7E7; width:100%; margin-bottom:5%;">
+                     <option style="font-weight:bold;">Choose  Department</option>
+                   <option style="font-weight:bold;">All Departments</option>
+             <option style="font-weight:bold;">Art</option>
+             <option style="font-weight:bold;">Commerce</option>
+             <option style="font-weight:bold;">Management</option>
+             <option style="font-weight:bold;">Education</option>
+             <option style="font-weight:bold;">Science</option>
+             <option style="font-weight:bold;">Other</option>
+                   </select>
 
 </td>
 
@@ -76,7 +75,7 @@
         padding-left:20%; background-color:rgba(236,230,230,0.65); border:none; color:rgba(255,255,255,1.00);
         font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600;  "  >
       </td></tr><tr> <td>
-            <select name ="s2" onchange="myFunction()" id="cataegory2"  style="background:#3f8acd; border:none; color:#ECE7E7; width:100%;">
+            <select name ="s2"  id="cataegory2"  style="background:#3f8acd; border:none; color:#ECE7E7; width:100%;">
                     <option style="font-weight:bold;">Choose Semester</option>
                 <option style="font-weight:bold;">All Semesters</option>
   <option style="font-weight:bold;">First Semester</option>
@@ -136,7 +135,7 @@
 var gCataegory1;
 var gCataegory2;
 
-function checkInfo()
+
 
   function checkInfo()
   {
@@ -165,83 +164,77 @@ function submitClick()
 {
 var myValue = '{{isInformationAvailable}}';
 var isTrueSet = (myValue == 'true');
-if(isTrueSet)
-{
+  if(isTrueSet)
+  {
 
 
 
 
 
-var departmentFilter = gCataegory1;
 
+  var departmentFilter = gCataegory1;
+  var semesterFilter = gCataegory2;
 
 
 var hello = '{{dataFromAnnouncement}}';
-
 var res = hello.replace(/&quot;/g, '"');
-
-
-
-
-
 
 var raw_data =  JSON.parse(res);
 
 
 
-        var forLength = raw_data.length - 1;
+          var forLength = raw_data.length - 1;
+
+      var i;
+       var used = false;
+       var anyNoteFromDept = false;
+
+       var filteredData = [{
+       name: 'str1',
+       age:   'str2'
+       }];
+         for(i=0;i<=forLength;i++)
+         {
+         var dept = raw_data[i].cataegories;
 
 
-    var used = false;
-    var anyNoteFromDept = false;
+           if(dept.includes(departmentFilter))
+           {
 
-    var filteredData = [{
-    name: 'str1',
-    age:   'str2'
-    }];
+             if(dept.includes(semesterFilter))
+{
 
-    var i;
-      for(i=0;i<=forLength;i++)
-      {
-      var dept = raw_data[i].cataegories;
+             if(!used)
+             {
+             filteredData.pop({
+             name: 'str1',
+             age:   'str2'
+               });
+               filteredData.push(raw_data[i]);
+               used = true;
+               anyNoteFromDept = true;
 
-
-        if(dept.includes(departmentFilter))
-        {
-
-
-          if(!used)
-          {
-          filteredData.pop({
-          name: 'str1',
-          age:   'str2'
-            });
-            filteredData.push(raw_data[i]);
-            used = true;
-            anyNoteFromDept = true;
-
-          }else{
-            filteredData.push(raw_data[i]);
-            anyNoteFromDept = true;
-          }
+             }else{
+               filteredData.push(raw_data[i]);
+               anyNoteFromDept = true;
+             }
 
 
+}
+           }
+         }
 
-        }
-      }
-
-      if(!anyNoteFromDept)
-      {
-        filteredData.pop({
-        name: 'str1',
-        age:   'str2'
-          });
-          filteredData.push({
-          title: 'No Data for this filter Exists'
-            });
-      }
-      var globalFilteredData = filteredData;
-
+         if(!anyNoteFromDept)
+         {
+           filteredData.pop({
+           name: 'str1',
+           age:   'str2'
+             });
+             filteredData.push({
+             title: 'No Data for this filter Exists'
+               });
+         }
+         var globalFilteredData = filteredData;
 
 
 
@@ -335,7 +328,7 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
 
 
 
-                 window.location.href = "/detailedEvent";
+                 window.location.href = "/detailedAnnouncement";
 
 
 
