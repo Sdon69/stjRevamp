@@ -1,15 +1,12 @@
 <!--
   Copyright 2016 Google, Inc.
-
   Licensed to the Apache Software Foundation (ASF) under one or more contributor
   license agreements. See the NOTICE file distributed with this work for
   additional information regarding copyright ownership. The ASF licenses this
   file to you under the Apache License, Version 2.0 (the "License"); you may not
   use this file except in compliance with the License. You may obtain a copy of
   the License at
-
   http://www.apache.org/licenses/LICENSE-2.0
-
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
@@ -19,10 +16,6 @@
 
 
     <style>
-
-
-
-
     .float{
     	position:fixed;
     	width:60px;
@@ -33,9 +26,7 @@
     	border-radius:50px;
     	text-align:center;
     	box-shadow: 2px 2px 3px #999;
-
     }
-
     .my-float{
     	margin-top:22px;
     }
@@ -118,8 +109,6 @@
 <div id="myDiv" style="height:100%,width:100%;">        </div>
 
 <script>
-
-
 //
 // var delayInMilliseconds = 2000; //1 second
 //
@@ -127,16 +116,12 @@
 //
 //   document.getElementById('create').click();
 // }, delayInMilliseconds);
-
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
 <script>
 var gCataegory1;
 var gCataegory2;
-
-
-
   function checkInfo()
   {
     var skillsSelect = document.getElementById("cataegory1");
@@ -145,7 +130,6 @@ var gCataegory2;
     var skillsSelect2 = document.getElementById("cataegory2");
     var cataegory2 = skillsSelect2.options[skillsSelect2.selectedIndex].text;
     gCataegory2 = cataegory2;
-
     if(cataegory1.includes('Choose'))
     {
       alert('Choose a Department');
@@ -153,12 +137,9 @@ var gCataegory2;
       alert('Choose a Semester');
   }
   else {
-
-
     // document.getElementById('create').click();
     document.getElementById('hangoutButtonId').click();
   }
-
   }
 function submitClick()
 {
@@ -166,29 +147,15 @@ var myValue = '{{isInformationAvailable}}';
 var isTrueSet = (myValue == 'true');
 if(isTrueSet)
   {
-
-
-
-
-
-
   var departmentFilter = gCataegory1;
   var semesterFilter = gCataegory2;
-
-
 var hello = '{{dataFromAnnouncement}}';
 var res = hello.replace(/&quot;/g, '"');
-
 var raw_data =  JSON.parse(res);
-
-
-
           var forLength = raw_data.length - 1;
-
       var i;
        var used = false;
        var anyNoteFromDept = false;
-
        var filteredData = [{
        name: 'str1',
        age:   'str2'
@@ -196,14 +163,10 @@ var raw_data =  JSON.parse(res);
          for(i=0;i<=forLength;i++)
          {
          var dept = raw_data[i].cataegories;
-
-
            if(dept.includes(departmentFilter))
            {
-
              if(dept.includes(semesterFilter))
 {
-
              if(!used)
              {
              filteredData.pop({
@@ -213,17 +176,13 @@ var raw_data =  JSON.parse(res);
                filteredData.push(raw_data[i]);
                used = true;
                anyNoteFromDept = true;
-
              }else{
                filteredData.push(raw_data[i]);
                anyNoteFromDept = true;
              }
-
-
 }
            }
          }
-
          if(!anyNoteFromDept)
          {
            filteredData.pop({
@@ -236,103 +195,73 @@ var raw_data =  JSON.parse(res);
          }
          var globalFilteredData = filteredData;
 
+            var t = {'<>':"div style='width:100%;padding-top:20px;'",'html':[
 
-
-
-
- var t = {'<>':"div style='width:100%;padding-top:20px;'",'html':[
-
-                         {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
-                           {'<>':"font face='Roboto'",'html':[
-                                  {'<>':"div style='width:100%; padding-bottom:10px; margin-right:20px; padding-left:2%; background:#ffffff;'",'children':[
-                         {
-                           '<>':"div style='width:100%'",'children':[
-                             {
-                            '<>':"table style='width:100%'",'children':[
-                                 {
-                                     '<>':"tr",'children':[
-                                       {
-                                       '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:600; padding-top:25px;text-align:left;'",'html':"${title}"
-                                       },
-                                       {
-                                         '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:450; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
-                                       }
-                                     ]
-                                 }
-                               ]
-                             }
-                           ]
-                         },{
-                             '<>':"div style='margin-left:6px;  margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:600;'",'children':[
-                               {
-                                 '<>':"table",'children':[
-                                   {
-                                       '<>':"tr",'children':[
-                                         {
-                               '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;text-align: left; color:#000000;'",'html':"Author : ${fullName}"
-                                         }
-                                       ]
-                                   }
-                                 ]
-                               }
-                             ]
-                         },{
-                            '<>':"div style='font-size:12px; font-weight:450; padding-top:5px;text-align: left;color:#000000;'",'html':"${dottedString}"
-                         }
-                     ]}  ] }]}]};
-
-
+                                    {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
+                                      {'<>':"font face='Roboto'",'html':[
+                                             {'<>':"div style='width:100%; padding-bottom:10px; margin-right:20px; padding-left:2%; background:#ffffff;'",'children':[
+                                    {
+                                      '<>':"div style='width:100%'",'children':[
+                                        {
+                                       '<>':"table style='width:100%'",'children':[
+                                            {
+                                                '<>':"tr",'children':[
+                                                  {
+                                                  '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:600; padding-top:25px;text-align:left;'",'html':"${title}"
+                                                  },
+                                                  {
+                                                    '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:450; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
+                                                  }
+                                                ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },{
+                                        '<>':"div style='margin-left:6px;  margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:600;'",'children':[
+                                          {
+                                            '<>':"table",'children':[
+                                              {
+                                                  '<>':"tr",'children':[
+                                                    {
+                                          '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;text-align: left; color:#000000;'",'html':"Author : ${fullName}"
+                                                    }
+                                                  ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                    },{
+                                       '<>':"div style='font-size:12px; font-weight:450; padding-top:5px;text-align: left;color:#000000;'",'html':"${dottedString}"
+                                    }
+                                ]}  ] }]}]};
 
   var d = filteredData;
-
   var transformedHtml =  json2html.transform(d,t) ;
   // document.write(transformedHtml);
-
   document.getElementById("myDiv").innerHTML=transformedHtml;
-
-
-
-
   $(function(){
       $("button").click(function() {
           var fired_button = $(this).val();
           derivedUniqueIdNumber = fired_button;
-
-
-
-
               for(i=0;i<=forLength;i++)
               {
               var uniqueId = raw_data[i].uniqueId;
-
-
                 if(derivedUniqueIdNumber === uniqueId)
                 {
-
                 var sortedTitle = raw_data[i].title;
-
                 var sortedDescription = raw_data[i].description;
                 var sortedDateOfPublish = raw_data[i].datePublished;
-
                 var sortedFullName = raw_data[i].fullName;
-
                 localStorage.setItem("sortedTitle", sortedTitle);
                 localStorage.setItem("sortedDescription", sortedDescription);
                 localStorage.setItem("sortedDateOfPublish", sortedDateOfPublish);
                 localStorage.setItem("sortedFullName", sortedFullName);
-
-                 window.location.href = "/detailedAnnouncement";
-
-
-
-
-
+                 window.location.href = "/detailedNotes";
                 }
-
               }
       });
   });
-
 }
 }
 </script>
