@@ -697,6 +697,7 @@ used = true;
               }else {
                    module.exports.passwordCorrect = false;
                    console.log('sheetsPassword','wrong')
+                   console.log('passwordRetrieved2',passwordRetrieved)
               }
             }
 
