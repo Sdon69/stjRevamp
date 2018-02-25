@@ -140,7 +140,7 @@ input:focus ~ .highlight {
 
         <form method="post" action="/signInWriteCheck" name='event'>
 
-
+<span id='isSignedInRequired' style="visibility:collapse";>Here</span>
 
          <div class="group">
         <input type='text' placeholder="User Id"  name='userId'>
@@ -148,10 +148,15 @@ input:focus ~ .highlight {
         <span class="bar"></span>
     </div>  <div class="group">
 <input type='password' placeholder="Password"  name='password'>
-<span id="incorrectPassword" style="color:#b00;font-weight:450;"></span>
+
 <span class="highlight"></span>
 <span class="bar"></span>
+<span id="incorrectPassword" style="color:#b00;font-weight:450;"></span>
+<br><br>
+  <a href='signup' style="text-decoration:none;"><div align='center' style="color:#15446e;font-weight:500;">Already not a member ? Sign Up</div></a>
 </div>
+
+
 
 <input type="button" value="Submit"  onclick="check()"  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF; width:100%;"    >
 
@@ -301,7 +306,7 @@ if(idExists)
 if(idExists)
 {
 
-
+    localStorage.setItem("signup", 'false');
   document.getElementById('hangoutButtonId').click();
 
   var delayInMilliseconds = 2000; //0.01 second

@@ -29,7 +29,7 @@
     "nodemon": "^1.9.1"
   },
   "nodemonConfig": {
-   "ignore": ["notesViewer.json","eventViewer.json","announcementViewer.json","classViewer.json","subjectViewer.json","sectionViewer.json","userIdFeed.json","userIdDetailedFeed.json","passwordCheck.json","attendanceAppender.json" ]
+   "ignore": ["notesViewer.json","eventViewer.json","announcementViewer.json","classViewer.json","subjectViewer.json","sectionViewer.json","userIdFeed.json","userIdDetailedFeed.json","passwordCheck.json","userIdWriter.json","attendanceAppender.json" ]
  }
 
 }

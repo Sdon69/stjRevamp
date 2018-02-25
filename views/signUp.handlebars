@@ -299,7 +299,13 @@ select:focus ~ .highlight {
       <span class="bar"></span>
     </div>
 <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse; height:0px;" >
+
+  <a href='signup' style="text-decoration:none;"><div align='center' style="color:#15446e;font-weight:500;">Already a member ? Sign in</div></a>
+</div>
+<br><br>
 <input type="button" value="Submit"  onclick="check()"  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;"    >
+
+
 
             <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
           </div>
@@ -658,7 +664,7 @@ if(!idExists)
 
 
     document.getElementById('hangoutButtonId').click();
-
+            localStorage.setItem("signup", 'true');
     var delayInMilliseconds = 1000; //1 second
 
 
@@ -666,6 +672,7 @@ if(!idExists)
     setTimeout(function() {
 
       document.getElementById('create').click();
+
            window.location.href = "/";
     }, delayInMilliseconds);
 

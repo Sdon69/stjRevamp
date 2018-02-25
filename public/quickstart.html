@@ -324,19 +324,39 @@
       user: 'user'
     }];
 
+
+    var studentsPresent = 0;
+
+    selectedButtonInfo = [{
+      user:'user',
+      name:'name'
+    }];
+
+    selectedButtonInfo.pop({
+      user:'user',
+      name:'name'
+    });
+    presentUser.pop({
+      user: 'user'
+    });
+
+
+    var mode = 'remove';
+
+    var subject;
     function clickDepartment()
     {
 
-      
+
       var skillsSelect = document.getElementById("department");
       var department = skillsSelect.options[skillsSelect.selectedIndex].text;
 
 
-      var classDataString = '{{classData}}';
+      var classDataString = localStorage.getItem("classDataString") ;
       classDataString = classDataString.replace(/&quot;/g, '"');
       var classData = JSON.parse(classDataString);
 
-      var subjectDataString = '{{subjectData}}';
+      var subjectDataString = localStorage.getItem("subjectDataString") ;
       subjectDataString = subjectDataString.replace(/&quot;/g, '"');
       var subjectData = JSON.parse(subjectDataString);
 
@@ -424,7 +444,7 @@
     {
 
 
-      var sectionDataString = '{{sectionData}}';
+      var sectionDataString = localStorage.getItem("sectionDataString");
       sectionDataString = sectionDataString.replace(/&quot;/g, '"');
       var sectionData = JSON.parse(sectionDataString);
 
@@ -508,13 +528,7 @@
 
 
 
-        presentUser.pop({
-          user: 'user'
-        });
 
-        var mode = 'remove';
-
-        var subject;
         function clickSubmit()
         {
           var today = new Date();
@@ -569,14 +583,27 @@
 
           var today = dd+monthName+yyyy+subject;
 
+          alert(today);
+
 
 
 
 
 
             document.getElementById('cataegoryStringText').value = JSON.stringify(presentUser);
-            var studentsPresentTotal = JSON.stringify(presentUser);
+
+            var studentsPresentTotal = JSON.stringify(selectedButtonInfo);
+            alert(studentsPresentTotal);
                 localStorage.setItem("studentsPresentTotal", studentsPresentTotal);
+                localStorage.setItem("attendanceDate", today);
+
+
+
+
+
+
+
+
 
           document.getElementById('todayDateText').value = today;
 
@@ -584,15 +611,16 @@
 
             document.getElementById('absent').innerHTML = parseInt(document.getElementById('total').innerHTML) -   parseInt(document.getElementById('present').innerHTML);
 
-               document.getElementById('hangoutButtonId').click();
-
-               var delayInMilliseconds = 10; //0.01 second
-
-               setTimeout(function() {
-
-                 document.getElementById('create').click();
-                      window.location.href = "/attendance";
-               }, delayInMilliseconds);
+            listMajors();
+               // document.getElementById('hangoutButtonId').click();
+               //
+               // var delayInMilliseconds = 10; //0.01 second
+               //
+               // setTimeout(function() {
+               //
+               //   document.getElementById('create').click();
+               //        window.location.href = "/attendance";
+               // }, delayInMilliseconds);
 
 
         }
@@ -619,6 +647,8 @@
         subject = document.event.subject.value;
 
 
+        localStorage.setItem("classNameSelected", className);
+        localStorage.setItem("sectionSelected",section);
 
 
 
@@ -685,10 +715,10 @@
           }
 
 
-
+  localStorage.setItem("semesterSelected",semesterString);
           var used = false;
 
-          var userIdDataString = '{{userIdData}}';
+          var userIdDataString = localStorage.getItem("userIdDataString")
           userIdDataString = userIdDataString.replace(/&quot;/g, '"');
           var userIdData = JSON.parse(userIdDataString);
 
@@ -728,14 +758,16 @@
                 });
                 userIdInfo.push({
                   name : fullName,
-                  userId: userId
+                  userId: userId,
+                  rowNumber:i
                 });
                 used = true;
               }else
               {
                 userIdInfo.push({
                   name : fullName,
-                  userId: userId
+                  userId: userId,
+                  rowNumber:i
                 });
               }
 
@@ -750,9 +782,9 @@
 
 
 
-                       var t = {'<>':"div id='${userId},${name}div' style='width:100%;padding-top:20px;'",'html':[
+                       var t = {'<>':"div id='${userId},${name},${rowNumber}div' style='width:100%;padding-top:20px;'",'html':[
 
-                                               {'<>':"button id='${userId},${name}' name='1' value='user${userId}' onClick='reply_click(this.id)'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
+                                               {'<>':"button id='${userId},${name},${rowNumber}' name='1' value='user${userId}' onClick='reply_click(this.id)'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
                                                  {'<>':"font face='Roboto'",'html':[
                                                        {'<>':"div style='width:100%; padding-bottom:10px; margin-right:20px; padding-left:2%; background:#ffffff;'",'children':[
                                                {
@@ -787,25 +819,7 @@
             document.getElementById('total').innerHTML = userIdInfo.length;
 
 
-                  $(function(){
-                      $("button").click(function() {
-                        if(mode == 'remove')
-                        {
 
-                          var fired_button = $(this).val();
-
-                          derivedUniqueId = fired_button;
-                          if(derivedUniqueId.includes('user'))
-                          {
-                          presentUser.push({
-                            user : derivedUniqueId
-                          });
-        }
-
-
-        }
-                      });
-                  });
 
         }
 
@@ -817,19 +831,12 @@
 
         }
 
-        var studentsPresent = 0;
 
-        selectedButtonInfo = [{
-          user:'user',
-          name:'name'
-        }];
-
-        selectedButtonInfo.pop({
-          user:'user',
-          name:'name'
-        });
         function reply_click(clicked_id)
         {
+
+
+
 
 
             var clickedButton = document.getElementById(clicked_id);
@@ -839,10 +846,14 @@
 
             var buttonInfo = clicked_id.split(",");
 
+            var num = parseInt(buttonInfo[2]) + 2;
+            var rowNumberString = num.toString();
+
 
             selectedButtonInfo.push({
               name :  buttonInfo[1],
-              userId: buttonInfo[0]
+              userId: buttonInfo[0],
+              rowNumber : rowNumberString
             });
 
 
@@ -865,10 +876,12 @@
 
              document.getElementById('present').innerHTML = ++studentsPresent;
 
-
         }
 
-        //Check from here
+
+        // Check from here
+
+
 
         function remove_reply_click(clicked_id)
         {
@@ -1011,6 +1024,19 @@
 
 
     <script type="text/javascript">
+
+      var inputRes;
+      var includes;
+      var canBeExecuted = false;
+
+      var readInfo = [{
+        dataToBeWritten: 'd',
+        rowNumber : 0
+      }];
+      readInfo.pop({
+        dataToBeWritten: 'd',
+        rowNumber : 0
+      });
       // Client ID and API key from the Developer Console
       var CLIENT_ID = '440184094540-ee1jb05ecrbgmicqcpqjk9v8s1cmqo8p.apps.googleusercontent.com';
       var API_KEY = 'AIzaSyA_zPUSHHB4qZHu7BiB8Tyh0bUdemAe_Gg';
@@ -1020,7 +1046,7 @@
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets";
 
       var authorizeButton = document.getElementById('authorize-button');
       var signoutButton = document.getElementById('signout-button');
@@ -1061,7 +1087,7 @@
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
-          listMajors();
+          // listMajors();
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
@@ -1098,27 +1124,117 @@
        * Print the names and majors of students in a sample spreadsheet:
        * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
        */
+
+
       function listMajors() {
+        var totalPresentUsers = localStorage.getItem("studentsPresentTotal");
+        var attendanceDate = localStorage.getItem("attendanceDate");
+        var classNameSelected = localStorage.getItem("classNameSelected");
+        var sectionSelected = localStorage.getItem("sectionSelected");
+        var semesterSelected = localStorage.getItem("semesterSelected");
+        totalPresentUsersString = totalPresentUsers.replace(/&quot;/g, '"');
+        var totalPresentUsersData = JSON.parse(totalPresentUsersString);
+        var a = 1;
+        var rangeImported = "Class Data!".concat("I"+ ++a + ":S");
+        var existingDateArrObj = [{
+        data:'row[0]',
+        rowNumber:'0'
+      }];
+      existingDateArrObj.pop({
+        data:'row[0]',
+        rowNumber:'0'
+      });
+
+
+
         gapi.client.sheets.spreadsheets.values.get({
           spreadsheetId: '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU',
           range: 'Class Data!A2:J',
-        }).then(function(response) {
-          var range = response.result;
-          if (range.values.length > 0) {
+           }).then(function(response) {
+             var range = response.result;
+             if (range.values.length > 0) {
+               for (i = 0; i < range.values.length; i++) {
+                 var row = range.values[i];
+                 // Print columns A and E, which correspond to indices 0 and 4.
 
-            for (i = 0; i < range.values.length; i++) {
-              var row = range.values[i];
 
+
+
+
+                 className = row[4];
+
+
+                  if(className == classNameSelected)
+                  {
+                        var section = row[5];
+                    if(section == sectionSelected)
+                    {
+                      var semester = row[9]
+                      if(semester == semesterSelected)
+                      {
+
+
+
+                                    for(k=0; k <= totalPresentUsersData.length;k++ )
+                                    {
+                                  
+                                      if(totalPresentUsersData[k].userId == row[0] )
+                                      {
+                                        var existingDate = row[8];
+                                          var   appendedDate = existingDate + attendanceDate ;
+                                          updateInfo(appendedDate,rangeImported);
+                                        break;
+                                      }
+                                    }
+
+
+
+              }
             }
-          } else {
-            document.write('No data found.');
           }
-        }, function(response) {
-          document.write('Error: ' + response.result.error.message);
-        });
-      }
+
+rangeImported =  "Class Data!".concat("I" + ++a + ":S");
+               }
+
+             } else {
+               alert('No data found.');
+             }
+           }, function(response) {
+             alert('Error: ' + response.result.error.message);
+           });
+
+
+}
+function updateInfo(stringImported,rangeImported)
+{
+         gapi.client.sheets.spreadsheets.values.update({
+           spreadsheetId: '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU',
+           range: rangeImported,
+           valueInputOption: "USER_ENTERED",
+           resource:  {
+                      values: [ [stringImported]]
+                    }
+         }).then(function(response) {
+
+           var range = response.result;
+           if (range.values.length > 0) {
+
+
+           } else {
+             document.write('No data found.');
+           }
+         }, function(response) {
+           document.write('Error: ' + response.result.error.message);
+         });
+
+
+
+}
+
 
     </script>
+
+
 
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"

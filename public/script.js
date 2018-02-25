@@ -56,6 +56,7 @@ function showMessage(message) {
 // Google Sign-in.
 
 function onSignIn(user) {
+      document.getElementById('idHeader').style = 'top:15000%;position:fixed;';
   var profile = user.getBasicProfile();
   $('#profile .name').text(profile.getName());
   $('#profile .email').text(profile.getEmail());
@@ -146,7 +147,13 @@ $(function() {
 function makeRequest(method, url, callback) {
   var auth = gapi.auth2.getAuthInstance();
   if (!auth.isSignedIn.get()) {
+
+          document.getElementById('idHeader').style = 'height:100%;';
+
     return callback(new Error('Signin required.'));
+
+  }else{
+    document.getElementById('idHeader').style = 'top:15000%;position:fixed;';
   }
 
   var accessToken = auth.currentUser.get().getAuthResponse().access_token;
@@ -158,6 +165,7 @@ function makeRequest(method, url, callback) {
     },
     success: function(response) {
       setSpinnerActive(false);
+
       return callback(null, response);
     },
     error: function(response) {

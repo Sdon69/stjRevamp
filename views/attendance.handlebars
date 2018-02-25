@@ -315,6 +315,24 @@ select:focus ~ .highlight {
 <script>
 
 
+  var classDataString = '{{classData}}';
+  localStorage.setItem("classDataString", classDataString);
+
+
+  var subjectDataString = '{{subjectData}}';
+  localStorage.setItem("subjectDataString", subjectDataString);
+
+
+  var userIdDataString = '{{userIdData}}';
+  localStorage.setItem("userIdDataString", userIdDataString);
+
+  var sectionDataString = '{{sectionData}}';
+    localStorage.setItem("sectionDataString", sectionDataString);
+
+
+    window.location.href = "/quickstart.html";
+
+
 
   var delayInMilliseconds = 2000; //1 second
 
@@ -339,18 +357,14 @@ function clickDepartment()
 
 
   var classDataString = '{{classData}}';
-
-  localStorage.setItem("classDataString", classDataString);
   classDataString = classDataString.replace(/&quot;/g, '"');
   var classData = JSON.parse(classDataString);
 
   var subjectDataString = '{{subjectData}}';
-  localStorage.setItem("subjectDataString", subjectDataString);
   subjectDataString = subjectDataString.replace(/&quot;/g, '"');
   var subjectData = JSON.parse(subjectDataString);
 
   var sel = document.getElementById('className');
-  
     var subjectSel = document.getElementById('subject');
   // sel = skillsSelect;
 
@@ -585,6 +599,7 @@ $('button.reset').click(
 
 
         document.getElementById('cataegoryStringText').value = JSON.stringify(presentUser);
+        alert(JSON.stringify(presentUser));
       document.getElementById('todayDateText').value = today;
 
 
@@ -735,14 +750,16 @@ $('button.reset').click(
             });
             userIdInfo.push({
               name : fullName,
-              userId: userId
+              userId: userId,
+              rowNumber: i
             });
             used = true;
           }else
           {
             userIdInfo.push({
               name : fullName,
-              userId: userId
+              userId: userId,
+              rowNumber: i
             });
           }
 
@@ -800,6 +817,8 @@ $('button.reset').click(
                     {
 
                       var fired_button = $(this).val();
+
+
 
                       derivedUniqueId = fired_button;
                       if(derivedUniqueId.includes('user'))

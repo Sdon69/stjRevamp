@@ -84,6 +84,7 @@ var sectionRawData;
 var subjectRawData;
 var userRawData;
 var userIdDetailedRawData;
+var didSignUp;
 
 var globalLoadedString;
 
@@ -245,7 +246,14 @@ router.get('/', function(req, res, next) {
     sampleString = 'hell';
       console.log('password = ','wrong');
     }
-
+      console.log('signup',didSignUp);
+      
+    if(didSignUp)
+    {
+      sampleString = 'check';
+      console.log('signup',didSignUp);
+    }
+          didSignUp = false;
     passwordCorrect = false;
     console.log('sampleString',sampleString);
 
@@ -283,7 +291,7 @@ router.get('/attendance', function(req, res, next) {
 
 
   var userIdData = userIdDetailedRawData;
-  var classData = classRawData;
+  var classData =  classRawData;
   var sectionData = sectionRawData;
   var subjectData = subjectRawData;
 
@@ -596,9 +604,9 @@ router.get('/signUp', function(req, res, next) {
     mode = 'signUp';
 
 
-    var userIdData =JSON.stringify(SheetsHelper.itemUseridDetails);
-    var classData = JSON.stringify(SheetsHelper.itemClassDetails);
-    var sectionData = JSON.stringify(SheetsHelper.itemSectionDetails);
+    var userIdData = userRawData;
+    var classData = classRawData;
+    var sectionData = sectionRawData;
 
 
 
@@ -652,6 +660,13 @@ router.post('/signupWriteCheck', function(req, res, next) {
     gLastName  = req.body.lastName;
 
     gSignupUserId = req.body.userId;
+    if(gSignupUserId.length>=6)
+    {
+          didSignUp = true;
+        console.log(didSignUp);
+
+    }
+
 
     gPassword =  req.body.password;
 

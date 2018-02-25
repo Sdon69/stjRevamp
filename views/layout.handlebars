@@ -34,6 +34,7 @@
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 
+
   <!-- Local Assets -->
   <link rel="stylesheet" href="/styles.css">
   <script src="/script.js"></script>
@@ -42,21 +43,21 @@
   <meta name="google-signin-scope" content="https://www.googleapis.com/auth/spreadsheets">
   <meta name="google-signin-client_id" content="700811269143-idu7dfsds23aunojvjdovv1q0giak851.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  
+
 </head>
 <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base" >
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" >
-    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary" style="top:15000%;position:fixed;"  >
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary" id='idHeader' style="top:15000%;position:fixed;"  >
 
-      <div class="mdl-layout__header-row" style="visibility:collapse;">
+      <div class="mdl-layout__header-row"  id='signinButton' >
 
 
         <!-- Google Sign-in button -->
-        <div id="profile" style="visibility:collapse;">
+        <div id="profile">
           <b class="name"></b><br/>
           <i class="email"></i>
         </div>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <div class="g-signin2"  id='signinButton2' data-onsuccess="onSignIn"></div>
       </div>
 
     </header>
@@ -68,5 +69,6 @@
       <button class="mdl-snackbar__action" type="button"></button>
     </div>
   </div>
+
 </body>
 </html>
