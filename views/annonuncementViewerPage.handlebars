@@ -18,74 +18,64 @@
 -->
 
 
+    <style>
 
 
 
 
+    .float{
+    	position:fixed;
+    	width:60px;
+    	height:60px;
+    	bottom:40px;
+    	right:40px;
+    	background-color:#3f8acd;
+    	border-radius:50px;
+    	text-align:center;
+    	box-shadow: 2px 2px 3px #999;
+
+    }
+
+    .my-float{
+    	margin-top:22px;
+    }
+    </style>
+
+    <a href="/annonuncementWriterPage">
+    <img src="bluePlus.jpg" class="float"></a>
+
+<div class="mdl-grid" style="padding:0;margin:0;background-color:#3f8acd;" >
 
 
-
-
-
-
-
-
-
-
-
-        <style>
-
-
-
-
-        .float{
-        	position:fixed;
-        	width:60px;
-        	height:60px;
-        	bottom:40px;
-        	right:40px;
-        	background-color:#3f8acd;
-        	border-radius:50px;
-        	text-align:center;
-        	box-shadow: 2px 2px 3px #999;
-
-        }
-
-        .my-float{
-        	margin-top:22px;
-        }
-        </style>
-
-        <a href="/annonuncementWriterPage">
-        <img src="bluePlus.jpg" class="float"></a>
-        <div class="mdl-grid" style="padding:0;margin:0;background-color:#3f8acd;" >
-
-
-          <!-- Show spreadsheets -->
-          <section id="spreadsheets2"
-                   class="mdl-cell mdl-cell--4-col relative" style="padding:0;margin:0;background-color:#3f8acd;">
-            <div class="mdl-list" style="padding:0;margin:0;background-color:#3f8acd; " >
-              <div class="mdl-list__item" style="padding:0;margin:0;background-color:#3f8acd;"><div style="width:100%; background-color:#3f8acd; ">
-
-        <div style="width:100%; background-color:#3f8acd; padding:2%; padding-bottom:4%;">
+  <!-- Show spreadsheets -->
+  <section id="spreadsheets2"
+           class="mdl-cell mdl-cell--4-col relative" style="padding:0;margin:0;background-color:#3f8acd;">
+    <div class="mdl-list" style="padding:0;margin:0;background-color:#3f8acd; " >
+      <div class="mdl-list__item" style="padding:0;margin:0;background-color:#3f8acd;"><div style="width:100%; background-color:#3f8acd; ">
         <form>
-        <table width="100%"><tr><td width="48%">
-            <select name ="s1" onchange="myFunction()" id="cataegory1" style="background:#3f8acd; border:none; color:#ECE7E7; width:100%; margin-bottom:5%;">
-                <option style="font-weight:bold;">Choose  Department</option>
-              <option style="font-weight:bold;">All Departments</option>
-        <option style="font-weight:bold;">Art</option>
-        <option style="font-weight:bold;">Commerce</option>
-        <option style="font-weight:bold;">Management</option>
-        <option style="font-weight:bold;">Education</option>
-        <option style="font-weight:bold;">Science</option>
-        <option style="font-weight:bold;">Other</option>
-              </select></td>
+        <table width="100%"><tr><td width="48%"><tr><td>
+      <select name ="s1"  id="cataegory1" style="background:#3f8acd; border:none; color:#ECE7E7; width:100%; ">
+            <option style="font-weight:bold;">Choose Event Genre</option>
+          <option style="font-weight:bold;">All Events</option>
+          <option style="font-weight:bold;">Technology</option>
+          <option style="font-weight:bold;">Social Gathering</option>
+          <option style="font-weight:bold;">Debate</option>
+          <option style="font-weight:bold;">Social Awareness</option>
+          <option style="font-weight:bold;">Convention</option>
+          <option style="font-weight:bold;">Sports</option>
+          <option style="font-weight:bold;">Other</option>
+          </select>
 
-            <td width="52%" rowspan="2" >
-            <input id='hangoutButtonId'    type="button" value="button" name="s3"  style="visibility: collapse;" onclick="submitClick()" >
-            <input type="button" value="FILTER"  onClick="checkInfo()" style="padding:5%; padding-right:20%; padding-left:20%; background-color:rgba(236,230,230,0.65); border:none; color:rgba(255,255,255,1.00); font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600;  "  >
-          </td></tr>
-             <tr> <td>
+</td>
+
+
+        <br>
+        <td width="52%"  >
+        <input id='hangoutButtonId'    type="button" value="button" name="s3"  style="visibility: collapse;" onclick="submitClick()" >
+        <input type="button" value="FILTER"  onClick="checkInfo()" style="padding:5%; padding-right:20%;
+        padding-left:20%; background-color:rgba(236,230,230,0.65); border:none; color:rgba(255,255,255,1.00);
+        font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600;  "  >
+      </td></tr><tr> <td>
             <select name ="s2" onchange="myFunction()" id="cataegory2"  style="background:#3f8acd; border:none; color:#ECE7E7; width:100%;">
                     <option style="font-weight:bold;">Choose Semester</option>
                 <option style="font-weight:bold;">All Semesters</option>
@@ -95,57 +85,58 @@
   <option style="font-weight:bold;">Fourth Semester</option>
   <option style="font-weight:bold;">Fifth Semester</option>
   <option style="font-weight:bold;">Sixth and Above Semesters</option>
-                </select></td></tr></table></form>
-        </div>
+                </select></td></tr></table>
 
+        </form>
+
+        <!-- <form method="post" action="/setModeEvents">
+          <input type='submit' id='setMode' >
+        </form> -->
 
         <span class="mdl-list__item-secondary-action">
 
-          <button class="mdl-button mdl-js-button mdl-button--raised
+          <button  class="mdl-button mdl-js-button mdl-button--raised
                          mdl-js-ripple-effect mdl-button--colored"
-                  rel="createAnnouncements"  type="button" id='create'  style="visibility: collapse; z-index:-88888888; position:fixed">Create</button>
+                  rel="createAnnouncements" type="button" id='create' onclick="f()"
+                   style="visibility: collapse; "  >Create</button>
 
 
+</button>
+        </span>
+        <!-- <iframe src= "/eventViewerFrame" style="position:fixed; top:20%; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:-1;">
+          Your browser doesn't support iframes
+      </iframe> -->
+      </div>
+      {{#each spreadsheets}}
+      <div class="mdl-list__item">
 
-                          </span></div></div></div></section></div>
-                          <!-- <iframe src= "/eventViewerFrame" style="position:fixed; top:20%; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:-1;">
-                            Your browser doesn't support iframes
-                        </iframe> -->
 
-                  <div id="myDiv" style="height:100%,width:100%;">        </div>
-
+      </div>
+      {{/each}}
+    </div>
+  </section>
+</div>
+<div id="myDiv" style="height:100%,width:100%;">        </div>
 
 <script>
 
 
-
-
-  var delayInMilliseconds = 2000; //1 second
-
-  setTimeout(function() {
-
-    document.getElementById('create').click();
-  }, delayInMilliseconds);
+//
+// var delayInMilliseconds = 2000; //1 second
+//
+// setTimeout(function() {
+//
+//   document.getElementById('create').click();
+// }, delayInMilliseconds);
 
 </script>
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
-  <script>
+<script>
 var gCataegory1;
 var gCataegory2;
 
-
-
-
-function loadData() // Not used till Now
-{
-
-  var sSemester   = localStorage.getItem("semester");
-  gCataegory1 = sSemester;
-  var sDepartment = localStorage.getItem("department");
-  gCataegory2 = sDepartment;
-}
+function checkInfo()
 
   function checkInfo()
   {
@@ -170,136 +161,143 @@ function loadData() // Not used till Now
   }
 
   }
-
-var derivedUniqueIdNumber;
 function submitClick()
 {
 var myValue = '{{isInformationAvailable}}';
 var isTrueSet = (myValue == 'true');
-  if(isTrueSet)
-  {
+if(isTrueSet)
+{
 
 
 
 
 
+var departmentFilter = gCataegory1;
 
-  var departmentFilter = gCataegory1;
-  var semesterFilter = gCataegory2;
 
 
 var hello = '{{dataFromAnnouncement}}';
+
 var res = hello.replace(/&quot;/g, '"');
+
+
+
+
+
 
 var raw_data =  JSON.parse(res);
 
 
 
-          var forLength = raw_data.length - 1;
-
-      var i;
-       var used = false;
-       var anyNoteFromDept = false;
-
-       var filteredData = [{
-       name: 'str1',
-       age:   'str2'
-       }];
-         for(i=0;i<=forLength;i++)
-         {
-         var dept = raw_data[i].cataegories;
+        var forLength = raw_data.length - 1;
 
 
-           if(dept.includes(departmentFilter))
-           {
+    var used = false;
+    var anyNoteFromDept = false;
 
-             if(dept.includes(semesterFilter))
-{
+    var filteredData = [{
+    name: 'str1',
+    age:   'str2'
+    }];
 
-             if(!used)
-             {
-             filteredData.pop({
-             name: 'str1',
-             age:   'str2'
-               });
-               filteredData.push(raw_data[i]);
-               used = true;
-               anyNoteFromDept = true;
-
-             }else{
-               filteredData.push(raw_data[i]);
-               anyNoteFromDept = true;
-             }
+    var i;
+      for(i=0;i<=forLength;i++)
+      {
+      var dept = raw_data[i].cataegories;
 
 
-}
-           }
-         }
+        if(dept.includes(departmentFilter))
+        {
 
-         if(!anyNoteFromDept)
-         {
-           filteredData.pop({
-           name: 'str1',
-           age:   'str2'
-             });
-             filteredData.push({
-             title: 'No Data for this filter Exists'
-               });
-         }
-         var globalFilteredData = filteredData;
+
+          if(!used)
+          {
+          filteredData.pop({
+          name: 'str1',
+          age:   'str2'
+            });
+            filteredData.push(raw_data[i]);
+            used = true;
+            anyNoteFromDept = true;
+
+          }else{
+            filteredData.push(raw_data[i]);
+            anyNoteFromDept = true;
+          }
 
 
 
+        }
+      }
 
-             var t = {'<>':"div style='width:100%;padding-top:20px;'",'html':[
+      if(!anyNoteFromDept)
+      {
+        filteredData.pop({
+        name: 'str1',
+        age:   'str2'
+          });
+          filteredData.push({
+          title: 'No Data for this filter Exists'
+            });
+      }
+      var globalFilteredData = filteredData;
 
-                                     {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
-                                       {'<>':"font face='Roboto'",'html':[
-                                           {'<>':"div style='width:100%; padding-bottom:10px; margin-right:20px; background:#ffffff;'",'children':[
-                                     {
-                                       '<>':"div style='width:100%'",'children':[
-                                         {
-                                        '<>':"table style='width:100%'",'children':[
-                                             {
-                                                 '<>':"tr",'children':[
+
+
+
+
+var t =
+                     {'<>':"div style='width:100%;padding-top:20px;'",'html':[
+
+                                            {'<>':"button id='1' name='1' value='${uniqueId}'  style='background:#fff;color:#3f8acd;width:100%; ",'html':[
+                                             {'<>':"font face='Roboto'",'html':[
+                                         {'<>':"div style='width:100%; padding-bottom:10px; margin-right:20px; background:#ffffff;'",'children':[
+                                           {
+                                             '<>':"div style='width:100%'",'children':[
+                                               {
+                                                 '<>':"table style='width:100%'",'children':[
                                                    {
-                                                   '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:600; padding-top:25px;text-align:left;'",'html':"${title}"
-                                                   },
-                                                   {
-                                                     '<>':"td style='margin-right:25px;padding-top:6px;font-size:8px; font-weight:450; color:#848587; padding-right:15px;' align='right'",'html':"${datePublished}"
+                                                       '<>':"tr",'children':[
+                                                         {
+                                                          '<>':"td style='margin-bottom:3px; color:#3f8acd;font-size:14px; font-weight:600; padding-top:25px;text-align:left;'",'html':"${title}"
+                                                         },
+                                                         {
+                                                           '<>':"td style='padding-top:6px;font-size:8px; font-weight:600; color:#848587; padding-right:15px;text-align: right;'' align='right'",'html':"${dateOfPublish}"
+                                                         }
+                                                       ]
                                                    }
                                                  ]
-                                             }
-                                           ]
-                                         }
-                                       ]
-                                     },{
-                                         '<>':"div style='margin-left:6px;  margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:600;'",'children':[
-                                           {
-                                             '<>':"table style='width:100%'",'children':[
-                                               {
-                                                   '<>':"tr",'children':[
-                                                     {
-                                           '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;text-align: left; color:#000000;'",'html':"Author : ${fullName}"
-                                                     }
-                                                   ]
                                                }
                                              ]
+                                           },{
+                                               '<>':"div style='margin-left:6px; margin-top:4px; margin-bottom:4px;  font-size:10px ; font-weight:450;'",'children':[
+                                                 {
+                                                   '<>':"table style='width:100%'",'children':[
+                                                     {
+                                                         '<>':"tr",'children':[
+                                                           {
+                                                               '<>':"td style='align-content:flex-start; font-size:10px;font-weight:450;text-align: left; color:#000000;'",'html':"Entry Fees : ${entryFees}"
+                                                           },
+                                                           {
+                                                               '<>':"td align='right' style='padding-right:8%;font-size:10px;font-weight:450;color:#000000;'",'html':"Date : ${eventDate}"
+                                                           }
+                                                         ]
+                                                     }
+                                                   ]
+                                                 }
+                                               ]
+                                           },{
+                                               '<>':"div style='font-size:12px; font-weight:450; padding-top:5px;text-align: left;color:#000000;'",'html':"${dottedString}"
                                            }
-                                         ]
-                                     },{
-                                         '<>':"div style='font-size:12px; font-weight:450; padding-top:5px;text-align: left;color:#000000;'",'html':"${dottedString}"
-                                     }
-                                 ]}  ] }]}]};
+                                       ]}  ] }]}]};
 
 
-  var d = filteredData;
+var d = filteredData;
 
-  var transformedHtml =  json2html.transform(d,t) ;
-  // document.write(transformedHtml);
+var transformedHtml =  json2html.transform(d,t) ;
+// document.write(transformedHtml);
 
-  document.getElementById("myDiv").innerHTML=transformedHtml;
-
+document.getElementById("myDiv").innerHTML=transformedHtml;
 
 
 
@@ -320,18 +318,24 @@ var raw_data =  JSON.parse(res);
                 {
 
                 var sortedTitle = raw_data[i].title;
-
                 var sortedDescription = raw_data[i].description;
-                var sortedDateOfPublish = raw_data[i].datePublished;
+                var sortedDateOfPublish = raw_data[i].dateOfPublish;
+                var sortedEventDate = raw_data[i].eventDate;
+                var sortedLastDateofRegistration =  raw_data[i].lastDateofRegistration;
+                var sortedEntryFees =  raw_data[i].entryFees;
 
-                var sortedFullName = raw_data[i].fullName;
 
                 localStorage.setItem("sortedTitle", sortedTitle);
                 localStorage.setItem("sortedDescription", sortedDescription);
                 localStorage.setItem("sortedDateOfPublish", sortedDateOfPublish);
-                localStorage.setItem("sortedFullName", sortedFullName);
+                localStorage.setItem("sortedEventDate", sortedEventDate);
+                localStorage.setItem("sortedLastDateofRegistration", sortedLastDateofRegistration);
+                localStorage.setItem("sortedEntryFees", sortedEntryFees);
 
-                 window.location.href = "/detailedAnnouncement";
+
+
+
+                 window.location.href = "/detailedEvent";
 
 
 
@@ -342,9 +346,6 @@ var raw_data =  JSON.parse(res);
               }
       });
   });
-
 }
 }
 </script>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
