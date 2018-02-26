@@ -134,6 +134,7 @@ select 				{
   width:100%;
   border:none;
   border-bottom:1px solid #757575;
+  -webkit-appearance: none;
 }
 select:focus 		{ outline:none; }
 
@@ -261,7 +262,7 @@ select:focus ~ .highlight {
       <span class="highlight"></span>
       <span class="bar"></span>
   </div> <div class="group">
-  <select  name ="department" id ="department" onchange="clickDepartment()" onclick="clickDepartment()">
+  <select  name ="department"   style="background:url(black_arrow.png) no-repeat right ;" id ="department" onchange="clickDepartment()" onclick="clickDepartment()">
       <option >Choose Department</option>
 
   <option>Art</option>
@@ -276,16 +277,16 @@ select:focus ~ .highlight {
     <span class="highlight"></span>
     <span class="bar"></span>
   </div> <div class="group">
-  <select name ="className"  id ="className" onclick="clickClassName()" onchange="clickClassName()">
+  <select name ="className"  id ="className"  style="background:url(black_arrow.png) no-repeat right ;"  onclick="clickClassName()" onchange="clickClassName()">
       <option>Choose Class</option>
   </select>
 </select>
 <span class="highlight"></span>
 <span class="bar"></span>
 </div> <div class="group">
-  <select name ="section" id ="section"  onclick="clickSection()" onchange="clickSection()" >
+  <select name ="section" id ="section"   style="background:url(black_arrow.png) no-repeat right ;"  onclick="clickSection()" onchange="clickSection()" >
       <option>Choose Section</option>
-  </select>  </select>
+  </select>  
     <span class="highlight"></span>
     <span class="bar"></span>
 </div>
