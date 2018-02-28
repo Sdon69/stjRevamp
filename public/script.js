@@ -56,7 +56,7 @@ function showMessage(message) {
 // Google Sign-in.
 
 function onSignIn(user) {
-      document.getElementById('idHeader').style = 'top:15000%;position:fixed;';
+      document.getElementById('idHeader').style = 'top:15000%;position:fixed;'  ;
   var profile = user.getBasicProfile();
   $('#profile .name').text(profile.getName());
   $('#profile .email').text(profile.getEmail());
