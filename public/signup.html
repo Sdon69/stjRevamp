@@ -417,7 +417,6 @@ if(!idExists)
       localStorage.setItem("phoneNo", phoneNo);
       listMajors();
 
-
   } else {
       // Sorry! No Web Storage support..
         document.write('Your phone is not compatible with app');
@@ -432,7 +431,7 @@ if(!idExists)
 
     //
     // document.getElementById('hangoutButtonId').click();
-    //         localStorage.setItem("signup", 'true');
+    //
     // var delayInMilliseconds = 1000; //1 second
     //
     //
@@ -616,6 +615,7 @@ function updateInfo(importedUserId,importedPassword,importedFirstName,importedLa
                   values: [ [importedUserId,importedPassword,importedFirstName,importedLastName,importedEmail,importedPhoneNo]]
                 }
      }).then(function(response) {
+       localStorage.setItem("signup", 'true');
        window.location.href = "/";
        var range = response.result;
        if (range.values.length > 0) {
