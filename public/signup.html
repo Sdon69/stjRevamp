@@ -340,10 +340,6 @@ var phoneNo = document.event.phoneNo.value;
 
 
 
-var userIdDataString =   localStorage.getItem("userIdDataString");
-userIdDataString = userIdDataString.replace(/&quot;/g, '"');
-var userIdData = JSON.parse(userIdDataString);
-
 
 
 
@@ -393,19 +389,10 @@ else if (lastName.length < 1) {
 else{
 
   var userId = document.event.userId.value;
-  var idExists = false;
-  for(i = 0;i<userIdData.length;i++)
-  {
-    if(userIdData[i].userId == userId)
-    {
-      idExists = true;
-    }
 
-  }
 
 //Saving Data using Html Web Storage
-if(!idExists)
-{
+
   if (typeof(Storage) !== "undefined") {
       // Code for localStorage/sessionStorage.
 
@@ -421,31 +408,9 @@ if(!idExists)
       // Sorry! No Web Storage support..
         document.write('Your phone is not compatible with app');
   }
-}
-
-if(!idExists)
-{
 
 
 
-
-    //
-    // document.getElementById('hangoutButtonId').click();
-    //
-    // var delayInMilliseconds = 1000; //1 second
-    //
-    //
-    //
-    // setTimeout(function() {
-    //
-    //   document.getElementById('create').click();
-    //
-    //        window.location.href = "/";
-    // }, delayInMilliseconds);
-
-}else{
-  alert('Id already taken');
-}
 
 
 
@@ -555,6 +520,10 @@ if(!idExists)
    * Print the names and majors of students in a sample spreadsheet:
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
+
+
+
+
 
 
   function listMajors() {

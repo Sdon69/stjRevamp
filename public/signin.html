@@ -206,36 +206,9 @@ function check()
 {
 
 
-
-
-
-
-
-
-
 var userId = document.event.userId.value;
 
 var password = document.event.password.value;
-
-
-
-
-var userIdDataString =   localStorage.getItem("userIdDataString");
-userIdDataString = userIdDataString.replace(/&quot;/g, '"');
-var userIdData = JSON.parse(userIdDataString);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
  if (userId.length < 1) {
     alert('Enter User Id');
@@ -249,109 +222,14 @@ var userIdData = JSON.parse(userIdDataString);
 
 
 
-
-
-
-
 else{
-  var userId = document.event.userId.value;
-  var idExists = false;
-  for(i = 0;i<userIdData.length;i++)
-  {
-
-    if(userIdData[i].userId == userId)
-    {
-      idExists = true;
-
-                var firstName = userIdData[i].firstName;
-                var lastName =    userIdData[i].lastname;
-                var className =   userIdData[i].className;
-                var section =     userIdData[i].section;
-                var emailId =     userIdData[i].emailId;
-                var phoneNo =     userIdData[i].phoneNo;
-                var semester =    userIdData[i].semester;
-
-                localStorage.setItem("firstName", firstName);
-                localStorage.setItem("lastname", lastName);
-                localStorage.setItem("userId", userId);
-                localStorage.setItem("semester", semester);
-                localStorage.setItem("className", className);
-                localStorage.setItem("section", section);
-                localStorage.setItem("emailAddress", emailId);
-                localStorage.setItem("phoneNo", phoneNo);
-
-    }
-
-  }
-
-//Saving Data using Html Web Storage
-if(idExists)
-{
-  if (typeof(Storage) !== "undefined") {
-      // Code for localStorage/sessionStorage.
-
-
-
-
-
-  } else {
-      // Sorry! No Web Storage support..
-        document.write('Your phone is not compatible with app');
-  }
-}
-
-if(idExists)
-{
+    var userId = document.event.userId.value;
     var password = document.event.password.value;
      localStorage.setItem("userIdToBeChecked", userId);
      localStorage.setItem("passwordToBeChecked", password);
-
-
      listMajors();
 
-
-  //   localStorage.setItem("signup", 'false');
-  // document.getElementById('hangoutButtonId').click();
-  //
-  // var delayInMilliseconds = 2000; //0.01 second
-  //
-  //
-  //
-  // setTimeout(function() {
-  //
-  //   document.getElementById('create').click();
-  //
-  // }, delayInMilliseconds);
-  //
-  //   setTimeout(function() {
-  //
-  //
-  //          window.location.href = "/";
-  //   }, 5000);
-
-
-
-
-
-
-
-
-
-
-}else{
-  alert('Id does not exist');
 }
-
-
-
-
-}
-
-
-
-
-
-
 
 }
 
@@ -458,9 +336,11 @@ if(idExists)
        var inputId = localStorage.getItem("userIdToBeChecked");
        var inputPassword = localStorage.getItem("passwordToBeChecked");
 
+       var idExists = false;
+
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU',
-      range: 'Class Data!A2:J',
+      spreadsheetId: '1RcujQMrh_DnVtUzgpBqS8JdMPVF2N1voqKePmQZYYCU',
+      range: 'Teacher Data!A2:J',
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {
@@ -472,9 +352,16 @@ if(idExists)
              var userId = row[0];
              if(userId == inputId)
              {
+              idExists = true;
                var passwordRetrieved = row[1];
                if(passwordRetrieved == inputPassword )
                {
+                 localStorage.setItem("userId", row[0]);
+                 localStorage.getItem("password",row[1]);
+                 localStorage.setItem("firstName", row[2]);
+                 localStorage.setItem("lastname", row[3]);
+                 localStorage.setItem("emailAddress", row[4]);
+                 localStorage.setItem("phoneNo", row[5]);
                   localStorage.setItem("signin","true");
                     window.location.href = "/";
                }else {
@@ -483,6 +370,10 @@ if(idExists)
              }
 
 
+           }
+           if(!idExists)
+           {
+             alert('Id does not exist');
            }
 
          } else {

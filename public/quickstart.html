@@ -345,6 +345,10 @@
 
     var mode = 'remove';
 
+
+
+
+
     var subject;
     function clickDepartment()
     {
@@ -354,7 +358,8 @@
       var department = skillsSelect.options[skillsSelect.selectedIndex].text;
 
 
-      var classDataString = localStorage.getItem("classDataString") ;
+      var classDataString = localStorage.getItem("classDataString");
+
       classDataString = classDataString.replace(/&quot;/g, '"');
       var classData = JSON.parse(classDataString);
 
@@ -446,7 +451,7 @@
     {
 
 
-      var sectionDataString = localStorage.getItem("sectionDataString");
+      var sectionDataString =   localStorage.getItem("sectionDataString");
       sectionDataString = sectionDataString.replace(/&quot;/g, '"');
       var sectionData = JSON.parse(sectionDataString);
 
@@ -1089,7 +1094,7 @@
         if (isSignedIn) {
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
-          // listMajors();
+          listMisc('className','Class Name!A2:G','1fzxyzBACml4GPghMpplfziKPgtgfYUQYwqwVXye7usI');
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
@@ -1207,6 +1212,8 @@ rangeImported =  "Class Data!".concat("I" + ++a + ":S");
 
 
 }
+
+
 function updateInfo(stringImported,rangeImported)
 {
          gapi.client.sheets.spreadsheets.values.update({
@@ -1233,6 +1240,190 @@ function updateInfo(stringImported,rangeImported)
 
 }
 
+
+
+    var classNames = [{
+           title: 'str1',
+           age:   'str2'
+         }];
+    classNames.pop({
+    title: 'str1',
+    age:   'str2'
+      });
+
+      var sectionNames = [{
+             title: 'str1',
+             age:   'str2'
+           }];
+      sectionNames.pop({
+      title: 'str1',
+      age:   'str2'
+        });
+
+
+        var subjectNames = [{
+               title: 'str1',
+               age:   'str2'
+             }];
+        subjectNames.pop({
+        title: 'str1',
+        age:   'str2'
+          });
+
+          var userDetails = [{
+                 title: 'str1',
+                 age:   'str2'
+               }];
+          userDetails.pop({
+          title: 'str1',
+          age:   'str2'
+            });
+
+
+  function listMisc(mode,rangeRetrieved,sheetIdRetrieved) {
+
+var rangeApplied = rangeRetrieved;
+var sheetIdApplied = sheetIdRetrieved;
+
+
+
+    gapi.client.sheets.spreadsheets.values.get({
+      spreadsheetId: sheetIdApplied,
+      range: rangeApplied,
+       }).then(function(response) {
+         var range = response.result;
+         if (range.values.length > 0) {
+           for (i = 0; i < range.values.length; i++) {
+             var row = range.values[i];
+             // Print columns A and E, which correspond to indices 0 and 4.
+
+
+             if(mode == 'className')
+             {
+               var className = row[0];
+               var department = row[1];
+               classNames.push({
+                 className: className,
+                 department: department,
+               });
+
+             }
+
+            else if(mode == 'sectionName')
+             {
+               var section = row[0];
+               var className = row[1];
+               sectionNames.push({
+                 section: section,
+                 className: className,
+               });
+             }
+
+             else if(mode == 'subjectName')
+             {
+               var subject = row[0];
+               var department = row[1];
+               subjectNames.push({
+                 subject: subject,
+                 department: department,
+               });
+             }
+
+             else if(mode == 'userName')
+             {
+               var userId =    row[0];
+               var firstName = row[2];
+               var lastname =  row[3];
+               var className = row[4];
+               var section =   row[5];
+               var emailId =   row[6];
+               var phoneNo =   row[7];
+               var semester =  row[9];
+
+               userDetails.push({
+                 userId: userId,
+                 firstName: firstName,
+                 lastname: lastname,
+                 className: className,
+                 section: section,
+                 emailId: emailId,
+                 phoneNo: phoneNo,
+                 semester : semester
+               });
+             }
+
+
+
+           } //End of for loop
+
+           if(mode == 'className')
+           {
+
+             //repeats the function but with now mode= sectionName
+             listMisc('sectionName','Sections!A2:G','1fzxyzBACml4GPghMpplfziKPgtgfYUQYwqwVXye7usI');
+
+           }
+
+          else if(mode == 'sectionName')
+           {
+              //repeats the function again but with now mode= subjectName
+                listMisc('subjectName','Subjects!A2:G','1fzxyzBACml4GPghMpplfziKPgtgfYUQYwqwVXye7usI');
+
+
+           }
+           else if(mode == 'subjectName')
+           {
+             listMisc('userName','Class Data!A2:J','1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU');
+
+
+
+
+
+           }else if(mode == 'userName')
+           {
+             var retrievedClassNames = JSON.stringify(classNames);
+
+             var retrievedSubjectNames = JSON.stringify(subjectNames);
+
+
+             var retrievedSectionNames = JSON.stringify(sectionNames);
+
+             var retrievedUserDetails = JSON.stringify(userDetails);
+
+
+
+               localStorage.setItem("classDataString", retrievedClassNames);
+
+
+
+               localStorage.setItem("subjectDataString", retrievedSubjectNames);
+
+
+               localStorage.setItem("sectionDataString", retrievedSectionNames);
+
+               localStorage.setItem("userIdDataString",retrievedUserDetails)
+
+               alert(retrievedUserDetails);
+           }
+
+
+
+
+
+
+
+
+         } else {
+           alert('No data found.');
+         }
+       }, function(response) {
+         alert('Error: ' + response.result.error.message);
+       });
+
+
+
+
+}
 
     </script>
 
