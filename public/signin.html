@@ -178,18 +178,7 @@ input:focus ~ .highlight {
 </div></font>
 
 
-<script>
 
-
-
-  var delayInMilliseconds = 2000; //2 second
-
-  setTimeout(function() {
-
-    document.getElementById('getData').click();
-  }, delayInMilliseconds);
-
-</script>
 
 
 
@@ -357,7 +346,7 @@ else{
                if(passwordRetrieved == inputPassword )
                {
                  localStorage.setItem("userId", row[0]);
-                 localStorage.getItem("password",row[1]);
+                 localStorage.setItem("password",row[1]);
                  localStorage.setItem("firstName", row[2]);
                  localStorage.setItem("lastname", row[3]);
                  localStorage.setItem("emailAddress", row[4]);

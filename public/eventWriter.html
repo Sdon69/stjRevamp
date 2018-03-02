@@ -688,8 +688,8 @@ function updateInfo(loadedTitle,loadedDescription,loadedPublishDate,loadedEventD
                     loadedLastDateOfRegistration,loadedEntryFees,loadedCataegory,loadedUserId,loadedFullName,"A",a]]
                 }
      }).then(function(response) {
-       localStorage.setItem("signup", 'true');
-       window.location.href = "/";
+  
+       window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {
 

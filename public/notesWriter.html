@@ -685,8 +685,8 @@ function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,l
                   values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate]]
                 }
      }).then(function(response) {
-       localStorage.setItem("signup", 'true');
-       window.location.href = "/";
+    
+       window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {
 
