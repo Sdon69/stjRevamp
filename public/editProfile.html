@@ -592,7 +592,7 @@ var loadedPhoneNo;
 
 
   function listMajors() {
-
+      document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
     loadedFirstName =    localStorage.getItem("transferFirstName")
     loadedLastName =     localStorage.getItem("transferLastName")
     loadedUserId =       localStorage.getItem("transferUserId")
@@ -655,6 +655,7 @@ localStorage.setItem("userId", loadedUserId);
 localStorage.setItem("password", loadedPassword);
 localStorage.setItem("emailAddress", loadedEmailAddress);
 localStorage.setItem("phoneNo", loadedPhoneNo);
+  document.getElementById("loadingDiv").style = "display:none;";
              window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {

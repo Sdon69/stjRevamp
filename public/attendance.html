@@ -11,7 +11,7 @@
       * { box-sizing:border-box; }
 
       /* basic stylings ------------------------------------------ */
-      body 				 { background:url(https://scotch.io/wp-content/uploads/2014/07/61.jpg); }
+
 
       h2 		 {
         text-align:center;
@@ -215,7 +215,8 @@
   <body>
     <button id="authorize-button" style="display: none;">Authorize</button>
     <button id="signout-button" style="display: none;">Sign Out</button>
-
+    <div id="loadingDiv" style="position:fixed; height:100%; width:100%; background:#80141516; display:block; z-index:5; "><div style="position:fixed; width:20%; top:50%; left:40%; background:#ffffff;"><table ><tr><td><img src="loading.gif"></td><td> Loading...</td></tr></table></div>
+    </div>
 
 
 
@@ -223,7 +224,7 @@
 
       <!-- Show spreadsheets -->
       <font face="roboto">
-        <div id='headerDiv' style="visibility:collapse; z-index:-500; height:0px; width:0px; position:absolute;">
+        <div id='headerDiv' style="visibility:collapse; z-index:-500; height:0px; width:0px; position:absolute; ">
 
       <div style="width:100%; background-color:#3f8acd; padding:2%;">
           <button value='SUBMIT' onclick="clickSubmit()"  style="padding:3%; padding-right:20%; padding-left:20%; background-color:rgba(236,230,230,0.65); border:none; color:rgba(255,255,255,1.00); font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600; width:100%;">SUBMIT</button>
@@ -234,14 +235,14 @@
               <table style="width:100%;">
                 <tr><td style="font-weight:500;color:#ECE7E7;">Present : <span id='present'></span></td><td align='center' style="font-weight:500;color:#ECE7E7;">Absent : <span id='absent'></span></td><td align='right' style="font-weight:500;color:#ECE7E7;">Total:<span id='total'></span></td></table>
         </div>  </div>
-      <div style="background:#ffffff; padding:20px; height:100%;" id='bodyDiv'>
+      <div style="background:#ffffff; padding-right:20px; padding-left:20px; padding-top:20px; height:100%;" id='bodyDiv'>
 
             <form method="post" action="/attendanceAppendCheck" name='event'>
         <div class="form-style-2">
 
 
     </div><div class="group">
-        <select name ="semester" style="background:url(black_arrow.png) no-repeat right ;" >
+        <select name ="semester" id="semesterDropDown" style="background:url(black_arrow.png) no-repeat right ;"  disabled>
       <option>Choose Semester</option>
       <option>First Semester</option>
       <option>Second Semester </option>
@@ -253,7 +254,7 @@
           <span class="highlight"></span>
           <span class="bar"></span>
       </div> <div class="group">
-      <select  name ="department" id ="department"  style="background:url(black_arrow.png) no-repeat right ;" onchange="clickDepartment()" onclick="clickDepartment()">
+      <select  name ="department" id ="department"  style="background:url(black_arrow.png) no-repeat right ;" onchange="clickDepartment()" onclick="clickDepartment()" disabled>
           <option >Choose Department</option>
 
       <option>Art</option>
@@ -268,32 +269,33 @@
         <span class="highlight"></span>
         <span class="bar"></span>
       </div> <div class="group">
-      <select name ="className"  id ="className" style="background:url(black_arrow.png) no-repeat right ;" onclick="clickClassName()" onchange="clickClassName()">
+      <select name ="className"  id ="className" style="background:url(black_arrow.png) no-repeat right ;" onclick="clickClassName()" onchange="clickClassName()" disabled>
           <option>Choose Class</option>
       </select>
     </select>
     <span class="highlight"></span>
     <span class="bar"></span>
     </div> <div class="group">
-      <select name ="section" id ="section"  style="background:url(black_arrow.png) no-repeat right ;"  onclick="clickSection()" onchange="clickSection()" >
+      <select name ="section" id ="section"  style="background:url(black_arrow.png) no-repeat right ;"  onclick="clickSection()" onchange="clickSection()" disabled>
           <option>Choose Section</option>
       </select>
         <span class="highlight"></span>
         <span class="bar"></span>
     </div>
     <div class="group">
-      <select name ="subject" id ="subject"   style="background:url(black_arrow.png) no-repeat right ;" onclick="clickSubject()" onchange="clickSection()" >
+      <select name ="subject" id ="subject"   style="background:url(black_arrow.png) no-repeat right ;" onclick="clickSubject()" onchange="clickSection()" disabled >
           <option>Choose Subject</option>
       </select>
         <span class="highlight"></span>
         <span class="bar"></span>
     </div>
+      <input type="button" value="Submit" id="checkButton"  onclick="check()"  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;" disabled   >
     </div>
 
 
-    <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse; height:0px;" >
-    <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse;height:0px;" >
-    <input type="button" value="Submit"  onclick="check()"  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;"    >
+    <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="display:none;" >
+    <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="display:none;" >
+
 
                 <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
               </div>
@@ -313,15 +315,17 @@
 
 
     <script>
+    function enableForm()
+    {
 
+        document.getElementById("checkButton").disabled=false;
+        document.getElementById("subject").disabled = false;
+        document.getElementById("section").disabled=false;
+        document.getElementById("className").disabled=false;
+        document.getElementById("department").disabled=false;
+        document.getElementById("semesterDropDown").disabled=false;
+    }
 
-
-      var delayInMilliseconds = 2000; //1 second
-
-      setTimeout(function() {
-
-        document.getElementById('getData').click();
-      }, delayInMilliseconds);
 
     </script><script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
     <script>
@@ -522,18 +526,18 @@
 
     }
 
-    $('button.reset').click(
-        function () {
-            $(this).prevAll('input').val(function(){
-                switch (this.type){
-                    case 'text':
-                        return this.defaultValue;
-                    case 'checkbox':
-                    case 'radio':
-                        this.checked = this.defaultChecked;
-                }
-            });
-        });
+    // $('button.reset').click(
+    //     function () {
+    //         $(this).prevAll('input').val(function(){
+    //             switch (this.type){
+    //                 case 'text':
+    //                     return this.defaultValue;
+    //                 case 'checkbox':
+    //                 case 'radio':
+    //                     this.checked = this.defaultChecked;
+    //             }
+    //         });
+    //     });
 
 
 
@@ -604,7 +608,7 @@
             document.getElementById('cataegoryStringText').value = JSON.stringify(presentUser);
 
             var studentsPresentTotal = JSON.stringify(selectedButtonInfo);
-            alert(studentsPresentTotal);
+
                 localStorage.setItem("studentsPresentTotal", studentsPresentTotal);
                 localStorage.setItem("attendanceDate", today);
 
@@ -1136,15 +1140,21 @@
        * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
        */
 
-
+       var count = 0;
+       var totalPresentUsers;
+       var totalPresentUsersString;
+       var totalPresentUsersData;
+       var forCount = 0;
       function listMajors() {
-        var totalPresentUsers = localStorage.getItem("studentsPresentTotal");
+              document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
+         totalPresentUsers = localStorage.getItem("studentsPresentTotal");
         var attendanceDate = localStorage.getItem("attendanceDate");
         var classNameSelected = localStorage.getItem("classNameSelected");
         var sectionSelected = localStorage.getItem("sectionSelected");
         var semesterSelected = localStorage.getItem("semesterSelected");
         totalPresentUsersString = totalPresentUsers.replace(/&quot;/g, '"');
-        var totalPresentUsersData = JSON.parse(totalPresentUsersString);
+         totalPresentUsersData = JSON.parse(totalPresentUsersString);
+        alert(totalPresentUsersData.length);
         var a = 1;
         var rangeImported = "Class Data!".concat("I"+ ++a + ":S");
         var existingDateArrObj = [{
@@ -1186,15 +1196,21 @@
 
 
 
-                                    for(k=0; k <= totalPresentUsersData.length;k++ )
+                                    for(k=0; k < totalPresentUsersData.length;k++ )
                                     {
 
                                       if(totalPresentUsersData[k].userId == row[0] )
                                       {
                                         var existingDate = row[8];
+                                        if(!existingDate.includes(attendanceDate))
+                                        {
                                           var   appendedDate = existingDate + attendanceDate ;
                                           updateInfo(appendedDate,rangeImported);
-                                        break;
+                                              ++forCount;
+
+                                        }
+
+
                                       }
                                     }
 
@@ -1207,7 +1223,6 @@
 rangeImported =  "Class Data!".concat("I" + ++a + ":S");
                }
 
-               window.top.location.reload();
 
              } else {
                alert('No data found.');
@@ -1222,6 +1237,8 @@ rangeImported =  "Class Data!".concat("I" + ++a + ":S");
 
 function updateInfo(stringImported,rangeImported)
 {
+
+
          gapi.client.sheets.spreadsheets.values.update({
            spreadsheetId: '1On0zu6-x0qgv32KjKm4JvdtN5yYArSDfeJ4fndJvbFU',
            range: rangeImported,
@@ -1230,6 +1247,14 @@ function updateInfo(stringImported,rangeImported)
                       values: [ [stringImported]]
                     }
          }).then(function(response) {
+           count = ++count
+           if(forCount == count)
+           {
+             document.getElementById("loadingDiv").style = "display:none;";
+
+           window.top.location.reload();
+           }
+
 
            var range = response.result;
            if (range.values.length > 0) {
@@ -1288,6 +1313,7 @@ function updateInfo(stringImported,rangeImported)
 
   function listMisc(mode,rangeRetrieved,sheetIdRetrieved) {
 
+  document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
 var rangeApplied = rangeRetrieved;
 var sheetIdApplied = sheetIdRetrieved;
 
@@ -1408,8 +1434,8 @@ var sheetIdApplied = sheetIdRetrieved;
                localStorage.setItem("sectionDataString", retrievedSectionNames);
 
                localStorage.setItem("userIdDataString",retrievedUserDetails)
-
-               alert(retrievedUserDetails);
+                    enableForm();
+                document.getElementById("loadingDiv").style = "display:none;";
            }
 
 
