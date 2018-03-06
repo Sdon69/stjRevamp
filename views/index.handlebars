@@ -26,7 +26,13 @@ if(signedUp == 'true' )
 
 
 }else{
-  window.location.href = "/getStarted.html";
+  if(localStorage.getItem("getStartedCompleted") == 'true')
+  {
+    window.location.href = "/signin";
+  }else {
+    window.location.href = "/getStarted.html";
+  }
+
 }
 
 

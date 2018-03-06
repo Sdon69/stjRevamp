@@ -8,9 +8,10 @@ body{
 
 <button id="authorize-button" style="display: none;">Authorize</button>
 <button id="signout-button" style="display: none;">Sign Out</button>
-<div  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF; width:100%; height:100%;"  >
+<div  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF; width:100%; height:100%;" align="justify"  >
 
-<div align="center" style="font-size:36px; font-family:Calibri; padding-top:45%;" id="headerId">Welcome to St. Johns App</div>
+<div align="center" style="font-size:36px; font-family:Calibri; padding-top:40%;" id="headerId">Welcome to St. Johns App</div>
+<div align="center" style="font-size:20px; font-family:Arial; padding:5%;line-height: 140%;" id="bodyId"></div>
 <br><br><div align="center"><button id="buttonId" style="background:#F1F1F1; opacity:0.8; width:80%; height:10%;font-size:26px; color:#408bce;" onClick="onclickButton()">Lets Get Started</button>
 </div></div>
 
@@ -18,9 +19,16 @@ body{
 <script>
 function onclickButton()
 {
+  if(document.getElementById("buttonId").innerHTML.includes("Lets Get"))
+  {
 document.getElementById("headerId").innerHTML = "First lets link your google account" ;
+document.getElementById("bodyId").innerHTML = "Aftering your google signin  , you may require to  Click on 'Advanced' and then click on  'Go to stjWebApp' " ;
 document.getElementById("buttonId").innerHTML = "Link" ;
-document.getElementById("authorize-button").click();
+
+}else if(document.getElementById("buttonId").innerHTML.includes("Link"))
+{
+  document.getElementById("authorize-button").click();
+}
 }
 </script>
 
@@ -77,10 +85,11 @@ document.getElementById("authorize-button").click();
   function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
-      signoutButton.style.display = 'block';
-      listMajors();
+      signoutButton.style.display = 'none';
+      localStorage.setItem("getStartedCompleted","true");
+      window.location.href = "/signin";
     } else {
-      authorizeButton.style.display = 'block';
+      authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
     }
   }
@@ -117,119 +126,6 @@ document.getElementById("authorize-button").click();
    */
 
 
-  function listMajors() {
-
-    var itemDetails = [{
-           title: 'str1',
-           age:   'str2'
-         }];
-    itemDetails.pop({
-    title: 'str1',
-    age:   'str2'
-      });
-    gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs',
-      range: 'Stj Teacher Notes!A2:H',
-       }).then(function(response) {
-         var range = response.result;
-         if (range.values.length > 0) {
-           for (i = 0; i < range.values.length; i++) {
-             var row = range.values[i];
-             // Print columns A and E, which correspond to indices 0 and 4.
-
-
-
-               var str1 = row[0];
-
-
-
-
-                                 if (str1.includes("BonBlank88"))
-                                 {
-
-                                     end = true;
-
-                                     continue;
-                                 }
-
-
-
-
-
-
-
-
-                                 // dept_filter = 'Debate';
-
-
-                                       cataegories = row[2];
-
-
-
-
-
-                                       var title = row[0];
-
-                                       var description =  row[1];
-
-                                      var publisherId =  row[3];
-
-                                       var fullName =  row[4];
-
-
-
-                                       var uniqueId =  row[5];
-
-                                       var datePublished =  row[6];
-
-                                       var fileUrl = row[7];
-
-
-                                       var trimmedString = description.substring(0, 68);
-                                       var dottedString = trimmedString.concat('....')
-
-
-
-                                         itemDetails.push({
-                                           title: title,
-                                           description:  description,
-                                           cataegories: cataegories,
-                                           publisherId: publisherId,
-                                           fullName:fullName,
-                                           uniqueId: uniqueId,
-                                           datePublished:datePublished,
-                                           dottedString:dottedString,
-                                           fileUrl:fileUrl
-                                         });
-
-
-
-
-
-
-
-
-
-
-
-
-           }
-
-
-            var viewerData =  JSON.stringify(itemDetails);
-
-        localStorage.setItem("viewerData", viewerData);
-                saveToViewerData();
-
-         } else {
-             alert('No data found.');
-         }
-       }, function(response) {
-         alert('Error: ' + response.result.error.message);
-       });
-
-
-}
 
 
 </script>
