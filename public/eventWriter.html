@@ -587,10 +587,10 @@ else{
   function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
-      signoutButton.style.display = 'block';
+      signoutButton.style.display = 'none';
       // listMajors();
     } else {
-      authorizeButton.style.display = 'block';
+      authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
     }
   }
@@ -688,7 +688,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedPublishDate,loadedEventD
                     loadedLastDateOfRegistration,loadedEntryFees,loadedCataegory,loadedUserId,loadedFullName,"A",a]]
                 }
      }).then(function(response) {
-  
+
        window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {

@@ -515,7 +515,7 @@ else{
    localStorage.setItem("loadedPublishDate", today);
      localStorage.setItem("loadedTitle", title);
    localStorage.setItem("loadedDescription", desc);
-  
+
 if(localStorage.getItem("status"))
 {
   if(localStorage.getItem("loadedUrl"))
@@ -613,10 +613,10 @@ if(localStorage.getItem("status"))
   function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
-      signoutButton.style.display = 'block';
+      signoutButton.style.display = 'none';
       // listMajors();
     } else {
-      authorizeButton.style.display = 'block';
+      authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
     }
   }
