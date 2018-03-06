@@ -282,11 +282,13 @@ var raw_data =  JSON.parse(res);
                 var sortedDescription = raw_data[i].description;
                 var sortedDateOfPublish = raw_data[i].datePublished;
                 var sortedFullName = raw_data[i].fullName;
+                var sortedFileUrl = raw_data[i].fileUrl;
                 localStorage.setItem("sortedTitle", sortedTitle);
                 localStorage.setItem("sortedDescription", sortedDescription);
                 localStorage.setItem("sortedDateOfPublish", sortedDateOfPublish);
                 localStorage.setItem("sortedFullName", sortedFullName);
-                 window.location.href = "/detailedNotes";
+                localStorage.setItem("sortedFileUrl", sortedFileUrl);
+                 window.location.href = "/detailedAnnouncement";
                 }
               }
       });
@@ -402,7 +404,7 @@ var raw_data =  JSON.parse(res);
       });
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs',
-      range: 'Stj Teacher Notes!A2:G',
+      range: 'Stj Teacher Notes!A2:H',
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {
@@ -455,6 +457,9 @@ var raw_data =  JSON.parse(res);
 
                                        var datePublished =  row[6];
 
+                                       var fileUrl = row[7];
+                                      
+
                                        var trimmedString = description.substring(0, 68);
                                        var dottedString = trimmedString.concat('....')
 
@@ -468,7 +473,8 @@ var raw_data =  JSON.parse(res);
                                            fullName:fullName,
                                            uniqueId: uniqueId,
                                            datePublished:datePublished,
-                                           dottedString:dottedString
+                                           dottedString:dottedString,
+                                           fileUrl:fileUrl
                                          });
 
 

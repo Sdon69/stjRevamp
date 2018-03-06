@@ -277,6 +277,26 @@ body{
     <input type="checkbox" name="semester4" value="Fifth Semester" style="width:auto;" id="mySelect">Fifth Semester<br><br>
     <input type="checkbox" name="semester5" value="Sixth and Above Semesters" style="width:auto;" id="mySelect">Sixth and Above Semesters<br><br>
 
+
+    <iframe id="iframe" src="https://script.google.com/macros/s/AKfycbxsGc9wk995ISDF0SHJrw_WW_Oup6KP8NSNQSlAynjLLLui6EgN/exec"  name="search_iframe"   style="width:100%; height:20%;  border:none; overflow:hidden; z-index:1;"></iframe>
+
+
+    <script>
+           window.addEventListener( "message",
+             function (e) {
+
+                   if(e.origin !== 'https://n-2u33vbfu5tx6lvuunsqfwkk5twnxjjiyftisg4y-0lu-script.googleusercontent.com'){ return; }
+                    if(e.data.includes('http'))
+                    {
+                     localStorage.setItem("loadedUrl", e.data);
+                   }else {
+                     localStorage.setItem("status",e.data);
+                   }
+             },
+             false);
+       </script>
+
+
     <br>
 
       <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
@@ -495,9 +515,19 @@ else{
    localStorage.setItem("loadedPublishDate", today);
      localStorage.setItem("loadedTitle", title);
    localStorage.setItem("loadedDescription", desc);
+  
+if(localStorage.getItem("status"))
+{
+  if(localStorage.getItem("loadedUrl"))
+  {
 
    listMajors();
-
+ }else {
+   alert('Image Uploading');
+ }
+}else {
+  listMajors();
+}
 
 
 
@@ -633,10 +663,17 @@ else{
     var loadedPublishDate = localStorage.getItem("loadedPublishDate")
     var loadedTitle = localStorage.getItem("loadedTitle")
     var loadedDescription = localStorage.getItem("loadedDescription")
+    var loadedUrl =  localStorage.getItem("loadedUrl");
+    if(!loadedUrl)
+    {
+      loadedUrl = 'None'
+    }
+
+    localStorage.removeItem('loadedUrl');
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs',
-      range: 'Stj Teacher Notes!A2:G',
+      range: 'Stj Teacher Notes!A2:H',
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {
@@ -652,11 +689,11 @@ else{
                            }
 
 
-                           rangeImported =  "Stj Teacher Notes!".concat("A" + ++a + ":G");
+                           rangeImported =  "Stj Teacher Notes!".concat("A" + ++a + ":H");
            }
 
              alert('Updating');
-            updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,rangeImported);
+            updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported);
 
 
          } else {
@@ -668,17 +705,17 @@ else{
 
 
 }
-function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,rangeImported)
+function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported)
 {
      gapi.client.sheets.spreadsheets.values.update({
        spreadsheetId: '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs',
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {
-                  values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate]]
+                  values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl]]
                 }
      }).then(function(response) {
-    
+
        window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {
