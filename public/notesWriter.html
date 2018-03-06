@@ -225,9 +225,10 @@ textarea:focus ~ .highlight {
 }
 
 
-body{
-	margin:0;
-	padding:0;
+html, body {height:100%; overflow:hidden}
+body {
+overflow:auto; -webkit-overflow-scrolling:touch;margin:0;
+padding:0;
 }
 
 </style>
@@ -685,7 +686,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,l
                   values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate]]
                 }
      }).then(function(response) {
-    
+
        window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {

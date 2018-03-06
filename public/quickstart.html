@@ -206,7 +206,11 @@
         to 	{ width:0; background:transparent; }
       }
 
-
+      html, body {height:100%; overflow:hidden}
+  body {
+    overflow:auto; -webkit-overflow-scrolling:touch;margin:0;
+  padding:0;
+  }
       </style>
   <body>
     <button id="authorize-button" style="display: none;">Authorize</button>

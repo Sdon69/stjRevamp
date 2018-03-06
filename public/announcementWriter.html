@@ -224,11 +224,11 @@ textarea:focus ~ .highlight {
   to 	{ width:0; background:transparent; }
 }
 
-body{
-	margin:0;
-	padding:0;
+html, body {height:100%; overflow:hidden}
+body {
+overflow:auto; -webkit-overflow-scrolling:touch;margin:0;
+padding:0;
 }
-
 </style>
 <button id="authorize-button" style="display: none;">Authorize</button>
 <button id="signout-button" style="display: none;">Sign Out</button>
