@@ -530,7 +530,7 @@ else{
 
 
      function listMajors() {
-
+  document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
        loadedFirstName =    localStorage.getItem("transferFirstName")
        loadedLastName =     localStorage.getItem("transferLastName")
        loadedUserId =       localStorage.getItem("transferUserId")
@@ -596,6 +596,7 @@ function updateInfo(importedUserId,importedPassword,importedFirstName,importedLa
        localStorage.setItem("emailAddress", loadedEmailAddress);
        localStorage.setItem("phoneNo", loadedPhoneNo);
        localStorage.setItem("signup", 'true');
+         document.getElementById("loadingDiv").style = "display:none;";
        window.location.href = "/";
        var range = response.result;
        if (range.values.length > 0) {
