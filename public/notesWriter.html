@@ -292,8 +292,10 @@ padding:0;
                        if(e.origin !== 'https://n-2u33vbfu5tx6lvuunsqfwkk5twnxjjiyftisg4y-0lu-script.googleusercontent.com'){ return; }
                         if(e.data.includes('http'))
                         {
+
                          localStorage.setItem("loadedUrl", e.data);
                        }else {
+                  
                          localStorage.setItem("status",e.data);
                        }
                  },
