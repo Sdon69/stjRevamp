@@ -244,13 +244,13 @@ padding:0;
 
 
               <div class="group">
-                    <input   type='text' placeholder="Concept" name='eventTitle'  id="mySelect"   required>
+                    <input   type='text' placeholder="Concept" name='eventTitle'  id="mySelect"  maxlength="40"   required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
 
                 </div>
                 <div class="group">
-                      <textarea name='eventDesc'  id="mySelect" placeholder="Notes" ></textarea> <span class="highlight"></span>
+                      <textarea name='eventDesc'  id="mySelect" placeholder="Notes"  maxlength="49000" ></textarea> <span class="highlight"></span>
                   <span class="tbar"></span>
 
                 </div>
@@ -295,7 +295,7 @@ padding:0;
 
                          localStorage.setItem("loadedUrl", e.data);
                        }else {
-                  
+
                          localStorage.setItem("status",e.data);
                        }
                  },
