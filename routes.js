@@ -326,6 +326,11 @@ router.get('/annonuncementWriterPage', function(req, res, next) {
     res.render('annonuncementWriterPage.handlebars');
 });
 
+router.get('/androidAnnouncementWriter', function(req, res, next) {
+
+    res.render('androidAnnouncementWriter.handlebars');
+});
+
 
 router.get('/notesWriterPage', function(req, res, next) {
 
