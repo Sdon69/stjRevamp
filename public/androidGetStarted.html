@@ -10,8 +10,8 @@ body{
 <button id="signout-button" style="display: none;">Sign Out</button>
 <div  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF; width:100%; height:100%;" align="justify"  >
 
-<div align="center" style="font-size:36px; font-family:Calibri; top:40%;" id="headerId">Welcome </div>
-<div align="center" style="font-size:20px; font-family:Arial; padding:5%;line-height: 140%;" id="bodyId">To this one time set up to upload Announcements and Notes with attachments.</div>
+<div align="center" style="font-size:36px; font-family:Calibri; top:40%;" id="headerId">Welcome to St. Johns App</div>
+<div align="center" style="font-size:20px; font-family:Arial; padding:5%;line-height: 140%;" id="bodyId"></div>
 <br><br><div align="center"><button id="buttonId" style="background:#F1F1F1; opacity:0.8; width:80%; height:10%;font-size:26px; color:#408bce;" onClick="onclickButton()">Lets Get Started</button>
 </div></div>
 
@@ -21,7 +21,7 @@ function onclickButton()
 {
   if(document.getElementById("buttonId").innerHTML.includes("Lets Get"))
   {
-document.getElementById("headerId").innerHTML = "First we need to link your google account" ;
+document.getElementById("headerId").innerHTML = "First lets link your google account" ;
 document.getElementById("bodyId").innerHTML = "After Google Signin  , you may require to  Click on 'Advanced' and then Click on  'Go to stjWebApp' " ;
 document.getElementById("buttonId").innerHTML = "Link" ;
 
@@ -49,14 +49,7 @@ document.getElementById("buttonId").innerHTML = "Link" ;
 
   var authorizeButton = document.getElementById('authorize-button');
   var signoutButton = document.getElementById('signout-button');
-  alert(localStorage.getItem("getStartedCompleted"));
-  if(localStorage.getItem("getStartedCompleted"))
-  {
-  if(localStorage.getItem("getStartedCompleted") == 'true')
-  {
-    window.location.href = "/androidSignin.html";
-  }
-}
+
   /**
    *  On load, called to load the auth2 library and API client library.
    */
