@@ -17,6 +17,43 @@
   the License.
 -->
 
+
+<script>
+ if(/iPhone|iPad|iPod/i.test(navigator.userAgent))
+{
+
+	alert("IOS");
+}else {
+  alert('Not Allowed');
+}
+
+</script>
+<script>
+
+  var signedUp = localStorage.getItem("signup");
+
+  var signedIn = localStorage.getItem("signin");
+
+
+if(signedUp == 'true' )
+{
+
+
+
+} else if(signedIn == 'true')
+{
+
+
+}else{
+  if(localStorage.getItem("getStartedCompleted") == 'true')
+  {
+    window.location.href = "/signin";
+  }else {
+    window.location.href = "/getStarted.html";
+  }
+
+}
+
 <style>
 
 ::placeholder {
@@ -605,7 +642,7 @@ else{
   function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
-      signoutButton.style.display = 'none';
+      signoutButton.style.display = 'block';
       alert("Signed in");
     } else {
       authorizeButton.style.display = 'none';
@@ -613,6 +650,7 @@ else{
           window.location.href = "/androidGetStarted.html";
     }
   }
+
 
   /**
    *  Sign in the user upon button click.
