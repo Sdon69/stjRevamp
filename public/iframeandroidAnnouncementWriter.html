@@ -16,41 +16,7 @@
   License for the specific language governing permissions and limitations under
   the License.
 -->
-<script>
- if(/Android/i.test(navigator.userAgent))
-{
 
-	alert("Android");
-}else {
-  alert('Not Allowed');
-}
-
-</script>
-<script>
-
-
-
-  var signedIn = localStorage.getItem("signin");
-
- if(signedIn == 'true')
-{
-
-
-}else{
-  if(localStorage.getItem("getStartedCompleted") == 'true')
-  {
-    window.location.href = "/androidSignin.html";
-  }else {
-    window.location.href = "/androidGetStarted.html";
-  }
-
-}
-
-
-
-
-
-</script>
 <style>
 
 ::placeholder {
