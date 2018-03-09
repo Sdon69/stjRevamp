@@ -355,7 +355,13 @@ else{
                  localStorage.setItem("phoneNo", row[5]);
                   localStorage.setItem("signin","true");
                     document.getElementById("loadingDiv").style = "display:none;";
+                    if(localStorage.getItem("androidCommand") == 'announcements')
+                    {
                     window.location.href = "/androidAnnouncementWriter.html";
+                  }
+                  else if (localStorage.getItem("androidCommand") == 'notes') {
+                          window.location.href = "/androidNotesWriter.html";
+                  }
                }else {
                    document.getElementById("incorrectPassword").innerHTML = 'Incorrect Password';
                }
