@@ -579,7 +579,7 @@ var loadedPhoneNo;
     loadedPhoneNo =      localStorage.getItem("transferPhoneNo")
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1RcujQMrh_DnVtUzgpBqS8JdMPVF2N1voqKePmQZYYCU',
+      spreadsheetId: '1wW2WXPzQnS0uZrZmhe-3OsHMSIjx3SfSRJQp0pUbqkQ',
       range: 'Teacher Data!A2:F',
        }).then(function(response) {
          var range = response.result;
@@ -620,7 +620,7 @@ rangeImported =  "Teacher Data!".concat("A" + ++a + ":S");
 function updateInfo(importedUserId,importedPassword,importedFirstName,importedLastName,importedEmail,importedPhoneNo,rangeImported)
 {
      gapi.client.sheets.spreadsheets.values.update({
-       spreadsheetId: '1RcujQMrh_DnVtUzgpBqS8JdMPVF2N1voqKePmQZYYCU',
+       spreadsheetId: '1wW2WXPzQnS0uZrZmhe-3OsHMSIjx3SfSRJQp0pUbqkQ',
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {
