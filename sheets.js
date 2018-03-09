@@ -87,21 +87,21 @@ var cataegory2;
 
   if(mode === 'announcementViewer')
   {
-    sheetId = '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs';
+    sheetId = '116OBhXliG69OB5bKRAEwpmlOz21LCCWStniSuIR6wPI';
     range = 'Stj Teacher Notes!A2:I';
     cataegory1 = 'All Departments';
     cataegory2 = 'All Semesters';
   }
   else if(mode === 'eventViewer')
   {
-    sheetId = '1_lodhrWpyuJSvJRi4MNyw8k7W7hSBKrXS7ukBVE4cI0';
+    sheetId = '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw';
     range = 'Class Data!A2:K';
 
         cataegory1 = 'All Events';
   }
   else if(mode === 'notesViewer')
   {
-    sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
+    sheetId = '1UDDtel5vAFBqVnaPZIZl20SwZEz_7fxGXYQOuKLvSmQ';
     range = 'Stj Teacher Notes!A2:J';
    cataegory1 = 'All Departments';
    cataegory2 = 'All Semesters';
@@ -130,7 +130,7 @@ var cataegory2;
   {
 
 
-    sheetId = '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs';
+    sheetId = '116OBhXliG69OB5bKRAEwpmlOz21LCCWStniSuIR6wPI';
     range = 'Stj Teacher Notes!A2:I';
 
   }
@@ -138,14 +138,14 @@ var cataegory2;
   {
 
 
-      sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
+      sheetId = '1UDDtel5vAFBqVnaPZIZl20SwZEz_7fxGXYQOuKLvSmQ';
       range = 'Stj Teacher Notes!A2:J';
 
   }
   if(mode === 'eventWriter')
   {
 
-    sheetId = '1_lodhrWpyuJSvJRi4MNyw8k7W7hSBKrXS7ukBVE4cI0';
+    sheetId = '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw';
     range = 'Class Data!A2:K';
 
   }
@@ -200,7 +200,7 @@ var cataegory2;
                 {
 
 
-                  sheetId = '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs';
+                  sheetId = '116OBhXliG69OB5bKRAEwpmlOz21LCCWStniSuIR6wPI';
                   range = 'Stj Teacher Notes!A2:F';
                   inputRes = {
                                 values: [ [gTitle,gDescription,gCataegories,gUserId,gFullName,uniqueIdNumber,gDateOfPublish]]
@@ -210,7 +210,7 @@ var cataegory2;
                 {
 
 
-                    sheetId = '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM';
+                    sheetId = '1UDDtel5vAFBqVnaPZIZl20SwZEz_7fxGXYQOuKLvSmQ';
                     range = 'Stj Teacher Notes!A2:J';
                     inputRes = {
                                   values: [ [gTitle,gDescription,gCataegories,gUserId,gFullName,uniqueIdNumber,gDateOfPublish]]
@@ -220,7 +220,7 @@ var cataegory2;
                 if(mode === 'eventWriter')
                 {
 
-                  sheetId = '1_lodhrWpyuJSvJRi4MNyw8k7W7hSBKrXS7ukBVE4cI0';
+                  sheetId = '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw';
                   range = 'Class Data!A2:K';
                   inputRes = {
                                 values: [ [gTitle,gDescription,gDateOfPublish,gDateOfEventString,gLastDateOfRegistrationString,gEntryFees,gCataegories,gUserId,gFullName,"A",uniqueIdNumber]]

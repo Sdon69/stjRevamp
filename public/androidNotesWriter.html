@@ -16,29 +16,7 @@
   License for the specific language governing permissions and limitations under
   the License.
 -->
-<script>
 
- if(/Android/i.test(navigator.userAgent))
-{
-	alert("Android");
-}else {
-  alert('Not Allowed');
-}
-localStorage.setItem("androidCommand","notes");
-</script>
-<script>
-  var signedIn = localStorage.getItem("signin");
- if(signedIn == 'true')
-{
-}else{
-  if(localStorage.getItem("getStartedCompleted") == 'true')
-  {
-    window.location.href = "/androidSignin.html";
-  }else {
-    window.location.href = "/androidGetStarted.html";
-  }
-}
-</script>
 
 <style>
 
@@ -699,7 +677,7 @@ else{
       localStorage.removeItem('status');
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM',
+      spreadsheetId: '1UDDtel5vAFBqVnaPZIZl20SwZEz_7fxGXYQOuKLvSmQ',
       range: 'Stj Teacher Notes!A2:H',
        }).then(function(response) {
          var range = response.result;
@@ -735,7 +713,7 @@ else{
 function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported)
 {
      gapi.client.sheets.spreadsheets.values.update({
-       spreadsheetId: '12UOUdDm2VoETOSM_zyP2Kfx6Mzuh-SdrXKLmv-yNZLM',
+       spreadsheetId: '1UDDtel5vAFBqVnaPZIZl20SwZEz_7fxGXYQOuKLvSmQ',
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {

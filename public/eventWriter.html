@@ -648,7 +648,7 @@ else{
     var loadedLastDateOfRegistration = localStorage.getItem("loadedLastDateOfRegistration");
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1_lodhrWpyuJSvJRi4MNyw8k7W7hSBKrXS7ukBVE4cI0',
+      spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
       range: 'Class Data!A2:K',
        }).then(function(response) {
          var range = response.result;
@@ -686,7 +686,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedPublishDate,loadedEventD
   loadedCataegory,loadedUserId,loadedFullName,a,rangeImported)
 {
      gapi.client.sheets.spreadsheets.values.update({
-       spreadsheetId: '1_lodhrWpyuJSvJRi4MNyw8k7W7hSBKrXS7ukBVE4cI0',
+       spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {

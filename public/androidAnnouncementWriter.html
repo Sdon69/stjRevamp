@@ -540,7 +540,7 @@ else{
     localStorage.removeItem('status');
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs',
+      spreadsheetId: '116OBhXliG69OB5bKRAEwpmlOz21LCCWStniSuIR6wPI',
       range: 'Stj Teacher Notes!A2:H',
        }).then(function(response) {
          var range = response.result;
@@ -566,7 +566,7 @@ else{
 function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported)
 {
      gapi.client.sheets.spreadsheets.values.update({
-       spreadsheetId: '1i6Kd38Z-NaO747Wi_DG9bxHH1LCMPzbCiDAIUbBxzYs',
+       spreadsheetId: '116OBhXliG69OB5bKRAEwpmlOz21LCCWStniSuIR6wPI',
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {
