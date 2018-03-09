@@ -357,6 +357,12 @@ router.get('/androidAnnouncementWriter', function(req, res, next) {
 });
 
 
+router.get('/androidNotesWriter', function(req, res, next) {
+
+
+      res.render('androidNotesWriter');
+});
+
 
 
 

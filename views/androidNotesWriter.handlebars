@@ -1,0 +1,49 @@
+<script>
+
+ if(/Android/i.test(navigator.userAgent))
+{
+	alert("Android");
+}else {
+  alert('Not Allowed');
+}
+localStorage.setItem("androidCommand","notes");
+</script>
+<script>
+  var signedIn = localStorage.getItem("signin");
+ if(signedIn == 'true')
+{
+}else{
+  if(localStorage.getItem("getStartedCompleted") == 'true')
+  {
+    window.location.href = "/androidSignin.html";
+  }else {
+    window.location.href = "/androidGetStarted.html";
+  }
+}
+</script>
+
+
+        <script>
+               window.addEventListener( "message",
+                 function (e) {
+
+                       if(e.origin !== 'https://n-zimj7dfcsfobgmntvmso4vfagfhs23aii7gtbnq-0lu-script.googleusercontent.com'){ return; }
+                        if(e.data.includes('http'))
+                        {
+
+                         localStorage.setItem("loadedUrl", e.data);
+                       }else {
+
+                         localStorage.setItem("status",e.data);
+                       }
+                 },
+                 false);
+           </script>
+<style>
+
+*{background-color: #ffffff;}
+
+
+</style>
+
+<iframe src="androidNotesWriter.html"  name="search_iframe"   style="position:fixed;  width:100%; height:82vh;  border:none; overflow:hidden; z-index:1;" scrolling=no></iframe></div>
