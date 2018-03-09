@@ -350,7 +350,11 @@ router.get('/signUp', function(req, res, next) {
       res.render('signUp.handlebars');
 });
 
+router.get('/androidAnnouncementWriter', function(req, res, next) {
 
+
+      res.render('androidAnnouncementWriter');
+});
 
 
 
