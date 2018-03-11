@@ -1,13 +1,4 @@
-<script>
-
- if(/Android/i.test(navigator.userAgent))
-{
-	alert("Android");
-}else {
-  alert('Not Allowed');
-}
-localStorage.setItem("androidCommand","announcements");
-</script>
+<script src="androidDeviceCheck.js"></script>
 <script>
   var signedIn = localStorage.getItem("signin");
  if(signedIn == 'true')
