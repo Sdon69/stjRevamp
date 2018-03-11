@@ -273,7 +273,7 @@ router.get('/detailedEvent', function(req, res, next) {
 });
 
 router.get('/editProfile', function(req, res, next) {
-    console.
+
 
 
 
@@ -363,11 +363,7 @@ router.get('/androidNotesWriter', function(req, res, next) {
       res.render('androidNotesWriter');
 });
 
-router.get('/editProfile', function(req, res, next) {
 
-
-      res.render('editProfile');
-});
 
 
 
