@@ -239,7 +239,7 @@ padding:0;
 
 <div class="form-style-2">
     <div class="group">
-          <input type='text' placeholder="Event Title" name='eventTitle'  id="mySelect"   maxlength="40"   required>
+          <input type='text' placeholder="Event Title" name='eventTitle'  id="mySelect"   maxlength="80"   required>
       <span class="highlight"></span>
       <span class="bar"></span>
 
@@ -649,7 +649,7 @@ else{
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
-      range: 'Class Data!A2:K',
+      range: 'Events!A2:K',
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {
@@ -665,7 +665,7 @@ else{
                            }
 
 
-                           rangeImported =  "Class Data!".concat("A" + ++a + ":K");
+                           rangeImported =  "Events!".concat("A" + ++a + ":K");
            }
 
              alert('Updating');

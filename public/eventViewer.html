@@ -432,7 +432,7 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
       });
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
-      range: 'Class Data!A2:K',
+      range: 'Events!A2:K',
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {

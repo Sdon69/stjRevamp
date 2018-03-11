@@ -363,6 +363,13 @@ router.get('/androidNotesWriter', function(req, res, next) {
       res.render('androidNotesWriter');
 });
 
+router.get('/editProfile', function(req, res, next) {
+
+
+      res.render('editProfile');
+});
+
+
 
 
 
