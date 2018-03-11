@@ -1,7 +1,7 @@
  if(/Android/i.test(navigator.userAgent))
 {
 
-	alert("Android");
+	// alert("Android");
 }else {
   window.location.href = "/serverDown.html";
 }

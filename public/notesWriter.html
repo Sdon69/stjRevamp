@@ -703,6 +703,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,l
                 }
      }).then(function(response) {
          document.getElementById("loadingDiv").style = "display:none;";
+         localStorage.setItem("writeMode", "notes");
        window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {

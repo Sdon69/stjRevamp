@@ -278,18 +278,6 @@ select:focus ~ .highlight {
 
 
 
-<!-- <script>
-
-
-
-  var delayInMilliseconds = 2000; //1 second
-
-  setTimeout(function() {
-
-    document.getElementById('getData').click();
-  }, delayInMilliseconds);
-
-</script> -->
 
 
 <script>
@@ -541,6 +529,7 @@ else{
 
              if(loadedUserId == userIdRetrieved)
              {
+                document.getElementById("loadingDiv").style = "display:none;";
                alert('ID already taken');
                break;
              }
@@ -558,12 +547,14 @@ rangeImported =  "Teacher Data!".concat("A" + ++a + ":S");
 
           }
          } else {
+            document.getElementById("loadingDiv").style = "display:none;";
            alert('No data found.');
          }
        }, function(response) {
+          document.getElementById("loadingDiv").style = "display:none;";
          alert('Error: ' + response.result.error.message);
        });
-
+ document.getElementById("loadingDiv").style = "display:none;";
 
 }
 function updateInfo(importedUserId,importedPassword,importedFirstName,importedLastName,importedEmail,importedPhoneNo,rangeImported)

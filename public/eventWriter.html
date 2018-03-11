@@ -678,6 +678,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedPublishDate,loadedEventD
                 }
      }).then(function(response) {
          document.getElementById("loadingDiv").style = "display:none;";
+         localStorage.setItem("writeMode", "event");
        window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {

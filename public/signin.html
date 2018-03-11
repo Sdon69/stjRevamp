@@ -339,9 +339,11 @@ else{
                  localStorage.setItem("phoneNo", row[5]);
                   localStorage.setItem("signin","true");
                     document.getElementById("loadingDiv").style = "display:none;";
-                    window.location.href = "/";
+                           window.location.href = "/";
+
                }else {
                    document.getElementById("incorrectPassword").innerHTML = 'Incorrect Password';
+                       document.getElementById("loadingDiv").style = "display:none;";
                }
              }
 
@@ -350,6 +352,8 @@ else{
            if(!idExists)
            {
              alert('Id does not exist');
+
+              document.getElementById("loadingDiv").style = "display:none;";
            }
 
          } else {
@@ -358,7 +362,6 @@ else{
        }, function(response) {
          alert('Error: ' + response.result.error.message);
        });
-
 
 }
 
