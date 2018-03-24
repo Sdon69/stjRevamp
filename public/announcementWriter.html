@@ -712,10 +712,10 @@ function updateTimestamp()
 {
      gapi.client.sheets.spreadsheets.values.update({
        spreadsheetId: '1nzKRlq7cQrI_XiJGxJdNax5oB91bR_SypiazWO2JTuU',
-       range:   "Timestamp!".concat("A2:B"),
+       range:   "Timestamp!".concat("B2:B"),
        valueInputOption: "USER_ENTERED",
        resource:  {
-                      values: [ ["announcementViewer",timestamp]]
+                      values: [ [timestamp]]
                 }
      }).then(function(response) {
          document.getElementById("loadingDiv").style = "display:none;";
