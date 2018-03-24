@@ -3,5 +3,5 @@
 
 
 }else {
-    // window.location.href = "/serverDown.html";
+    window.location.href = "/serverDown.html";
 }
