@@ -539,6 +539,8 @@ else{
 
 <script type="text/javascript">
 
+var timestamp;
+
 
   // Client ID and API key from the Developer Console
   var CLIENT_ID = '494373301552-ud7mvkhosmjkbbv4th3qelqij6jatfkg.apps.googleusercontent.com';
@@ -660,7 +662,7 @@ else{
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1UDDtel5vAFBqVnaPZIZl20SwZEz_7fxGXYQOuKLvSmQ',
-      range: 'Stj Teacher Notes!A2:H',
+      range: 'Stj Teacher Notes!A2:I',
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {
@@ -676,7 +678,7 @@ else{
                            }
 
 
-                           rangeImported =  "Stj Teacher Notes!".concat("A" + ++a + ":H");
+                           rangeImported =  "Stj Teacher Notes!".concat("A" + ++a + ":I");
            }
 
 
@@ -694,12 +696,42 @@ else{
 }
 function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported)
 {
+
+  timestamp = Math.round(new Date().getTime()/1000);
      gapi.client.sheets.spreadsheets.values.update({
        spreadsheetId: '1UDDtel5vAFBqVnaPZIZl20SwZEz_7fxGXYQOuKLvSmQ',
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {
-                      values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl]]
+                      values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,timestamp]]
+                }
+     }).then(function(response) {
+       updateTimestamp();
+
+       var range = response.result;
+       if (range.values.length > 0) {
+
+
+       } else {
+         document.write('No data found.');
+       }
+     }, function(response) {
+       document.write('Error: ' + response.result.error.message);
+     });
+
+
+
+}
+
+
+function updateTimestamp()
+{
+     gapi.client.sheets.spreadsheets.values.update({
+       spreadsheetId: '1nzKRlq7cQrI_XiJGxJdNax5oB91bR_SypiazWO2JTuU',
+       range:   "Timestamp!".concat("B3:B"),
+       valueInputOption: "USER_ENTERED",
+       resource:  {
+                      values: [ [timestamp]]
                 }
      }).then(function(response) {
          document.getElementById("loadingDiv").style = "display:none;";

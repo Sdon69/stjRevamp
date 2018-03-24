@@ -526,7 +526,7 @@ else{
 
 <script type="text/javascript">
 
-
+  var timestamp;
   // Client ID and API key from the Developer Console
   var CLIENT_ID = '494373301552-ud7mvkhosmjkbbv4th3qelqij6jatfkg.apps.googleusercontent.com';
   var API_KEY = 'AIzaSyAPAiPku7AqUy6mzyI-QVGe1cobzv8Afmw';
@@ -632,7 +632,7 @@ else{
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
-      range: 'Events!A2:K',
+      range: 'Events!A2:L',
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {
@@ -648,7 +648,7 @@ else{
                            }
 
 
-                           rangeImported =  "Events!".concat("A" + ++a + ":K");
+                           rangeImported =  "Events!".concat("A" + ++a + ":L");
            }
 
              alert('Updating');
@@ -668,18 +668,46 @@ else{
 function updateInfo(loadedTitle,loadedDescription,loadedPublishDate,loadedEventDate,loadedLastDateOfRegistration,loadedEntryFees,
   loadedCataegory,loadedUserId,loadedFullName,a,rangeImported)
 {
+      timestamp = Math.round(new Date().getTime()/1000);
      gapi.client.sheets.spreadsheets.values.update({
        spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {
                   values: [ [loadedTitle,loadedDescription,loadedPublishDate,loadedEventDate,
-                    loadedLastDateOfRegistration,loadedEntryFees,loadedCataegory,loadedUserId,loadedFullName,"A",a]]
+                    loadedLastDateOfRegistration,loadedEntryFees,loadedCataegory,loadedUserId,loadedFullName,"A",a,timestamp]]
                 }
      }).then(function(response) {
-         document.getElementById("loadingDiv").style = "display:none;";
-         localStorage.setItem("writeMode", "event");
-       window.top.location.reload();
+  updateTimestamp();
+       var range = response.result;
+       if (range.values.length > 0) {
+
+
+       } else {
+         document.write('No data found.');
+       }
+     }, function(response) {
+       document.write('Error: ' + response.result.error.message);
+     });
+
+
+
+}
+
+
+function updateTimestamp()
+{
+     gapi.client.sheets.spreadsheets.values.update({
+       spreadsheetId: '1nzKRlq7cQrI_XiJGxJdNax5oB91bR_SypiazWO2JTuU',
+       range:   "Timestamp!".concat("B4:B"),
+       valueInputOption: "USER_ENTERED",
+       resource:  {
+                      values: [ [timestamp]]
+                }
+     }).then(function(response) {
+       document.getElementById("loadingDiv").style = "display:none;";
+       localStorage.setItem("writeMode", "event");
+     window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {
 

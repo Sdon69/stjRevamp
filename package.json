@@ -21,15 +21,27 @@
     "json2html": "0.0.8",
     "morgan": "^1.7.0",
     "node-json2html": "^1.1.1",
+    "nodemon": "^1.9.1",
     "sequelize": "^3.21.0",
-    "sqlite3": "^3.1.3",
-    "nodemon": "^1.9.1"
+    "sqlite3": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.9.1"
   },
   "nodemonConfig": {
-   "ignore": ["notesViewer.json","eventViewer.json","announcementViewer.json","classViewer.json","subjectViewer.json","sectionViewer.json","userIdFeed.json","userIdDetailedFeed.json","passwordCheck.json","userIdWriter.json","attendanceAppender.json","package-lock.json" ]
- }
-
+    "ignore": [
+      "notesViewer.json",
+      "eventViewer.json",
+      "announcementViewer.json",
+      "classViewer.json",
+      "subjectViewer.json",
+      "sectionViewer.json",
+      "userIdFeed.json",
+      "userIdDetailedFeed.json",
+      "passwordCheck.json",
+      "userIdWriter.json",
+      "attendanceAppender.json",
+      "package-lock.json"
+    ]
+  }
 }
