@@ -561,8 +561,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,l
                   values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,timestamp]]
                 }
      }).then(function(response) {
-    document.getElementById("loadingDiv").style = "display:none;";
-       window.top.location.reload();
+       updateTimestamp()
        var range = response.result;
        if (range.values.length > 0) {
        } else {
