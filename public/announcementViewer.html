@@ -31,10 +31,11 @@ padding:0;
     <a href="/annonuncementWriterPage">
     <img src="bluePlus.jpg" class="float"></a>
 
+
     <button id="authorize-button" style="display: none;">Authorize</button>
     <button id="signout-button" style="display: none;">Sign Out</button>
-<div id="loadingDiv" style="position:fixed; height:100%; width:100%; background:#80141516; display:block;"><div style="position:fixed; width:20%; top:50%; left:40%; background:#ffffff;"><table ><tr><td><img src="loading.gif"></td><td> Loading...</td></tr></table></div>
-</div>
+<!-- <div id="loadingDiv" style="position:fixed; height:100%; width:100%; background:#80141516; display:block;"><div style="position:fixed; width:20%; top:50%; left:40%; background:#ffffff;"><table ><tr><td><img src="loading.gif"></td><td> Loading...</td></tr></table></div>
+</div> -->
   <!-- Show spreadsheets -->
 <div style="width:100%; background-color:#3f8acd; ">
         <form>
@@ -57,11 +58,11 @@ padding:0;
         <td width="52%"  rowspan="2"  >
         <input id='hangoutButtonId'    type="button" value="button" name="s3"  style="visibility: collapse;" onclick="submitClick()" >
 
-        <button type="button"  value='filter' onClick="checkInfo()" style="padding:5%; padding-right:20%;
+        <button type="button"  value='filter' onClick="checkInfo()" style= "padding:5%; padding-right:20%;
         padding-left:20%; background-color:rgba(236,230,230,0.65); border:none; color:rgba(255,255,255,1.00);
         font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600;  " >FILTER</button>
       </td></tr><tr> <td>
-            <select name ="s2"  id="cataegory2"  style="background:#3f8acd; border:none; color:#ECE7E7; margin-left:2%;  width:100%;-webkit-appearance: none; background:url(15xvbd5.png) no-repeat right ;">
+            <select name ="s2"  id="cataegory2"  style= "background:#3f8acd; border:none; color:#ECE7E7; margin-left:2%;  width:100%;-webkit-appearance: none; background:url(15xvbd5.png) no-repeat right ;">
 
                 <option style="font-weight:bold;">All Semesters</option>
   <option style="font-weight:bold;">First Semester</option>
@@ -85,21 +86,29 @@ padding:0;
 </span>
 
 </div>
-<div id="myDiv" style="height:100%,width:100%;">        </div>
+<div style="height:1.5%;width:100%;" id="loadingDiv"><marquee scrollamount="75"  behavior="alternate" >
+<div style="height:100%;width:25%; background:#3f8acd;"></div></marquee></div>
+
+<div id="myDiv" style="height:100%;width:100%;">        </div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.0.0/json2html.min.js"></script>
 
 <script>
+
+
 var gCataegory1;
 var gCataegory2;
 
 var viewerData;
+
+saveToViewerData();
+checkInfo();
 function saveToViewerData()
 {
-  viewerData =  localStorage.getItem("viewerData");
-  localStorage.removeItem("viewerData");
+  viewerData =  localStorage.getItem("announcementViewerData");
+
 }
 
   function checkInfo()
@@ -144,6 +153,8 @@ function submitClick()
 
 var res = viewerData.replace(/&quot;/g, '"');
 var raw_data =  JSON.parse(res);
+
+raw_data.reverse();
 
 
 
@@ -336,7 +347,7 @@ var raw_data =  JSON.parse(res);
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
-      listMajors();
+    listMajors("timestamp",getMiscSheetId(),"Timestamp!B2:B");
     } else {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
@@ -374,9 +385,14 @@ var raw_data =  JSON.parse(res);
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
 
+   var timestampSaved =  localStorage.getItem("timestampSavedAnnouncements");
+if(timestampSaved == undefined)
+{
+timestampSaved = "1521000000";
+}
 
-  function listMajors() {
-    document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
+  function listMajors(mode,sheetId,rangeRetrieved) {
+    document.getElementById("loadingDiv").style ="height:1.5%;width:100%;" ;
     var itemDetails = [{
            title: 'str1',
            age:   'str2'
@@ -386,8 +402,8 @@ var raw_data =  JSON.parse(res);
     age:   'str2'
       });
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '116OBhXliG69OB5bKRAEwpmlOz21LCCWStniSuIR6wPI',
-      range: 'Stj Teacher Notes!A2:H',
+      spreadsheetId: sheetId,
+      range: rangeRetrieved,
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {
@@ -396,9 +412,25 @@ var raw_data =  JSON.parse(res);
              // Print columns A and E, which correspond to indices 0 and 4.
 
 
+             var str1 = row[0];
 
-               var str1 = row[0];
+             if(mode == "timestamp")
+             {
+               timestampRetrieved = str1;
+                  if(timestampSaved != timestampRetrieved)
+                  {
 
+                      var timestampRetrieved = str1;
+                      localStorage.setItem("timestampSavedAnnouncements",timestampRetrieved);
+                      listMajors("announcementViewer",getAnnouncementSheetId(),"Stj Teacher Notes!A2:H");
+                      break;
+
+                  }else {
+                    break;
+                  }
+            }
+            else if(mode != "timestamp")
+            {
 
 
 
@@ -469,17 +501,21 @@ var raw_data =  JSON.parse(res);
 
 
 
-
+                                       }
 
            }
 
 
-            var viewerData =  JSON.stringify(itemDetails);
+           if(mode != "timestamp")
+           {
+                       var viewerData =  JSON.stringify(itemDetails);
 
-        localStorage.setItem("viewerData", viewerData);
-                saveToViewerData();
-                  document.getElementById("loadingDiv").style = "display:none;";
-                  checkInfo()
+                   localStorage.setItem("announcementViewerData", viewerData);
+                   saveToViewerData();
+
+                             checkInfo()
+                           }
+                            document.getElementById("loadingDiv").style = "display:none;";
          } else {
              alert('No data found.');
          }

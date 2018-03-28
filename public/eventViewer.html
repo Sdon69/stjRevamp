@@ -35,8 +35,8 @@ padding:0;
 
         <button id="authorize-button" style="display: none;">Authorize</button>
         <button id="signout-button" style="display: none;">Sign Out</button>
-        <div id="loadingDiv" style="position:fixed; height:100%; width:100%; background:#80141516; display:block;"><div style="position:fixed; width:20%; top:50%; left:40%; background:#ffffff;"><table ><tr><td><img src="loading.gif"></td><td> Loading...</td></tr></table></div>
-        </div>
+        <!-- <div id="loadingDiv" style="position:fixed; height:100%; width:100%; background:#80141516; display:block;"><div style="position:fixed; width:20%; top:50%; left:40%; background:#ffffff;"><table ><tr><td><img src="loading.gif"></td><td> Loading...</td></tr></table></div>
+        </div> -->
   <!-- Show spreadsheets -->
 <div style="width:100%; background-color:#3f8acd; ">
         <form>
@@ -59,7 +59,7 @@ padding:0;
         <br>
         <td width="52%"  >
         <input id='hangoutButtonId'    type="button" value="button" name="s3"  style="visibility: collapse;" onclick="submitClick()"  >
-        <button type="button"  value='filter' onClick="checkInfo()" style="padding:5%; padding-right:20%;
+        <button type="button"  value='filter' onClick="checkInfo()" style= "padding:5%; padding-right:20%;
         padding-left:20%; background-color:rgba(236,230,230,0.65); border:none; color:rgba(255,255,255,1.00);
         font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600;  "  >FILTER</button>
       </td></tr></td></tr></table>
@@ -78,6 +78,8 @@ padding:0;
 
         </span>
 </div>
+<div style="height:1.5%;width:100%;" id="loadingDiv"><marquee scrollamount="75"  behavior="alternate" >
+<div style="height:100%;width:25%; background:#3f8acd;"></div></marquee></div>
 <div id="myDiv" style="height:100%,width:100%;">        </div>
 
 <script>
@@ -98,10 +100,14 @@ padding:0;
 var gCataegory1;
 var gCataegory2;
 var viewerData;
+
+saveToViewerData();
+checkInfo();
 function saveToViewerData()
 {
-  viewerData =  localStorage.getItem("viewerData");
-  localStorage.removeItem("viewerData");
+  viewerData =  localStorage.getItem("eventViewerData");
+
+
 }
 function checkInfo()
 {
@@ -119,9 +125,9 @@ function checkInfo()
 
 else {
 
-
-  // document.getElementById('create').click();
-  document.getElementById('hangoutButtonId').click();
+submitClick();
+  // // document.getElementById('create').click();
+  // document.getElementById('hangoutButtonId').click();
 }
 
 }
@@ -147,7 +153,7 @@ var raw_data =  JSON.parse(res);
 
 var raw_data =  JSON.parse(res);
 
-
+raw_data.reverse();
 
         var forLength = raw_data.length - 1;
 
@@ -363,7 +369,7 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
     if (isSignedIn) {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
-      listMajors();
+      listMajors("timestamp",getMiscSheetId(),"Timestamp!B4:B");
     } else {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
@@ -400,10 +406,14 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
    * Print the names and majors of students in a sample spreadsheet:
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
+   var timestampSaved =  localStorage.getItem("timestampSavedEvents");
+if(timestampSaved == undefined)
+{
+  timestampSaved = "1521000000";
+}
 
-
-  function listMajors() {
-    document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
+  function listMajors(mode,sheetId,rangeRetrieved) {
+    document.getElementById("loadingDiv").style ="height:1.5%;width:100%;" ;
     var itemDetails = [{
            title: 'str1',
            age:   'str2'
@@ -413,8 +423,8 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
     age:   'str2'
       });
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
-      range: 'Events!A2:K',
+      spreadsheetId: sheetId,
+      range: rangeRetrieved,
        }).then(function(response) {
          var range = response.result;
          if (range.values.length > 0) {
@@ -424,9 +434,25 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
 
 
 
-               var str1 = row[0];
+                            var str1 = row[0];
 
+                            if(mode == "timestamp")
+                            {
+                              timestampRetrieved = str1;
+                                 if(timestampSaved != timestampRetrieved)
+                                 {
 
+                                     var timestampRetrieved = str1;
+                                     localStorage.setItem("timestampSavedEvents",timestampRetrieved);
+                                     listMajors("eventViewer",getEventSheetId(),"Events!A2:K");
+                                     break;
+
+                                 }else {
+                                   break;
+                                 }
+                          }
+                          else if(mode != "timestamp")
+                          {
 
 
                                  if (str1.includes("BonBlank88"))
@@ -493,16 +519,20 @@ document.getElementById("myDiv").innerHTML=transformedHtml;
 
 
                                                      }
+                                                   }
            }
 
 
-            var viewerData =  JSON.stringify(itemDetails);
+           if(mode != "timestamp")
+           {
+                       var viewerData =  JSON.stringify(itemDetails);
 
-
-        localStorage.setItem("viewerData", viewerData);
-              saveToViewerData();
-        document.getElementById("loadingDiv").style = "display:none;";
-          checkInfo()
+                   localStorage.setItem("eventViewerData", viewerData);
+                   saveToViewerData();
+                           // document.getElementById("loadingDiv").style = "display:none;";
+                             checkInfo()
+                           }
+                             document.getElementById("loadingDiv").style = "display:none;";
          } else {
            alert('No data found.');
          }

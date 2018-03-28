@@ -222,7 +222,7 @@ padding:0;
 
 <div class="form-style-2">
     <div class="group">
-          <input type='text' placeholder="Event Title" name='eventTitle'  id="mySelect"   maxlength="80"   required>
+          <input type='text' placeholder="Event Title" name='eventTitle'  id="mySelect" autocomplete="new-password"   maxlength="80"   required>
       <span class="highlight"></span>
       <span class="bar"></span>
 
@@ -236,11 +236,11 @@ padding:0;
       <span class="bar"></span>
 
       </div>
-          <div class="group">
+          <!-- <div class="group">
           <input type='password' placeholder="Confirm Password" name='pass_check'  id="mySelect">  <span class="highlight"></span>
       <span class="bar"></span>
 
-      </div>
+      </div> -->
           <div class="group">  <font color="#3f8acd">
           <b>Date of Event:<br><br>
           <input type="date" name='date_of_event'  id="mySelect">  <span class="highlight"></span>
@@ -254,7 +254,8 @@ padding:0;
 
       </div>
           Genre(s):<br><br>
-
+          <input type="checkbox" style= "width:auto; visibility:visible;" id="checkAllSemesters" onclick="checkAllS()" ><span id="checkAllSemestersSpan"> Select All Genres<br><br></span>
+            <input type="checkbox" style= "width:auto; display:none;" id="uncheckAllSemesters" onclick="uncheckAllS()" ><span id="uncheckAllSemestersSpan"></span>
           <input type="checkbox" name="genres0" value="Technology"  id="mySelect" style="width:auto;"  > Technology<br><br>
           <input type="checkbox" name="genres1" value="Social Gathering"  id="mySelect"  style="width:auto;"> Social Gathering<br><br>
           <input type="checkbox" name="genres2" value="Debate"  id="mySelect" style="width:auto;"> Debate<br><br>
@@ -283,6 +284,14 @@ padding:0;
               </font>
 <script>
 
+function checkAllS()
+{
+  checkAllEvents();
+}
+function uncheckAllS()
+{
+  uncheckAllEvents();
+}
 var isGenreChecked = false;
 var cataegoryString = 'All Events';
 function concatCataegoryString()
@@ -367,8 +376,8 @@ var desc = document.event.eventDesc.value;
 
 var entryFees = document.event.entryFees.value;
 
-var pass_check = document.event.pass_check.value;
-var loadedPassword = localStorage.getItem("password");
+// var pass_check = document.event.pass_check.value;
+// var loadedPassword = localStorage.getItem("password");
 var date_of_event =   document.event.date_of_event.value;
 var dateOfEventArray = date_of_event.split("-");
 var dateOfEventYear = dateOfEventArray[0];
@@ -448,12 +457,13 @@ else if (desc.length < 1) {
 else if (entryFees.length < 1) {
     alert('Enter the Entry Fees.');
 }
-else if (pass_check.length < 1) {
-    alert('Confirm the password.');
-}else if(pass_check != loadedPassword)
-{
-  alert("Incorrect Password");
-}
+// else if (pass_check.length < 1) {
+//     alert('Confirm the password.');
+// }
+// else if(pass_check != loadedPassword)
+// {
+//   alert("Incorrect Password");
+// }
 else if(date_of_event.length < 2)
 {
 
@@ -522,9 +532,48 @@ else{
 
 }
 
+
+function checkAllEvents()
+{
+  document.event.genres0.checked = true;
+  document.event.genres1.checked = true;
+  document.event.genres2.checked = true;
+  document.event.genres3.checked = true;
+  document.event.genres4.checked = true;
+  document.event.genres5.checked = true;
+  document.event.genres6.checked = true;
+
+  document.getElementById("uncheckAllSemesters").checked = false;
+    document.getElementById("checkAllSemesters").style ="display:none";
+      document.getElementById("checkAllSemestersSpan").style = "display:none";
+      document.getElementById("uncheckAllSemesters").style ="visibility:visible;width:auto";
+      document.getElementById("uncheckAllSemestersSpan").innerHTML = " Deselect All Genres<br><br>";
+    document.getElementById("uncheckAllSemestersSpan").style ="visibility:visible;width:auto";
+
+}
+
+function uncheckAllEvents()
+{
+  document.event.genres0.checked = false;
+  document.event.genres1.checked = false;
+  document.event.genres2.checked = false;
+  document.event.genres3.checked = false;
+  document.event.genres4.checked = false;
+  document.event.genres5.checked = false;
+  document.event.genres6.checked = false;
+
+  document.getElementById("checkAllSemesters").checked = false;
+  document.getElementById("checkAllSemesters").style = "visibility:visible;width:auto";
+    document.getElementById("checkAllSemestersSpan").innerHTML = " Select All Genres<br><br>";
+      document.getElementById("checkAllSemestersSpan").style ="visibility:visible;width:auto";
+    document.getElementById("uncheckAllSemesters").style  ="display:none";
+document.getElementById("uncheckAllSemestersSpan").style ="display:none";
+
+}
 </script>
 
 <script type="text/javascript">
+
 
   var timestamp;
   // Client ID and API key from the Developer Console
@@ -631,7 +680,7 @@ else{
     var loadedLastDateOfRegistration = localStorage.getItem("loadedLastDateOfRegistration");
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
+      spreadsheetId: getEventSheetId(),
       range: 'Events!A2:L',
        }).then(function(response) {
          var range = response.result;
@@ -651,7 +700,7 @@ else{
                            rangeImported =  "Events!".concat("A" + ++a + ":L");
            }
 
-             alert('Updating');
+
             updateInfo(loadedTitle,loadedDescription,loadedPublishDate,loadedEventDate,loadedLastDateOfRegistration,loadedEntryFees,
               loadedCataegory,loadedUserId,loadedFullName,a,rangeImported);
 
@@ -670,7 +719,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedPublishDate,loadedEventD
 {
       timestamp = Math.round(new Date().getTime()/1000);
      gapi.client.sheets.spreadsheets.values.update({
-       spreadsheetId: '1SC0UPYthsoS5NKDuC5oJt-y29__f0gm0wkIkJoDduWw',
+       spreadsheetId: getEventSheetId(),
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {
@@ -698,7 +747,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedPublishDate,loadedEventD
 function updateTimestamp()
 {
      gapi.client.sheets.spreadsheets.values.update({
-       spreadsheetId: '1nzKRlq7cQrI_XiJGxJdNax5oB91bR_SypiazWO2JTuU',
+       spreadsheetId: getMiscSheetId(),
        range:   "Timestamp!".concat("B4:B"),
        valueInputOption: "USER_ENTERED",
        resource:  {
@@ -707,6 +756,7 @@ function updateTimestamp()
      }).then(function(response) {
        document.getElementById("loadingDiv").style = "display:none;";
        localStorage.setItem("writeMode", "event");
+          localStorage.setItem("homePage","eventViewerPage");
      window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {
