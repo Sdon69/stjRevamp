@@ -304,9 +304,9 @@ router.get('/annonuncementViewerPage', function(req, res, next) {
 });
 
 
-router.get('/notesViewerPage', function(req, res, next) {
+router.get('/notesViewer.html', function(req, res, next) {
 
-    res.render('notesViewerPage');
+    res.render('notesViewer.html');
 });
 
 

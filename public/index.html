@@ -72,15 +72,15 @@ if(signedUp == 'true' )
   <table style="width:100%;" ><tr>
     <tr>
     <td style="width:20%; padding-left:5px;"><a  onclick="attendanceChange()"  href="attendance" target="search_iframe"><img height=36px width=30px src = "attendance.png" id="attendanceImg"></a> </td>
-    <td style="width:20%;padding-left:5px;"  ><a onclick="announcementChange()" href="annonuncementViewerPage" target="search_iframe"><img height=30px width=36px src = "announcements.png"  id="annonuncementImg"></a> </td>
-    <td style="width:20%;padding-left:5px;"><a onclick="notesChange()" href="notesViewerPage" target="search_iframe"><img height=36px width=28px src = "notes.png" id="notesImg"></a> </td>
-    <td style="width:20%;padding-left:2px;"><a onclick="eventChange()" href="eventViewerPage" target="search_iframe"><img height=30px width=40px src = "events.png" id="eventsImg"></a> </td>
+    <td style="width:20%;padding-left:5px;"  ><a onclick="announcementChange()" href="announcementViewer.html" target="search_iframe"><img height=30px width=36px src = "announcements.png"  id="annonuncementImg"></a> </td>
+    <td style="width:20%;padding-left:5px;"><a onclick="notesChange()" href="notesViewer.html" target="search_iframe"><img height=36px width=28px src = "notes.png" id="notesImg"></a> </td>
+    <td style="width:20%;padding-left:2px;"><a onclick="eventChange()" href="eventViewer.html" target="search_iframe"><img height=30px width=40px src = "events.png" id="eventsImg"></a> </td>
     <td style="width:20%;"  ><a href="profile" onclick="profileChange()"  target="search_iframe"><img height=36px width=30px style="margin-left:4px;" src = "profile.png" id="profileImg"></a> </td>
     </tr>
 <td style="width:20%;"><a  onclick="attendanceChange()" href="attendance"  style="text-decoration:none;" target="search_iframe"><span id='attendanceText' style="color:#3f8acd">Atten..</span></a> </td>
-<td style="width:20%;"><a onclick="announcementChange()" href="annonuncementViewerPage"  style="text-decoration:none;" target="search_iframe"><span id='announcementsText' style="color:#3f8acd">Annou..</span></a> </td>
-<td style="width:20%;"><a onclick="notesChange()" href="notesViewerPage"  style="text-decoration:none;" target="search_iframe"><span id='notesText' style="color:#3f8acd">Notes</span></a> </td>
-<td style="width:20%;"><a onclick="eventChange()" href="eventViewerPage"  style="text-decoration:none;" target="search_iframe"><span id='eventsText' style="color:#3f8acd">Events</span></a> </td>
+<td style="width:20%;"><a onclick="announcementChange()" href="announcementViewer.html"  style="text-decoration:none;" target="search_iframe"><span id='announcementsText' style="color:#3f8acd">Annou..</span></a> </td>
+<td style="width:20%;"><a onclick="notesChange()" href="notesViewer.html"  style="text-decoration:none;" target="search_iframe"><span id='notesText' style="color:#3f8acd">Notes</span></a> </td>
+<td style="width:20%;"><a onclick="eventChange()" href="eventViewer.html"  style="text-decoration:none;" target="search_iframe"><span id='eventsText' style="color:#3f8acd">Events</span></a> </td>
 <td style="width:20%;"  ><a onclick="profileChange()" href="profile"  style="text-decoration:none;" target="search_iframe"><span id='profileText' style="color:#3f8acd">Profile</span></a></td>
 </tr>
 
@@ -194,11 +194,11 @@ function setHomePage()
 
 function iconChange(page)
 {
-  if(homePage == "annonuncementViewerPage")
+  if(homePage == "announcementViewer.html")
   announcementChange();
-  else if(homePage == "eventViewerPage")
+  else if(homePage == "eventViewer.html")
   eventChange();
-  else if(homePage == "notesViewerPage")
+  else if(homePage == "notesViewer.html")
   notesChange();
 
 }

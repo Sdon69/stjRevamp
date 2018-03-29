@@ -831,7 +831,7 @@ function updateTimestamp()
      }).then(function(response) {
          document.getElementById("loadingDiv").style = "display:none;";
          localStorage.setItem("writeMode", "notes");
-               localStorage.setItem("homePage","notesViewerPage");
+               localStorage.setItem("homePage","notesViewer.html");
 
        window.top.location.reload();
        var range = response.result;

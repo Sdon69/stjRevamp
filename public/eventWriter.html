@@ -523,7 +523,7 @@ else{
        // setTimeout(function() {
        //
        //   document.getElementById('create').click();
-       //        window.location.href = "/eventViewerPage";
+       //        window.location.href = "/eventViewer.html";
        // }, delayInMilliseconds);
 
 
@@ -756,7 +756,7 @@ function updateTimestamp()
      }).then(function(response) {
        document.getElementById("loadingDiv").style = "display:none;";
        localStorage.setItem("writeMode", "event");
-          localStorage.setItem("homePage","eventViewerPage");
+          localStorage.setItem("homePage","eventViewer.html");
      window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {

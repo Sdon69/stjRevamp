@@ -817,7 +817,7 @@ function updateTimestamp()
      }).then(function(response) {
          document.getElementById("loadingDiv").style = "display:none;";
          localStorage.setItem("writeMode", "notes");
-            localStorage.setItem("homePage","annonuncementViewerPage");
+            localStorage.setItem("homePage","announcementViewer.html");
        window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {
