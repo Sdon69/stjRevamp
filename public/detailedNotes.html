@@ -49,14 +49,19 @@ var sortedFullName =localStorage.getItem("sortedFullName")
 
 var sortedFileUrl = localStorage.getItem("sortedFileUrl");
 
-if(sortedFileUrl !='None')
+if(sortedFileUrl !='None' &&  sortedFileUrl.length > 20)
 {
 	var trimmedFileId =sortedFileUrl.substring(sortedFileUrl.lastIndexOf("/d/")+3,sortedFileUrl.lastIndexOf("vi")-1);
 	var sourceString = "https://docs.google.com/viewer?srcid=fileid&pid=explorer&efh=false&a=v&chrome=false&embedded=true" ;
 	var generatedSrc = sourceString.replace('fileid', trimmedFileId);
 	document.getElementById("attachmentFrame").src = generatedSrc;
 	 document.getElementById("attachmentUrl").innerHTML = "Attachments :";
-}else {
+}else if(sortedFileUrl.length > 4 && sortedFileUrl.length <20){
+		document.getElementById("attachmentFrame").style = "display:none;";
+document.getElementById("attachmentUrl").innerHTML = '<center><iframe width="480" height="360" src="https://www.youtube.com/embed/' + sortedFileUrl + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></center>';
+
+}
+else {
 	document.getElementById("attachmentFrame").style = "display:none;";
 	 document.getElementById("attachmentUrl").innerHTML = "Attachments : None";
 }

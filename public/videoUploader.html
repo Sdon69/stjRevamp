@@ -1,3 +1,7 @@
+<head>
+<script src="deviceCheck.js"></script>
+<script src="youtubeUpload.js"></script>
+<link rel="stylesheet" type="text/css" href="youtubeUploader.css">
 
 <style>
 
@@ -119,7 +123,6 @@ input:focus ~ .highlight {
   to 	{ width:0; background:transparent; }
 }
 
-
 textarea 				{
   font-size:18px;
   padding:10px 10px 10px 5px;
@@ -207,112 +210,108 @@ textarea:focus ~ .highlight {
   to 	{ width:0; background:transparent; }
 }
 
+
 html, body {height:100%; overflow:hidden}
 body {
 overflow:auto; -webkit-overflow-scrolling:touch;margin:0;
-padding:0;
+padding:20px;
 }
+
 </style>
+</head>
+
 <button id="authorize-button" style="display: none;">Authorize</button>
 <button id="signout-button" style="display: none;">Sign Out</button>
-<div id="loadingDiv" style="position:fixed; height:100%; width:100%; background:#80141516; display:none;"><div style="position:fixed; width:20%; top:50%; left:40%; background:#ffffff;"><table ><tr><td><img src="loading.gif"></td><td> Loading...</td></tr></table></div>
-</div>
-<font face="roboto">
-<div style="background:#ffffff; padding:20px;">
+<span id="signinButton" class="pre-sign-in">
+  <!-- IMPORTANT: Replace the value of the <code>data-clientid</code>
+       attribute in the following tag with your project's client ID. -->
 
-        <form method="post" action="/announcementWriteCheck" name='event'>
+  <span
+    class="g-signin"
+    data-callback="signinCallback"
+    data-clientid="494373301552-ud7mvkhosmjkbbv4th3qelqij6jatfkg.apps.googleusercontent.com"
+    data-cookiepolicy="single_host_origin"
+    data-scope="https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube">
 
+  </span>
+</span>
 
-          <div class="form-style-2">
-              <div class="group">
-                    <input type='text' placeholder="Title" name='eventTitle' autocomplete="new-password"  id="mySelect"   maxlength="80"   required>
-                <span class="highlight"></span>
-                <span class="bar"></span>
+<div class="post-sign-in">
 
-                </div>
-              <div class="group">
-                    <textarea name='eventDesc'  id="mySelect" placeholder="Details"  maxlength="49000"  ></textarea> <span class="highlight"></span>
-                <span class="tbar"></span>
+  <div>
+    <!-- <img id="channel-thumbnail">
+    <span id="channel-name"></span> -->
+  </div>
 
-                </div>
-                    <!-- <div class="group">
-                    <input type='password' placeholder="Confirm Password" name='pass_check'  id="mySelect">  <span class="highlight"></span>
-                <span class="bar"></span>
+    <form name='event'>
+                <div class="group">
+    <input id="title" type="text" placeholder="Title" style="width:100%;" required>
+    <span class="highlight"></span>
+    <span class="bar"></span>
 
-                </div> -->
-    <br> <font color="#3f8acd">
-    <b>
-      Department(s) Concerned:<br><br>
-      <input type="checkbox" style= "width:auto; visibility:visible;" id="checkAllDepartments" onclick="checkAllD()"><span id="checkAllDepartmentsSpan" >Select All Departments<br><br></span>
-      <input type="checkbox" style= "width:auto; display:none;" id="uncheckAllDepartments" onclick="uncheckAllD()"><span id="uncheckAllDepartmentsSpan"></span>
-      <input type="checkbox"  name="department0" value="Art"  style="width:auto; " id="mySelect">Art<br><br>
-      <input type="checkbox" name="department1" value="Commerce"  style="width:auto;" id="mySelect">Commerce<br><br>
-      <input type="checkbox" name="department2" value="Management" style="width:auto;" id="mySelect">Management<br><br>
-      <input type="checkbox" name="department3" value="Education" style="width:auto;" id="mySelect">Education<br><br>
-      <input type="checkbox" name="department4" value="Science" style="width:auto;" id="mySelect">Science<br><br>
-      <input type="checkbox" name="department5" value="Other" style="width:auto;" id="mySelect">Other<br><br>
+  </div>
 
-      <br>
+                <div class="group">
+    <textarea id="description" placeholder="Description" style="width:100%;" required></textarea>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+  </div>
+  <br> <font color="#3f8acd">
+  <b>
+  Department(s) Concerned:<br><br>
+    <input type="checkbox" style= "width:auto; visibility:visible;" id="checkAllDepartments" onclick="checkAllD()"><span id="checkAllDepartmentsSpan" >Select All Departments<br><br></span>
+          <input type="checkbox" style= "width:auto; display:none;" id="uncheckAllDepartments" onclick="uncheckAllD()"><span id="uncheckAllDepartmentsSpan"></span>
+  <input type="checkbox"  name="department0" value="Art"  style="width:auto; " id="mySelect">Art<br><br>
+  <input type="checkbox" name="department1" value="Commerce"  style="width:auto;" id="mySelect">Commerce<br><br>
+  <input type="checkbox" name="department2" value="Management" style="width:auto;" id="mySelect">Management<br><br>
+  <input type="checkbox" name="department3" value="Education" style="width:auto;" id="mySelect">Education<br><br>
+  <input type="checkbox" name="department4" value="Science" style="width:auto;" id="mySelect">Science<br><br>
+  <input type="checkbox" name="department5" value="Other" style="width:auto;" id="mySelect">Other<br><br>
 
-
-      Semesters(s) Concerned:<br><br>
-      <input type="checkbox" style= "width:auto; visibility:visible;" id="checkAllSemesters" onclick="checkAllS()" ><span id="checkAllSemestersSpan">Select All Semesters<br><br></span>
-        <input type="checkbox" style= "width:auto; display:none;" id="uncheckAllSemesters" onclick="uncheckAllS()" ><span id="uncheckAllSemestersSpan"></span>
-      <input type="checkbox" name="semester0" value="First Semester" style="width:auto;" id="mySelect">First Semester<br><br>
-      <input type="checkbox" name="semester1" value="Second Semester" style="width:auto;"style="width:auto;"  id="mySelect">Second Semester<br><br>
-      <input type="checkbox" name="semester2" value="Third Semester"  style="width:auto;" id="mySelect">Third Semester<br><br>
-      <input type="checkbox" name="semester3" value="Fourth Semester" style="width:auto;" id="mySelect">Fourth Semester<br><br>
-      <input type="checkbox" name="semester4" value="Fifth Semester" style="width:auto;" id="mySelect">Fifth Semester<br><br>
-      <input type="checkbox" name="semester5" value="Sixth and Above Semesters" style="width:auto;" id="mySelect">Sixth and Above Semesters<br><br>
+  <br>
 
 
-    <iframe id="iframe" src="https://script.google.com/macros/s/AKfycbx0EPMPMoik0bHwgCfcK-fovnXnPjknk8KNZrRx3Mw5HB6oKyLu/exec"  name="search_iframe"   style="width:100%; height:20%;  border:none; overflow:hidden; z-index:1;"></iframe>
-
-
-    <script>
-           window.addEventListener( "message",
-             function (e) {
-
-                   if(e.origin !== 'https://n-zimj7dfcsfobgmntvmso4vfagfhs23aii7gtbnq-0lu-script.googleusercontent.com'){ return; }
-                    if(e.data.includes('http'))
-                    {
-
-                     localStorage.setItem("loadedUrl", e.data);
-                   }else {
-
-                     localStorage.setItem("status",e.data);
-                   }
-             },
-             false);
-       </script>
-
-
-    <br>
-
-      <input type='text' name='cataegoryTextName' value='false'  id='cataegoryStringText'  style="visibility:collapse;" >
-  <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse;" >
-<input type="button" value="SUBMIT"  onclick="check()" style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;"    >
-
-            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
-          </div>
-        </form>
-        <br><br>
-      <span class="mdl-list__item-secondary-action" style="position:relative; ">
-
-        <button  class="mdl-button mdl-js-button mdl-button--raised
-                       mdl-js-ripple-effect mdl-button--colored"
-                rel="writeAnnouncement" type="button" id='create'  style="position:relative; visibility:collapse;">Create</button>
-
-
-
-</div>
+  Semesters(s) Concerned:<br><br>
+  <input type="checkbox" style= "width:auto; visibility:visible;" id="checkAllSemesters" onclick="checkAllS()" ><span id="checkAllSemestersSpan">Select All Semesters<br><br></span>
+    <input type="checkbox" style= "width:auto; display:none;" id="uncheckAllSemesters" onclick="uncheckAllS()" ><span id="uncheckAllSemestersSpan"></span>
+  <input type="checkbox" name="semester0" value="First Semester" style="width:auto;" id="mySelect">First Semester<br><br>
+  <input type="checkbox" name="semester1" value="Second Semester" style="width:auto;"style="width:auto;"  id="mySelect">Second Semester<br><br>
+  <input type="checkbox" name="semester2" value="Third Semester"  style="width:auto;" id="mySelect">Third Semester<br><br>
+  <input type="checkbox" name="semester3" value="Fourth Semester" style="width:auto;" id="mySelect">Fourth Semester<br><br>
+  <input type="checkbox" name="semester4" value="Fifth Semester" style="width:auto;" id="mySelect">Fifth Semester<br><br>
+  <input type="checkbox" name="semester5" value="Sixth and Above Semesters" style="width:auto;" id="mySelect">Sixth and Above Semesters<br><br>
+</b>
 </font>
-<script src="deviceCheck.js"></script>
-<script>
-var isSemesterChecked;
-var isDepartmentChecked;
-var cataegoryString = 'All Departments All Semesters';
+</form>
+    <!-- <label for="privacy-status">Privacy Status:</label> -->
+    <select id="privacy-status" style="display:none;">
 
+      <option>unlisted</option>
+
+    </select>
+
+
+  <div>
+    <input  type="file" id="file" class="button"  accept="video/*" style="width:100%; margin-bottom:5%;border-bottom:none;" >
+        <button onclick="onClickUpload()" style="width:100%;background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;border:none;padding:2%;font-weight:550;">Upload And Submit</button>
+    <button id="button" style="width:100%;display:none">Upload And Submit</button>
+  <div class="during-upload">
+    <p><span id="percent-transferred"></span>% done (<span id="bytes-transferred"></span>/<span id="total-bytes"></span> bytes)</p>
+    <progress id="upload-progress" max="1" value="0"></progress>
+  </div>
+
+  <div class="post-upload">
+    <!-- <p>Uploaded video with id <span id="video-id"></span>. Polling for status...</p> -->
+    <ul id="post-upload-status"></ul>
+    <div id="player"></div>
+  </div>
+  <!-- <p id="disclaimer">By uploading a video, you certify that you own all rights to the content or that you are authorized by the owner to make the content publicly available on YouTube, and that it otherwise complies with the YouTube Terms of Service located at <a href="http://www.youtube.com/t/terms" target="_blank">http://www.youtube.com/t/terms</a></p> -->
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//apis.google.com/js/client:plusone.js"></script>
+
+<script type="text/javascript">
 function checkAllD()
 {
   checkAllDepartments();
@@ -332,11 +331,106 @@ function uncheckAllS()
 {
   uncheckAllSemesters();
 }
-
-function concatCataegoryString()
+var isAnyFileSelected = false;
+var isSemesterChecked;
+var isDepartmentChecked;
+var cataegoryString = 'All Departments All Semesters';
+function onClickUpload()
 {
 
 
+
+
+
+  var title = document.getElementById("title").value;
+
+  var desc = document.getElementById("description").value;
+
+
+  //
+    // var pass_check = document.event.pass_check.value;
+  var loadedPassword = localStorage.getItem("password");
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if(dd<10){
+    dd='0'+dd;
+    }
+    if(mm<10){
+    mm='0'+mm;
+    }
+    var today = dd+'/'+mm+'/'+yyyy;
+
+
+
+
+  concatCataegoryString();
+
+
+
+
+
+
+
+
+
+  if(title.length < 1)
+  {
+
+
+    alert('Enter the Title.');
+  }
+  else if (desc.length < 1) {
+      alert('Enter the Description.');
+  }
+  // else if (pass_check.length < 1) {
+  //     alert('Confirm the password.');
+  // }else if(pass_check != loadedPassword)
+  // {
+  //   alert("Incorrect Password")
+  // }
+
+
+
+
+
+
+  else if (!isDepartmentChecked) {
+    alert('Choose Atleast one Department')
+  }
+
+  else if (!isSemesterChecked) {
+    alert('Choose Atleast one Semester');
+
+  }else if(!isAnyFileSelected)
+  {
+      alert('Please Choose a File');
+  }
+  else{
+
+
+
+        localStorage.setItem("loadedCataegory", cataegoryString);
+
+
+              document.getElementById('button').click();
+
+
+  }
+
+
+
+
+
+
+
+
+}
+function concatCataegoryString()
+{
 
              var semester = ['1'];
              semester.pop('1');
@@ -450,7 +544,6 @@ isDepartmentChecked = true;
 
 }
 
-
 function checkAllSemesters()
 {
   document.event.semester0.checked = true;
@@ -523,121 +616,9 @@ document.getElementById("uncheckAllDepartmentsSpan").style ="display:none";
 }
 
 
-
-function check()
-{
+var timestamp;
 
 
-
-
-var title = document.event.eventTitle.value;
-
-var desc = document.event.eventDesc.value;
-
-
-
-// var pass_check = document.event.pass_check.value;
-
-var loadedPassword = localStorage.getItem("password");
-
-
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
-
-  var yyyy = today.getFullYear();
-  if(dd<10){
-  dd='0'+dd;
-  }
-  if(mm<10){
-  mm='0'+mm;
-  }
-  var today = dd+'/'+mm+'/'+yyyy;
-
-
-
-
-concatCataegoryString();
-
-
-
-
-
-
-
-
-
-if(title.length < 1)
-{
-
-
-  alert('Enter the Event Title.');
-}
-else if (desc.length < 1) {
-    alert('Enter the Event Description.');
-}
-// else if (pass_check.length < 1) {
-//     alert('Confirm the password.');
-// } else if(pass_check != loadedPassword)
-// {
-//   alert("Incorrect Password")
-// }
-
-
-
-
-
-
-else if (!isDepartmentChecked) {
-  alert('Choose Atleast one Department')
-}
-
-else if (!isSemesterChecked) {
-  alert('Choose Atleast one Semester');
-
-}
-else{
-
-   document.getElementById('cataegoryStringText').value = cataegoryString;
-   document.getElementById('todayDateText').value = today;
-
-
-   localStorage.setItem("loadedCataegory", cataegoryString);
-   localStorage.setItem("loadedPublishDate", today);
-     localStorage.setItem("loadedTitle", title);
-   localStorage.setItem("loadedDescription", desc);
-
-    if(localStorage.getItem("status"))
-    {
-      if(localStorage.getItem("loadedUrl"))
-      {
-
-        listMajors();
-      }else {
-        alert('Upload In Progress... ');
-      }
-    }else {
-      listMajors();
-    }
-
-}
-
-
-
-
-
-
-
-}
-
-
-
-
-</script>
-
-<script type="text/javascript">
-
-  var timestamp;
   // Client ID and API key from the Developer Console
   var CLIENT_ID = '494373301552-ud7mvkhosmjkbbv4th3qelqij6jatfkg.apps.googleusercontent.com';
   var API_KEY = 'AIzaSyAPAiPku7AqUy6mzyI-QVGe1cobzv8Afmw';
@@ -689,9 +670,19 @@ else{
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
       // listMajors();
+
     } else {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
+      alert('not signed in');
+      var delayInMilliseconds = 10; //0.01 second
+
+      setTimeout(function() {
+
+      document.getElementById('authorize-button').click();
+      }, delayInMilliseconds);
+
+
     }
   }
 
@@ -728,15 +719,16 @@ else{
 
 
   function listMajors() {
-    document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
+      // document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
+
     var loadedFirstName = localStorage.getItem("firstName");
     var loadedLastName = localStorage.getItem("lastname");
     var loadedFullName = loadedFirstName.concat(' ' + loadedLastName);
     var loadedUserId = localStorage.getItem("userId");
     var loadedCataegory = localStorage.getItem("loadedCataegory")
     var loadedPublishDate = localStorage.getItem("loadedPublishDate")
-    var loadedTitle = localStorage.getItem("loadedTitle")
-    var loadedDescription = localStorage.getItem("loadedDescription")
+    var loadedTitle =  document.getElementById("title").value;
+    var loadedDescription = document.getElementById("description").value;
     var loadedUrl =  localStorage.getItem("loadedUrl");
     if(!loadedUrl)
     {
@@ -744,10 +736,10 @@ else{
     }
 
     localStorage.removeItem('loadedUrl');
-    localStorage.removeItem('status');
+      localStorage.removeItem('status');
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: getAnnouncementSheetId(),
+      spreadsheetId: getNoteSheetId(),
       range: 'Stj Teacher Notes!A2:I',
        }).then(function(response) {
          var range = response.result;
@@ -768,7 +760,7 @@ else{
            }
 
 
-            updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported);
+      updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported);
 
 
          } else {
@@ -782,17 +774,19 @@ else{
 }
 function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported)
 {
-    timestamp = Math.round(new Date().getTime()/1000);
+
+  timestamp = Math.round(new Date().getTime()/1000);
      gapi.client.sheets.spreadsheets.values.update({
-       spreadsheetId: getAnnouncementSheetId(),
+       spreadsheetId: getNoteSheetId(),
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {
-                  values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,timestamp]]
+                      values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,timestamp]]
                 }
      }).then(function(response) {
-    document.getElementById("loadingDiv").style = "display:none;";
-   updateTimestamp();
+       updateTimestamp();
+
+       var range = response.result;
        if (range.values.length > 0) {
 
 
@@ -812,15 +806,16 @@ function updateTimestamp()
 {
      gapi.client.sheets.spreadsheets.values.update({
        spreadsheetId: getMiscSheetId(),
-       range:   "Timestamp!".concat("B2:B"),
+       range:   "Timestamp!".concat("B3:B"),
        valueInputOption: "USER_ENTERED",
        resource:  {
                       values: [ [timestamp]]
                 }
      }).then(function(response) {
-         document.getElementById("loadingDiv").style = "display:none;";
+         // document.getElementById("loadingDiv").style = "display:none;";
          localStorage.setItem("writeMode", "notes");
-            localStorage.setItem("homePage","announcementViewer.html");
+               localStorage.setItem("homePage","notesViewer.html");
+
        window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {
@@ -837,24 +832,15 @@ function updateTimestamp()
 
 }
 
+$("#file").change(function(){
+isAnyFileSelected = true;
+
+ });
+
 
 </script>
 
-<script async defer src="https://apis.google.com/js/api.js"
-  onload="this.onload=function(){};handleClientLoad()"
-  onreadystatechange="if (this.readyState === 'complete') this.onload()">
-</script>
-
-<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDanbVBY4jbMNYwx2S_BXhpUsDf2aUaST4",
-    authDomain: "united-skyline-196615.firebaseapp.com",
-    databaseURL: "https://united-skyline-196615.firebaseio.com",
-    projectId: "united-skyline-196615",
-    storageBucket: "united-skyline-196615.appspot.com",
-    messagingSenderId: "494373301552"
-  };
-  firebase.initializeApp(config);
-</script>
+  <script async defer src="https://apis.google.com/js/api.js"
+    onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()">
+  </script>
