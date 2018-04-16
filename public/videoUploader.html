@@ -1,4 +1,6 @@
 <head>
+
+
 <script src="deviceCheck.js"></script>
 <script src="youtubeUpload.js"></script>
 <link rel="stylesheet" type="text/css" href="youtubeUploader.css">
@@ -292,19 +294,20 @@ padding:20px;
 
 
   <div>
-    <input  type="file" id="file" class="button"  accept="video/*" style="width:100%; margin-bottom:5%;border-bottom:none;" >
-        <button onclick="onClickUpload()" style="width:100%;background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;border:none;padding:2%;font-weight:550;">Upload And Submit</button>
-    <button id="button" style="width:100%;display:none">Upload And Submit</button>
+    <input  type="file" id="file" class="button"  accept="video/*" style = "width:100%; margin-bottom:5%;border-bottom:none;" >
+
+    <button id="button" style= "width:100%;display:none">Upload And Submit</button>
   <div class="during-upload">
     <p><span id="percent-transferred"></span>% done (<span id="bytes-transferred"></span>/<span id="total-bytes"></span> bytes)</p>
     <progress id="upload-progress" max="1" value="0"></progress>
   </div>
-
   <div class="post-upload">
     <!-- <p>Uploaded video with id <span id="video-id"></span>. Polling for status...</p> -->
     <ul id="post-upload-status"></ul>
     <div id="player"></div>
   </div>
+  <button onclick="onClickUpload()" style= "width:100%;background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;border:none;padding:2%;font-weight:550;">Upload And Submit</button>
+
   <!-- <p id="disclaimer">By uploading a video, you certify that you own all rights to the content or that you are authorized by the owner to make the content publicly available on YouTube, and that it otherwise complies with the YouTube Terms of Service located at <a href="http://www.youtube.com/t/terms" target="_blank">http://www.youtube.com/t/terms</a></p> -->
 </div>
 
@@ -431,6 +434,7 @@ function onClickUpload()
 }
 function concatCataegoryString()
 {
+  cataegoryString = 'All Departments All Semesters';
 
              var semester = ['1'];
              semester.pop('1');
@@ -716,8 +720,9 @@ var timestamp;
    * Print the names and majors of students in a sample spreadsheet:
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
-
-
+   var loadedTitle;
+   var loadedDescription;
+   var loadedCataegory
   function listMajors() {
       // document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
 
@@ -725,10 +730,10 @@ var timestamp;
     var loadedLastName = localStorage.getItem("lastname");
     var loadedFullName = loadedFirstName.concat(' ' + loadedLastName);
     var loadedUserId = localStorage.getItem("userId");
-    var loadedCataegory = localStorage.getItem("loadedCataegory")
+     loadedCataegory = localStorage.getItem("loadedCataegory")
     var loadedPublishDate = localStorage.getItem("loadedPublishDate")
-    var loadedTitle =  document.getElementById("title").value;
-    var loadedDescription = document.getElementById("description").value;
+    loadedTitle =  document.getElementById("title").value;
+    loadedDescription = document.getElementById("description").value;
     var loadedUrl =  localStorage.getItem("loadedUrl");
     if(!loadedUrl)
     {
@@ -739,10 +744,11 @@ var timestamp;
       localStorage.removeItem('status');
     var a = 2;
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: getNoteSheetId(),
-      range: 'Stj Teacher Notes!A2:I',
+      spreadsheetId: getUploadedVideoInfoSheetId(),
+      range: 'videoInfo!A1:I',
        }).then(function(response) {
          var range = response.result;
+
          if (range.values.length > 0) {
            for (i = 0; i < range.values.length; i++) {
              var row = range.values[i];
@@ -756,11 +762,11 @@ var timestamp;
                            }
 
 
-                           rangeImported =  "Stj Teacher Notes!".concat("A" + ++a + ":I");
+                           rangeImported =  "videoInfo!".concat("A" + a++ + ":I");
            }
 
 
-      updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,rangeImported);
+      updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,--a,loadedPublishDate,loadedUrl,rangeImported);
 
 
          } else {
@@ -777,7 +783,7 @@ function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,l
 
   timestamp = Math.round(new Date().getTime()/1000);
      gapi.client.sheets.spreadsheets.values.update({
-       spreadsheetId: getNoteSheetId(),
+       spreadsheetId: getUploadedVideoInfoSheetId(),
        range: rangeImported,
        valueInputOption: "USER_ENTERED",
        resource:  {
@@ -806,7 +812,7 @@ function updateTimestamp()
 {
      gapi.client.sheets.spreadsheets.values.update({
        spreadsheetId: getMiscSheetId(),
-       range:   "Timestamp!".concat("B3:B"),
+       range:   "Timestamp!".concat("B5:B"),
        valueInputOption: "USER_ENTERED",
        resource:  {
                       values: [ [timestamp]]
@@ -815,8 +821,8 @@ function updateTimestamp()
          // document.getElementById("loadingDiv").style = "display:none;";
          localStorage.setItem("writeMode", "notes");
                localStorage.setItem("homePage","notesViewer.html");
+sendGcmMessage(loadedTitle,loadedDescription,loadedCataegory,"videoInfo");
 
-       window.top.location.reload();
        var range = response.result;
        if (range.values.length > 0) {
 

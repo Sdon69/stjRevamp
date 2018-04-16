@@ -1,4 +1,5 @@
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <style>
 
@@ -297,6 +298,7 @@ var isGenreChecked = false;
 var cataegoryString = 'All Events';
 function concatCataegoryString()
 {
+  cataegoryString = 'All Departments All Semesters';
 
     var genreString = 'All Events'
   var genres = ['1'];
@@ -647,7 +649,9 @@ document.getElementById("uncheckAllSemestersSpan").style ="display:none";
    * Print the names and majors of students in a sample spreadsheet:
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
-
+   var loadedTitle;
+   var loadedDescription;
+   var loadedCataegory;
 
   function listMajors() {
   document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
@@ -655,10 +659,10 @@ document.getElementById("uncheckAllSemestersSpan").style ="display:none";
     var loadedLastName = localStorage.getItem("lastname");
     var loadedFullName = loadedFirstName.concat(' ' + loadedLastName);
     var loadedUserId = localStorage.getItem("userId");
-    var loadedTitle = localStorage.getItem("loadedTitle");
-    var loadedDescription = localStorage.getItem("loadedDescription");
+     loadedTitle = localStorage.getItem("loadedTitle");
+     loadedDescription = localStorage.getItem("loadedDescription");
     var loadedEntryFees = localStorage.getItem("loadedEntryFees");
-    var loadedCataegory = localStorage.getItem("loadedCataegory");
+     loadedCataegory = localStorage.getItem("loadedCataegory");
     var loadedPublishDate =  localStorage.getItem("loadedPublishDate");
     var loadedEventDate = localStorage.getItem("loadedEventDate");
     var loadedLastDateOfRegistration = localStorage.getItem("loadedLastDateOfRegistration");
@@ -738,10 +742,10 @@ function updateTimestamp()
                       values: [ [timestamp]]
                 }
      }).then(function(response) {
-       document.getElementById("loadingDiv").style = "display:none;";
+
        localStorage.setItem("writeMode", "event");
           localStorage.setItem("homePage","eventViewer.html");
-     window.top.location.reload();
+sendGcmMessage(loadedTitle,loadedDescription,loadedCataegory,"event");
        var range = response.result;
        if (range.values.length > 0) {
 

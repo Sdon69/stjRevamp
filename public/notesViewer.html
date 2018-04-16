@@ -114,6 +114,10 @@ var gCataegory2;
 var viewerData;
 saveToViewerData();
 checkInfo();
+
+function mycomparator(a,b) {
+  return parseInt(a.timestamp, 10) - parseInt(b.timestamp, 10);
+}
 function saveToViewerData()
 {
   viewerData =  localStorage.getItem("noteViewerData");
@@ -190,6 +194,10 @@ raw_data.reverse();
              title: 'No Data for this filter Exists'
                });
          }
+
+         filteredData.sort(mycomparator);
+         filteredData.reverse();
+
          var globalFilteredData = filteredData;
 
             var t = {'<>':"div style='width:100%;padding-top:20px;'",'html':[
@@ -318,7 +326,7 @@ raw_data.reverse();
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
 
-      listMajors("timestamp",getMiscSheetId(),"Timestamp!B3:B");
+      listMajors("timestamp",getMiscSheetId(),"Timestamp!A3:B");
     } else {
       authorizeButton.style.display = 'none';
       signoutButton.style.display = 'none';
@@ -357,12 +365,21 @@ raw_data.reverse();
    */
 
           var timestampSaved =  localStorage.getItem("timestampSavedNotes");
+          var videoTimestampSaved =  localStorage.getItem("videoTimestampSaved");
+          var isViewerTimestampUpdated = false;
+          var isVideoTimeStampUpdated= false;
+            var dataRetrievedEnd = false;
 if(timestampSaved == undefined)
 {
   timestampSaved = "1521000000";
 }
-  function listMajors(mode,sheetId,rangeRetrieved) {
-    document.getElementById("loadingDiv").style ="height:1.5%;width:100%;" ;
+
+if(videoTimestampSaved == undefined)
+{
+  videoTimestampSaved = "1521000000";
+}
+timestampSaved = "1521000000";
+  videoTimestampSaved = "1521000000";
   var itemDetails = [{
            title: 'str1',
            age:   'str2'
@@ -371,11 +388,15 @@ if(timestampSaved == undefined)
     title: 'str1',
     age:   'str2'
       });
+  function listMajors(mode,sheetId,rangeRetrieved) {
+    document.getElementById("loadingDiv").style ="height:1.5%;width:100%;" ;
+
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: sheetId,
       range: rangeRetrieved,
        }).then(function(response) {
          var range = response.result;
+
          if (range.values.length > 0) {
            for (i = 0; i < range.values.length; i++) {
              var row = range.values[i];
@@ -384,23 +405,40 @@ if(timestampSaved == undefined)
 
 
                var str1 = row[0];
-               timestampRetrieved = str1;
+
+
+
+
                if(mode == "timestamp")
                {
 
+                     if(str1 == "notesViewer")
+                     {
+                          timestampRetrieved = row[1];
                     if(timestampSaved != timestampRetrieved)
                     {
 
-                        var timestampRetrieved = str1;
-                        localStorage.setItem("timestampSavedNotes",timestampRetrieved);
-                        listMajors("noteViewer",getNoteSheetId(),"Stj Teacher Notes!A2:H");
-                        break;
 
-                    }else {
-                      break;
+                        isViewerTimestampUpdated = true;
+                        var timestampRetrieved = row[1];
+                        localStorage.setItem("timestampSavedNotes",timestampRetrieved);
+
+
                     }
+                  } else if(str1 == "videoInfoViewer")
+                   {
+                  if(videoTimestampSaved != timestampRetrieved)
+                      {
+
+                        isVideoTimeStampUpdated = true;
+                          var timestampRetrieved = row[1];
+                          localStorage.setItem("videoTimestampSaved",timestampRetrieved);
+
+
+                      }
              }
-             else if(mode != "timestamp")
+           }
+             else if(mode == "noteViewer")
              {
 
 
@@ -442,6 +480,7 @@ if(timestampSaved == undefined)
                                        var uniqueId =  row[5];
 
                                         var fileUrl = row[7];
+                                        var timestamp = row[8];
 
 
 
@@ -458,8 +497,77 @@ if(timestampSaved == undefined)
                                            fullName:fullName,
                                            uniqueId: uniqueId,
                                            dottedString:dottedString,
-                                           fileUrl:fileUrl
+                                           fileUrl:fileUrl,
+                                           timestamp:timestamp
                                          });
+
+
+
+
+
+
+}else if(mode == "videoInfoViewer")
+{
+
+
+
+                    if (str1.includes("BonBlank88"))
+                    {
+
+                        end = true;
+
+                        continue;
+                    }
+
+
+
+
+
+
+
+
+                    // dept_filter = 'Debate';
+
+
+                          cataegories = row[2];
+
+
+
+
+
+                          var title = row[0];
+
+                          var description =  row[1];
+
+                         var publisherId =  row[3];
+
+                          var fullName =  row[4];
+
+
+
+                          var uniqueId =  row[5] + "vidInf";
+
+                           var fileUrl = row[7];
+                           var timestamp = row[8];
+
+
+
+                          var trimmedString = description.substring(0, 68);
+                          var dottedString = trimmedString.concat('....')
+
+
+
+                            itemDetails.push({
+                              title: title,
+                              description:  description,
+                              cataegories: cataegories,
+                              publisherId: publisherId,
+                              fullName:fullName,
+                              uniqueId: uniqueId,
+                              dottedString:dottedString,
+                              fileUrl:fileUrl,
+                              timestamp:timestamp
+                            });
 
 
 
@@ -473,10 +581,36 @@ if(timestampSaved == undefined)
 
 
            }
+           if(mode == "timestamp")
+           {
+             if(isViewerTimestampUpdated)
+             {
 
-if(mode != "timestamp")
+                 listMajors("noteViewer",getNoteSheetId(),"Stj Teacher Notes!A2:I");
+               }else if(isVideoTimeStampUpdated)
+               {
+                   listMajors("videoInfoViewer",getUploadedVideoInfoSheetId(),"videoInfo!A2:I");
+               }
+           }
+
+else if(mode == "noteViewer")
+{
+  if(isVideoTimeStampUpdated)
+  {
+
+      listMajors("videoInfoViewer",getUploadedVideoInfoSheetId(),"videoInfo!A2:I");
+  }else{
+     dataRetrievedEnd = true;
+  }
+}else if (mode == "videoInfoViewer") {
+     dataRetrievedEnd = true;
+}
+
+
+if(dataRetrievedEnd)
 {
             var viewerData =  JSON.stringify(itemDetails);
+
 
         localStorage.setItem("noteViewerData", viewerData);
         saveToViewerData();

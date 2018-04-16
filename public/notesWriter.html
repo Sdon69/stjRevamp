@@ -1,4 +1,5 @@
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <style>
 
@@ -333,6 +334,7 @@ var isDepartmentChecked;
 var cataegoryString = 'All Departments All Semesters';
 function concatCataegoryString()
 {
+  cataegoryString = 'All Departments All Semesters';
 
              var semester = ['1'];
              semester.pop('1');
@@ -445,6 +447,8 @@ isDepartmentChecked = true;
 
 
 }
+
+
 
 function checkAllSemesters()
 {
@@ -734,18 +738,19 @@ var timestamp;
    * Print the names and majors of students in a sample spreadsheet:
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
-
-
+   var loadedTitle;
+   var loadedDescription;
+   var loadedCataegory
   function listMajors() {
       document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
     var loadedFirstName = localStorage.getItem("firstName");
     var loadedLastName = localStorage.getItem("lastname");
     var loadedFullName = loadedFirstName.concat(' ' + loadedLastName);
     var loadedUserId = localStorage.getItem("userId");
-    var loadedCataegory = localStorage.getItem("loadedCataegory")
+     loadedCataegory = localStorage.getItem("loadedCataegory")
     var loadedPublishDate = localStorage.getItem("loadedPublishDate")
-    var loadedTitle = localStorage.getItem("loadedTitle")
-    var loadedDescription = localStorage.getItem("loadedDescription")
+     loadedTitle = localStorage.getItem("loadedTitle")
+     loadedDescription = localStorage.getItem("loadedDescription")
     var loadedUrl =  localStorage.getItem("loadedUrl");
     if(!loadedUrl)
     {
@@ -829,11 +834,11 @@ function updateTimestamp()
                       values: [ [timestamp]]
                 }
      }).then(function(response) {
-         document.getElementById("loadingDiv").style = "display:none;";
+
          localStorage.setItem("writeMode", "notes");
                localStorage.setItem("homePage","notesViewer.html");
 
-       window.top.location.reload();
+    sendGcmMessage(loadedTitle,loadedDescription,loadedCataegory,"note");
        var range = response.result;
        if (range.values.length > 0) {
 

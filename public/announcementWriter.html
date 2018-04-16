@@ -1,4 +1,5 @@
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <style>
 
 ::placeholder {
@@ -336,7 +337,7 @@ function uncheckAllS()
 function concatCataegoryString()
 {
 
-
+cataegoryString = 'All Departments All Semesters';
 
              var semester = ['1'];
              semester.pop('1');
@@ -726,17 +727,19 @@ else{
    * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
    */
 
-
+    var loadedTitle;
+    var loadedDescription;
+    var loadedCataegory;
   function listMajors() {
     document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
     var loadedFirstName = localStorage.getItem("firstName");
     var loadedLastName = localStorage.getItem("lastname");
     var loadedFullName = loadedFirstName.concat(' ' + loadedLastName);
     var loadedUserId = localStorage.getItem("userId");
-    var loadedCataegory = localStorage.getItem("loadedCataegory")
+    loadedCataegory = localStorage.getItem("loadedCataegory")
     var loadedPublishDate = localStorage.getItem("loadedPublishDate")
-    var loadedTitle = localStorage.getItem("loadedTitle")
-    var loadedDescription = localStorage.getItem("loadedDescription")
+    loadedTitle = localStorage.getItem("loadedTitle")
+    loadedDescription = localStorage.getItem("loadedDescription")
     var loadedUrl =  localStorage.getItem("loadedUrl");
     if(!loadedUrl)
     {
@@ -791,8 +794,9 @@ function updateInfo(loadedTitle,loadedDescription,loadedCataegory,loadedUserId,l
                   values: [ [loadedTitle,loadedDescription,loadedCataegory,loadedUserId,loadedFullName,a,loadedPublishDate,loadedUrl,timestamp]]
                 }
      }).then(function(response) {
-    document.getElementById("loadingDiv").style = "display:none;";
+
    updateTimestamp();
+          var range = response.result;
        if (range.values.length > 0) {
 
 
@@ -818,10 +822,11 @@ function updateTimestamp()
                       values: [ [timestamp]]
                 }
      }).then(function(response) {
-         document.getElementById("loadingDiv").style = "display:none;";
+
+
          localStorage.setItem("writeMode", "notes");
             localStorage.setItem("homePage","announcementViewer.html");
-       window.top.location.reload();
+sendGcmMessage(loadedTitle,loadedDescription,loadedCataegory,"announcement");
        var range = response.result;
        if (range.values.length > 0) {
 
@@ -845,16 +850,4 @@ function updateTimestamp()
   onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>
 
-<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDanbVBY4jbMNYwx2S_BXhpUsDf2aUaST4",
-    authDomain: "united-skyline-196615.firebaseapp.com",
-    databaseURL: "https://united-skyline-196615.firebaseio.com",
-    projectId: "united-skyline-196615",
-    storageBucket: "united-skyline-196615.appspot.com",
-    messagingSenderId: "494373301552"
-  };
-  firebase.initializeApp(config);
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

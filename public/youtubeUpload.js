@@ -442,7 +442,6 @@ UploadVideo.prototype.pollForVideoStatus = function() {
       id: this.videoId
     },
     callback: function(response) {
-        alert(response.items[0].player.embedHtml);
       if (response.error) {
         // The status polling failed.
         console.log(response.error.message);
@@ -453,7 +452,7 @@ UploadVideo.prototype.pollForVideoStatus = function() {
           // This is a non-final status, so we need to poll again.
           case 'uploaded':
             $('#post-upload-status').append('<li>Upload status: ' + uploadStatus + '</li>');
-            setTimeout(this.pollForVideoStatus.bind(this), STATUS_POLLING _INTERVAL_MILLIS);
+            setTimeout(this.pollForVideoStatus.bind(this), STATUS_POLLING_INTERVAL_MILLIS);
             break;
           // The video was successfully transcoded and is available.
           case 'processed':
