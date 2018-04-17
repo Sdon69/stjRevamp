@@ -378,8 +378,7 @@ if(videoTimestampSaved == undefined)
 {
   videoTimestampSaved = "1521000000";
 }
-timestampSaved = "1521000000";
-  videoTimestampSaved = "1521000000";
+
   var itemDetails = [{
            title: 'str1',
            age:   'str2'
@@ -427,8 +426,10 @@ timestampSaved = "1521000000";
                     }
                   } else if(str1 == "videoInfoViewer")
                    {
+                       var timestampRetrieved = row[1];
                   if(videoTimestampSaved != timestampRetrieved)
                       {
+
 
                         isVideoTimeStampUpdated = true;
                           var timestampRetrieved = row[1];
