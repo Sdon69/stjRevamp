@@ -293,8 +293,19 @@ padding:20px;
     </select>
 
 
+
+
   <div>
+
     <input  type="file" id="file" class="button"  accept="video/*" style = "width:100%; margin-bottom:5%;border-bottom:none;" >
+<center><span style="font-size:26;font-weight:550;color:#454647;">Or</span></center><br>
+<div class="group">
+<input id="videoUrl" type="text" placeholder="Video link eg. 'https://www.youtube.com/watch?v=IV_m_uZOUgI' without inverted commas" style="width:100%;" required>
+<span class="highlight"></span>
+<span class="bar"></span>
+
+</div>
+
 
     <button id="button" style= "width:100%;display:none">Upload And Submit</button>
   <div class="during-upload">
@@ -306,6 +317,7 @@ padding:20px;
     <ul id="post-upload-status"></ul>
     <div id="player"></div>
   </div>
+  <iframe id="videoObject" type="text/html" width="500" style="display:none;" height="265" frameborder="0" allowfullscreen></iframe>
   <button onclick="onClickUpload()" style= "width:100%;background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;border:none;padding:2%;font-weight:550;">Upload And Submit</button>
 
   <!-- <p id="disclaimer">By uploading a video, you certify that you own all rights to the content or that you are authorized by the owner to make the content publicly available on YouTube, and that it otherwise complies with the YouTube Terms of Service located at <a href="http://www.youtube.com/t/terms" target="_blank">http://www.youtube.com/t/terms</a></p> -->
@@ -349,7 +361,9 @@ function onClickUpload()
 
   var desc = document.getElementById("description").value;
 
+  var videoUrl = document.getElementById("videoUrl").value;
 
+  var isLinkValid  =validateYouTubeUrl(videoUrl);
   //
     // var pass_check = document.event.pass_check.value;
   var loadedPassword = localStorage.getItem("password");
@@ -408,18 +422,26 @@ function onClickUpload()
   else if (!isSemesterChecked) {
     alert('Choose Atleast one Semester');
 
-  }else if(!isAnyFileSelected)
+  }else if(!isAnyFileSelected && !isLinkValid)
   {
-      alert('Please Choose a File');
+      alert('Please Choose a File or Paste a Valid Link');
   }
   else{
 
 
 
+
+
         localStorage.setItem("loadedCataegory", cataegoryString);
 
+        if(isAnyFileSelected)
+        {
+            document.getElementById('button').click();
+        }else if(isLinkValid) {
+          listMajors();
 
-              document.getElementById('button').click();
+        }
+
 
 
   }
@@ -432,6 +454,30 @@ function onClickUpload()
 
 
 }
+
+function validateYouTubeUrl(url) {
+
+    if (url != undefined || url != '') {
+        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+        var match = url.match(regExp);
+        if (match && match[2].length == 11) {
+            // Do anything for being valid
+            // if need to change the url to embed url then use below line
+            console.log(match[2]);
+            localStorage.setItem("loadedUrl",match[2]);
+            document.getElementById("videoObject").style = "display:block;" ;
+            $('#videoObject').attr('src', 'https://www.youtube.com/embed/' + match[2] + '?autoplay=1&enablejsapi=1');
+
+            return true;
+        } else {
+
+          return false;
+            // Do anything for not being valid
+        }
+    }
+}
+
+
 function concatCataegoryString()
 {
   cataegoryString = 'All Departments All Semesters';
