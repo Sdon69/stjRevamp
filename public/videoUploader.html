@@ -777,7 +777,15 @@ var timestamp;
     var loadedFullName = loadedFirstName.concat(' ' + loadedLastName);
     var loadedUserId = localStorage.getItem("userId");
      loadedCataegory = localStorage.getItem("loadedCataegory")
-    var loadedPublishDate = localStorage.getItem("loadedPublishDate")
+     var yyyy = today.getFullYear();
+     if(dd<10){
+     dd='0'+dd;
+     }
+     if(mm<10){
+     mm='0'+mm;
+     }
+     var today = dd+'/'+mm+'/'+yyyy;
+       var loadedPublishDate = today;
     loadedTitle =  document.getElementById("title").value;
     loadedDescription = document.getElementById("description").value;
     var loadedUrl =  localStorage.getItem("loadedUrl");
