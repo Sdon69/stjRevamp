@@ -72,7 +72,7 @@
 
             <button type="button"  value='filter' onClick="checkInfo()" style= "padding:5%; padding-right:20%;
             padding-left:20%;  background-color:rgba(236,230,230,0.65); border:none; color:rgba(255,255,255,1.00);
-            font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600;  "  >FILTER</button>
+            font-size:12px; box-shadow:rgba(0,0,0,1.00); font-weight:600;  " id="filterButton" >FILTER</button>
           </td></tr><tr> <td>
                 <select name ="s2"  id="cataegory2" style="background:#3f8acd; margin-left:2%; border:none; color:#ECE7E7; width:100%;-webkit-appearance: none; background:url(15xvbd5.png) no-repeat right ;">
 
@@ -128,22 +128,16 @@ function saveToViewerData()
   {
     var skillsSelect = document.getElementById("cataegory1");
     var cataegory1 = skillsSelect.options[skillsSelect.selectedIndex].text;
+    // alert(cataegory1);
+
     gCataegory1 = cataegory1;
     var skillsSelect2 = document.getElementById("cataegory2");
     var cataegory2 = skillsSelect2.options[skillsSelect2.selectedIndex].text;
     gCataegory2 = cataegory2;
-    if(cataegory1.includes('Choose'))
-    {
-      alert('Choose a Department');
-  }else if (cataegory2.includes('Choose')) {
-      alert('Choose a Semester');
-  }
-  else {
-    // document.getElementById('create').click();
-    // document.getElementById('hangoutButtonId').click();
+
 submitClick();
 
-  }
+
   }
 function submitClick()
 {
@@ -635,4 +629,9 @@ document.getElementById("loadingDiv").style = "display:none;";
 <script async defer src="https://apis.google.com/js/api.js"
   onload="this.onload=function(){};handleClientLoad()"
   onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+
+
+<script>
+
 </script>
