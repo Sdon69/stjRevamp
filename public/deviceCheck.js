@@ -6,7 +6,7 @@
     // window.location.href = "/serverDown.html";
 }
 
-var mode = "test";
+var mode = "release";
   if(mode == "test")
   {
   localStorage.setItem("eventSheetId", "1tFhDy9sR9dlJ0jwNbqbcq3TnFpViMHJOi2xeOv_Wqqw");
