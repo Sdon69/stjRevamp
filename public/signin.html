@@ -125,16 +125,16 @@ input:focus ~ .highlight {
   <font face="roboto">
   <div style="background:#ffffff; padding:20px; height:120vh;">
 
-        <form method="post" action="/signInWriteCheck" name='event'>
+        <form  name='event'>
 
 <span id='isSignedInRequired' style="visibility:collapse";>Here</span>
 
          <div class="group">
-        <input type='text' placeholder="User Id"  name='userId'>
+        <input type='text' placeholder="User Id"  name='userId' id="userIdField">
         <span class="highlight"></span>
         <span class="bar"></span>
     </div>  <div class="group">
-<input type='password' placeholder="Password"  name='password'>
+<input type='password' placeholder="Password"  name='password' id="passwordField">
 
 <span class="highlight"></span>
 <span class="bar"></span>
@@ -147,7 +147,7 @@ input:focus ~ .highlight {
 
 <input type="button" value="Submit"  onclick="check()"  style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF; width:100%;"    >
 
-            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
+            <!-- <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   > -->
           </div>
         </form>
         <br><br>
@@ -166,7 +166,23 @@ input:focus ~ .highlight {
 
 
 
+<script>
+var input = document.getElementById("passwordField");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        check();
+    }
+});
 
+ input = document.getElementById("userIdField");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        check();
+    }
+});
+</script>
 
 <script>
 

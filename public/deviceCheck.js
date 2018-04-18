@@ -6,7 +6,7 @@
     // window.location.href = "/serverDown.html";
 }
 
-var mode = "release";
+var mode = "test";
   if(mode == "test")
   {
   localStorage.setItem("eventSheetId", "1tFhDy9sR9dlJ0jwNbqbcq3TnFpViMHJOi2xeOv_Wqqw");
@@ -134,7 +134,7 @@ var mode = "release";
         departmentCollection[++arrayIncrementer] = "Management";
         departmentCollection[++arrayIncrementer] = "Education";
         departmentCollection[++arrayIncrementer] = "Science";
-        departmentCollection[++arrayIncrementer] = "Other Subjects";
+        departmentCollection[++arrayIncrementer] = "Other";
 
         var semesterCollection = [6];
         arrayIncrementer = 0;
@@ -182,4 +182,65 @@ var mode = "release";
         }
         return outputTopic;
 
+     }
+
+
+     function loadCheckBoxes(saveKey)
+     {
+     var savedCheckBoxes = localStorage.getItem(saveKey);
+     if(savedCheckBoxes != undefined)
+         {
+           subCataegories = savedCheckBoxes;
+           var departmentCollection = [6];
+           var outputTopic ="";
+           arrayIncrementer = 0;
+           departmentCollection[arrayIncrementer] = "Art";
+           departmentCollection[++arrayIncrementer] = "Commerce";
+           departmentCollection[++arrayIncrementer] = "Management";
+           departmentCollection[++arrayIncrementer] = "Education";
+           departmentCollection[++arrayIncrementer] = "Science";
+           departmentCollection[++arrayIncrementer] = "Other";
+
+           var semesterCollection = [6];
+           arrayIncrementer = 0;
+           semesterCollection[arrayIncrementer] = "First Semester";
+           semesterCollection[++arrayIncrementer] = "Second Semester";
+           semesterCollection[++arrayIncrementer] = "Third Semester";
+           semesterCollection[++arrayIncrementer] = "Fourth Semester";
+           semesterCollection[++arrayIncrementer] = "Fifth Semester";
+           semesterCollection[++arrayIncrementer] = "Sixth and Above Semesters";
+
+
+                         if (subCataegories.includes("Art")) {
+                           document.event.department0.checked = true;
+                         }  if (subCataegories.includes("Commerce")) {
+                           document.event.department1.checked = true;
+                         }  if (subCataegories.includes("Management")) {
+                           document.event.department2.checked  = true;
+                         }  if (subCataegories.includes("Education")) {
+                           document.event.department3.checked  = true;
+                         }  if (subCataegories.includes("Science")) {
+                           document.event.department4.checked  = true;
+                         }  if (subCataegories.includes("Other")) {
+                           document.event.department5.checked  = true;
+                         }
+
+
+
+                 if (subCataegories.includes("First Semester")) {
+                   document.event.semester0.checked = true;
+                 }  if (subCataegories.includes("Second Semester")) {
+                   document.event.semester1.checked = true;
+                 }  if (subCataegories.includes("Third Semester")) {
+                   document.event.semester2.checked  = true;
+                 }  if (subCataegories.includes("Fourth Semester")) {
+                   document.event.semester3.checked  = true;
+                 }  if (subCataegories.includes("Fifth Semester")) {
+                   document.event.semester4.checked  = true;
+                 }  if (subCataegories.includes("Sixth and Above Semesters")) {
+                   document.event.semester5.checked  = true;
+                 }
+
+
+               }
      }

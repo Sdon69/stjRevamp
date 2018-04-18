@@ -223,18 +223,18 @@ padding:0;
 </div>
 <font face="roboto">
 <div style="background:#ffffff; padding:20px;">
-        <form method="post" action="/notesWriteCheck" name='event'>
+        <form name='event'>
 
 
 
               <div class="group">
-                    <input   type='text' placeholder="Concept" name='eventTitle' autocomplete="new-password"  id="mySelect"  maxlength="80"   required>
+                    <input   type='text' placeholder="Concept" name='eventTitle' autocomplete="new-password"  id="titleField"   maxlength="80"   required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
 
                 </div>
                 <div class="group">
-                      <textarea name='eventDesc'  id="mySelect" placeholder="Notes"  maxlength="49000" ></textarea> <span class="highlight"></span>
+                      <textarea name='eventDesc'   placeholder="Notes" id="descriptionField" maxlength="49000" ></textarea> <span class="highlight"></span>
                   <span class="tbar"></span>
 
                 </div>
@@ -273,7 +273,7 @@ padding:0;
         <iframe id="iframe" src="https://script.google.com/macros/s/AKfycbx0EPMPMoik0bHwgCfcK-fovnXnPjknk8KNZrRx3Mw5HB6oKyLu/exec"  name="search_iframe"   style= "overflow:hidden; z-index:1;width:100%; height:20%;  border: 2px dashed #3f8acd;
     border-radius: 5px;  " scrolling="no"></iframe>
 
-<script src="deviceCheck.js"></script>
+
         <script>
                window.addEventListener( "message",
                  function (e) {
@@ -295,7 +295,7 @@ padding:0;
   <input type='text' name='todayTextName' value='false'  id='todayDateText'   style="visibility:collapse; height:0px; width:0;" >
 <input type="button" value="SUBMIT"  onclick="check()" style="background: linear-gradient(0deg, #15446e, #408bce); color:#FFFFFF;"    >
 
-            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
+
 
         </form>
 
@@ -307,7 +307,10 @@ padding:0;
 
               </div>
               </font>
-
+              <script src="deviceCheck.js"></script>
+<script>
+loadCheckBoxes("savedCheckBoxesNotes");
+</script>
 <script>
 function checkAllD()
 {
@@ -329,6 +332,13 @@ function uncheckAllS()
   uncheckAllSemesters();
 }
 
+var input = document.getElementById("titleField");
+input.addEventListener("keyup", function(event) {
+   event.preventDefault();
+   var titleText = document.getElementById("titleField").value;
+    document.getElementById("descriptionField").value = "Below are notes explaining " + titleText + ".";
+
+});
 
 var isSemesterChecked;
 var isDepartmentChecked;
@@ -568,10 +578,12 @@ if(title.length < 1)
 {
 
 
-  alert('Enter the Event Title.');
+  alert('Enter the Concept.');
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
 }
 else if (desc.length < 1) {
-    alert('Enter the Event Description.');
+    alert('Enter the  Description.');
+          document.body.scrollTop = document.getElementById("descriptionField").scrollTop;
 }
 // else if (pass_check.length < 1) {
 //     alert('Confirm the password.');
@@ -749,6 +761,7 @@ var timestamp;
     var loadedFullName = loadedFirstName.concat(' ' + loadedLastName);
     var loadedUserId = localStorage.getItem("userId");
      loadedCataegory = localStorage.getItem("loadedCataegory")
+      localStorage.setItem("savedCheckBoxesNotes",loadedCataegory);
 
 
     var today = new Date();

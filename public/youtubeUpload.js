@@ -347,7 +347,7 @@ UploadVideo.prototype.ready = function(accessToken) {
       } else {
         // $('#channel-name').text(response.items[0].snippet.title);
         // $('#channel-thumbnail').attr('src', response.items[0].snippet.thumbnails.default.url);
-
+         yGoogleSignedIn();
         $('.pre-sign-in').hide();
         $('.post-sign-in').show();
       }
@@ -472,6 +472,7 @@ UploadVideo.prototype.pollForVideoStatus = function() {
 
 function saveUploadedVideoData(videoId)
 {
+
 
   var today = new Date();
   var dd = today.getDate();

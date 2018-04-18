@@ -213,38 +213,38 @@ select:focus ~ .highlight {
   <font face="roboto">
   <div style="background:#ffffff; padding:20px; height:100%;">
 
-        <form method="post" action="/signupWriteCheck" name='event'>
+        <form  name='event'>
     <div class="form-style-2">
 
               <div class="group">
-    <input type='text' placeholder="First Name"    name='firstName' maxlength="20"/>
+    <input type='text' placeholder="First Name"    name='firstName' id="firstNameField" maxlength="20"/>
     <span class="highlight"></span>
     <span class="bar"></span>
 </div>  <div class="group">
-    <input type='text' placeholder="Last Name"  name='lastName' maxlength="20">
+    <input type='text' placeholder="Last Name"  name='lastName' maxlength="20" id="lastNameField" >
     <span class="highlight"></span>
     <span class="bar"></span>
 </div>  <div class="group">
-        <input type='text' placeholder="User Id"  name='userId' maxlength="20" >
+        <input type='text' placeholder="User Id"  name='userId' maxlength="20"  id="userIdField" >
         <span class="highlight"></span>
         <span class="bar"></span>
     </div>  <div class="group">
-<input type='password' placeholder="Password"  name='password' maxlength="20" >
+<input type='password' placeholder="Password"  name='password' maxlength="20"  id="passwordField" >
 <span class="highlight"></span>
 <span class="bar"></span>
 </div>  <div class="group">
-    <input type='password' placeholder="Confirm Password"  name='confirmPassword' maxlength="20" ><br>
+    <input type='password' placeholder="Confirm Password"  name='confirmPassword' maxlength="20"  id="confirmPasswordField" ><br>
     <span class="highlight"></span>
     <span class="bar"></span>
 </div>  <span class="highlight"></span>
     <span class="bar"></span>
 </div>
   <div class="group">
-    <input type='text' placeholder="Email Address"    name='emailAddress' maxlength="40" /><br>
+    <input type='text' placeholder="Email Address"    name='emailAddress' maxlength="40" id="emailAddressField"  /><br>
     <span class="highlight"></span>
     <span class="bar"></span>
   </div>  <div class="group">
-      <input type='tel' placeholder="Phone No."    name='phoneNo' maxlength="10" /><br>
+      <input type='tel' placeholder="Phone No."    name='phoneNo' maxlength="10" id="phoneNoField"  /><br>
       <span class="highlight"></span>
       <span class="bar"></span>
     </div>
@@ -261,7 +261,6 @@ select:focus ~ .highlight {
 
 
 
-            <input type="submit" value="Submit" id='hangoutButtonId'  style="visibility:collapse;"   >
           </div>
         </form>
         <br><br>
@@ -285,6 +284,62 @@ select:focus ~ .highlight {
 
 
 
+ var input = document.getElementById("firstNameField");
+input.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        check();
+    }
+});
+
+var input = document.getElementById("lastNameField");
+input.addEventListener("keyup", function(event) {
+   event.preventDefault();
+   if (event.keyCode === 13) {
+       check();
+   }
+});
+
+var input = document.getElementById("userIdField");
+input.addEventListener("keyup", function(event) {
+   event.preventDefault();
+   if (event.keyCode === 13) {
+       check();
+   }
+});
+
+var input = document.getElementById("passwordField");
+input.addEventListener("keyup", function(event) {
+   event.preventDefault();
+   if (event.keyCode === 13) {
+       check();
+   }
+});
+
+var input = document.getElementById("confirmPasswordField");
+input.addEventListener("keyup", function(event) {
+   event.preventDefault();
+   if (event.keyCode === 13) {
+       check();
+   }
+});
+
+var input = document.getElementById("emailAddressField");
+input.addEventListener("keyup", function(event) {
+   event.preventDefault();
+   if (event.keyCode === 13) {
+       check();
+   }
+});
+
+var input = document.getElementById("phoneNoField");
+input.addEventListener("keyup", function(event) {
+   event.preventDefault();
+   if (event.keyCode === 13) {
+       check();
+   }
+});
+
 
 
 
@@ -292,40 +347,20 @@ function check()
 {
 
 
+  var firstName = document.event.firstName.value;
+
+  var lastName = document.event.lastName.value;
+
+  var userId = document.event.userId.value;
+
+  var password = document.event.password.value;
+
+  var confirmPassword = document.event.confirmPassword.value;
 
 
+  var emailAddress = document.event.emailAddress.value;
 
-
-
-
-
-var firstName = document.event.firstName.value;
-
-var lastName = document.event.lastName.value;
-
-var userId = document.event.userId.value;
-
-var password = document.event.password.value;
-
-var confirmPassword = document.event.confirmPassword.value;
-
-
-var emailAddress = document.event.emailAddress.value;
-
-var phoneNo = document.event.phoneNo.value;
-
-
-
-
-
-
-
-
-
-
-
-
-
+  var phoneNo = document.event.phoneNo.value;
 
 
 
@@ -542,7 +577,7 @@ rangeImported =  "Teacher Data!".concat("A" + ++a + ":S");
            }
            if(loadedUserId != userIdRetrieved)
            {
-             alert('Updating');
+             
             updateInfo(loadedUserId,loadedPassword,loadedFirstName,loadedLastName,loadedEmailAddress,loadedPhoneNo,rangeImported);
 
           }

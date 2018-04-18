@@ -224,6 +224,8 @@ padding:20px;
 
 <button id="authorize-button" style="display: none;">Authorize</button>
 <button id="signout-button" style="display: none;">Sign Out</button>
+<div id="loadingDiv" style="position:fixed; height:100%; width:100%; background:#80141516; display:none;"><div style="position:fixed; width:20%; top:50%; left:40%; background:#ffffff;"><table ><tr><td><img src="loading.gif"></td><td> Loading...</td></tr></table></div>
+</div>
 <span id="signinButton" class="pre-sign-in">
   <!-- IMPORTANT: Replace the value of the <code>data-clientid</code>
        attribute in the following tag with your project's client ID. -->
@@ -247,14 +249,14 @@ padding:20px;
 
     <form name='event'>
                 <div class="group">
-    <input id="title" type="text" placeholder="Title" style="width:100%;" required>
+    <input id="title" type="text" placeholder="Title"  style="width:100%;" required>
     <span class="highlight"></span>
     <span class="bar"></span>
 
   </div>
 
                 <div class="group">
-    <textarea id="description" placeholder="Description" style="width:100%;" required></textarea>
+    <textarea id="description" placeholder="Description"  style="width:100%;" required></textarea>
     <span class="highlight"></span>
     <span class="bar"></span>
   </div>
@@ -325,7 +327,9 @@ padding:20px;
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apis.google.com/js/client:plusone.js"></script>
-
+<script>
+loadCheckBoxes("savedCheckBoxesVideoInfo");
+</script>
 <script type="text/javascript">
 function checkAllD()
 {
@@ -346,12 +350,30 @@ function uncheckAllS()
 {
   uncheckAllSemesters();
 }
+
+var input = document.getElementById("title");
+input.addEventListener("keyup", function(event) {
+   event.preventDefault();
+   var titleText = document.getElementById("title").value;
+    document.getElementById("description").value = "Below is a video explaining " + titleText + ".";
+
+});
+
 var isAnyFileSelected = false;
 var isSemesterChecked;
 var isDepartmentChecked;
 var cataegoryString = 'All Departments All Semesters';
+var isYGoogleSignedIn = false;
+function yGoogleSignedIn()
+{
+  isYGoogleSignedIn = true;
+}
+
 function onClickUpload()
 {
+
+
+
 
 
 
@@ -368,18 +390,6 @@ function onClickUpload()
     // var pass_check = document.event.pass_check.value;
   var loadedPassword = localStorage.getItem("password");
 
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-
-    var yyyy = today.getFullYear();
-    if(dd<10){
-    dd='0'+dd;
-    }
-    if(mm<10){
-    mm='0'+mm;
-    }
-    var today = dd+'/'+mm+'/'+yyyy;
 
 
 
@@ -394,11 +404,12 @@ function onClickUpload()
 
 
 
-  if(title.length < 1)
+   if(title.length < 1)
   {
 
 
     alert('Enter the Title.');
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   else if (desc.length < 1) {
       alert('Enter the Description.');
@@ -436,7 +447,13 @@ function onClickUpload()
 
         if(isAnyFileSelected)
         {
+          if(isYGoogleSignedIn)
+        {
             document.getElementById('button').click();
+          }else{
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+            alert("Please Click on G Sign in");
+          }
         }else if(isLinkValid) {
           listMajors();
 
@@ -770,21 +787,27 @@ var timestamp;
    var loadedDescription;
    var loadedCataegory
   function listMajors() {
-      // document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
+      document.getElementById("loadingDiv").style = "position:fixed; height:100%; width:100%; background:#80141516; display:block;" ;
 
     var loadedFirstName = localStorage.getItem("firstName");
     var loadedLastName = localStorage.getItem("lastname");
     var loadedFullName = loadedFirstName.concat(' ' + loadedLastName);
     var loadedUserId = localStorage.getItem("userId");
      loadedCataegory = localStorage.getItem("loadedCataegory")
-     var yyyy = today.getFullYear();
-     if(dd<10){
-     dd='0'+dd;
-     }
-     if(mm<10){
-     mm='0'+mm;
-     }
-     var today = dd+'/'+mm+'/'+yyyy;
+       localStorage.setItem("savedCheckBoxesVideoInfo",loadedCataegory);
+       var today = new Date();
+       var dd = today.getDate();
+       var mm = today.getMonth()+1; //January is 0!
+
+       var yyyy = today.getFullYear();
+       if(dd<10){
+       dd='0'+dd;
+       }
+       if(mm<10){
+       mm='0'+mm;
+       }
+       var today = dd+'/'+mm+'/'+yyyy;
+
        var loadedPublishDate = today;
     loadedTitle =  document.getElementById("title").value;
     loadedDescription = document.getElementById("description").value;
@@ -872,7 +895,7 @@ function updateTimestamp()
                       values: [ [timestamp]]
                 }
      }).then(function(response) {
-         // document.getElementById("loadingDiv").style = "display:none;";
+         document.getElementById("loadingDiv").style = "display:none;";
          localStorage.setItem("writeMode", "notes");
                localStorage.setItem("homePage","notesViewer.html");
 sendGcmMessage(loadedTitle,loadedDescription,loadedCataegory,"videoInfo");
